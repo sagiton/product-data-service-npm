@@ -1,0 +1,32 @@
+{
+  "name": "product-data-service",
+  "version": "1.0.0",
+  "main": "dist/pds.min.js",
+  "dependencies": {
+    "jquery": "1.11.3",
+    "datatables.net": "1.10.12",
+    "datatables.net-responsive": "2.1.0",
+    "slick-carousel": "1.6.0",
+    "waypoints": "4.0.1",
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-breadcrumb": "^0.5.0",
+    "angular-cookies": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angular-ui-router": "^0.3.2",
+    "angular-datatables": "^0.5.5",
+    "angular-sticky": "angular-sticky-plugin#^0.3.0",
+    "bootstrap": "3.3.6",
+    "lodash": "^4.17.2",
+    "urijs": "^1.18.4",
+    "angular-img-fallback": "^0.2.0",
+    "angular-slick-carousel": "^3.1.7",
+    "cliplister": "https://mycliplister.com/merge?cliplister=2.0&clviewer=2.0&videostage=2.1&innercontrols=2.1&clickablevideo=2.0&playbutton=2.0&previewimage=2.0&bufferingspinner=2.0",
+    "angular-resource": "^1.6.1",
+    "angular-bootstrap": "^2.5.0",
+    "angular-translate": "^2.15.1"
+  },
+  "resolutions": {
+    "lodash": "^4.17.2"
+  }
+}
