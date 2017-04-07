@@ -1,39 +1,42 @@
 {
-  "name": "product-data-service",
-  "version": "1.1.0",
-  "description": "Product data service",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "lite-server -c=bs-config.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://phornik@stash.kittelberger.de/scm/javaboschtt/buderus-website-templates-2017.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.18.8",
-    "connect-history-api-fallback": "^1.3.0",
-    "connect-modrewrite": "^0.9.0",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-clean-css": "^2.3.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-concat-util": "^0.5.5",
-    "gulp-concat-vendor": "0.0.4",
-    "gulp-main-bower-files": "^1.6.0",
-    "gulp-ng-config": "^1.4.0",
-    "gulp-nop": "0.0.3",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^1.9.1",
-    "gulp-uglify": "^2.0.0",
-    "http-proxy-middleware": "^0.17.3",
-    "lite-server": "^2.2.2",
-    "lodash": "^4.17.2",
-    "main-bower-files": "^2.13.1",
-    "yargs": "^6.6.0"
-  }
+    "name": "product-data-service",
+    "version": "1.0.0",
+    "description": "Product data service",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "serve": "lite-server -c=bs-config.js"
+    },
+    "publishConfig" : {
+        "registry" : "https://nexus.sagiton.pl/repository/npm-quinn/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.sagiton.pl/sagiton/product-data-service-npm.git"
+    },
+    "author": "mateusz.rutski@sagiton.pl",
+    "license": "private",
+    "devDependencies": {
+        "browser-sync": "^2.18.8",
+        "connect-history-api-fallback": "^1.3.0",
+        "connect-modrewrite": "^0.9.0",
+        "del": "^2.2.2",
+        "gulp": "^3.9.1",
+        "gulp-autoprefixer": "^3.1.1",
+        "gulp-clean-css": "^2.3.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-concat-util": "^0.5.5",
+        "gulp-concat-vendor": "0.0.4",
+        "gulp-main-bower-files": "^1.6.0",
+        "gulp-ng-config": "^1.4.0",
+        "gulp-nop": "0.0.3",
+        "gulp-rename": "^1.2.2",
+        "gulp-sourcemaps": "^1.9.1",
+        "gulp-uglify": "^2.0.0",
+        "http-proxy-middleware": "^0.17.3",
+        "lite-server": "^2.2.2",
+        "lodash": "^4.17.2",
+        "main-bower-files": "^2.13.1",
+        "yargs": "^6.6.0"
+    }
 }
