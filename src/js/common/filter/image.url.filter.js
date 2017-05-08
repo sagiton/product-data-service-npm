@@ -3,7 +3,7 @@
         .module('pds.common.filter')
         .filter('imageUrl', ImageUrlFilter);
 
-    ImageUrlFilter.$inject = ['config'];
+    ImageUrlFilter.$inject = ['env'];
 
     var defaultImages = {
         sm: '/media/images/default-category-image_460x460.jpg',
@@ -12,9 +12,9 @@
         keyvisual: '/media/images/skv_keyvisual_1.jpg'
     };
 
-    function ImageUrlFilter(config) {
+    function ImageUrlFilter(env) {
         return function (mediaObject, size) {
-            return mediaObject ? config.endPoint.ocsMediaEndpoint + "media/" + mediaObject : defaultImages[size || 'product'];
+            return mediaObject ? env.endPoint.ocsMediaEndpoint + "media/" + mediaObject : defaultImages[size || 'product'];
         }
     }
 })(angular);

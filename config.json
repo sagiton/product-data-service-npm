@@ -1,74 +1,10 @@
 {
-    "dev": {
-        "config": {
-            "endPoint": {
-                "productDataService": "https://pds-buderus.kittelberger.net/stg/v2.1.1/",
-                "searchService": "https://ss-buderus.kittelberger.net/stg/v1.1.1/",
-                "ocsMediaEndpoint": "https://pds-buderus.kittelberger.net/stg/v2.1.1/"
-            },
-            "metaTags": {
-                "siteName":"Buderus",
-                "brand":"Buderus"
-            },
-            "navigationMaxElements": 6,
-            "search": {
-                "cmsChannelDiscriminator": "deCHCmsDiscriminator",
-                "pdsChannelDiscriminator": "buderusPdsDiscriminator"
-            }
-        }
-    },
-    "stg": {
-        "config": {
-            "endPoint": {
-                "productDataService": "https://pds-buderus.kittelberger.net/stg/v2.1.1/",
-                "searchService": "https://ss-buderus.kittelberger.net/stg/v1.1.1/",
-                "ocsMediaEndpoint": "https://pds-buderus.kittelberger.net/stg/v2.1.1/"
-            },
-            "metaTags": {
-                "siteName":"Buderus",
-                "brand":"Buderus"
-            },
-            "navigationMaxElements": 6,
-            "search": {
-                "cmsChannelDiscriminator": "deCHCmsDiscriminator",
-                "pdsChannelDiscriminator": "buderusPdsDiscriminator"
-            }
-        }
-    },
-    "rvw": {
-        "config": {
-            "endPoint": {
-                "productDataService": "https://pds-buderus.kittelberger.net/stg/v2.1.1/",
-                "searchService": "https://ss-buderus.kittelberger.net/stg/v1.1.1/",
-                "ocsMediaEndpoint": "https://pds-buderus.kittelberger.net/stg/v2.1.1/"
-            },
-            "metaTags": {
-                "siteName":"Buderus",
-                "brand":"Buderus"
-            },
-            "navigationMaxElements": 6,
-            "search": {
-                "cmsChannelDiscriminator": "deCHCmsDiscriminator",
-                "pdsChannelDiscriminator": "buderusPdsDiscriminator"
-            }
-        }
-    },
-    "prd": {
-        "config": {
-            "endPoint": {
-                "productDataService": "https://pds-buderus.kittelberger.net/stg/v2.1.1/",
-                "searchService": "https://ss-buderus.kittelberger.net/stg/v1.1.1/",
-                "ocsMediaEndpoint": "https://pds-buderus.kittelberger.net/stg/v2.1.1/"
-            },
-            "metaTags": {
-                "siteName":"Buderus",
-                "brand":"Buderus"
-            },
-            "navigationMaxElements": 6,
-            "search": {
-                "cmsChannelDiscriminator": "deCHCmsDiscriminator",
-                "pdsChannelDiscriminator": "buderusPdsDiscriminator"
-            }
-        }
+    "config": {
+        "metaTags": {
+            "siteName": "Buderus"
+        },
+        "pdsPathPrefix": "/ocs",
+        "pdsTemplatePath": "/src/html",
+        "forceLanguage": null
     }
 }

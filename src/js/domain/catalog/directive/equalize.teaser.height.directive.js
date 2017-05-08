@@ -7,7 +7,7 @@
         return {
             restrict: 'EA',
             controller: ['$scope', '$element', '$attrs', function (scope, element, attrs) {
-                if (scope.$last) {
+                if (scope.$last && window.equalHeightsTeaser) {
                     $timeout(equalHeightsTeaser, 0);
                 }
             }]

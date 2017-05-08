@@ -16,8 +16,6 @@
             .getMenu()
             .then(function(menu) {
                 vm.menu = menu;
-                //TODO Product finder removed for go-live
-                vm.menu.children = _.reject(vm.menu.children, {type: 'toolfinder'});
             });
     }
 })(angular);

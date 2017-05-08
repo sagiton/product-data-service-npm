@@ -14,6 +14,8 @@ var argv = require('yargs').argv;
 var cleanCss = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
+var runSequence = require('run-sequence');
+var merge = require('merge-stream');
 
 var paths = {
     build: './',
@@ -44,7 +46,7 @@ gulp.task('css', function() {
         .pipe(gulp.dest(pathsCss.dist));
 });
 
-gulp.task('scripts', ['clean', 'ng-config'], function() {
+gulp.task('scripts', ['ng-config'], function() {
     var isPrd = !argv.env || (argv.env == 'prd');
     return gulp
         .src(paths.scripts)
@@ -56,7 +58,7 @@ gulp.task('scripts', ['clean', 'ng-config'], function() {
         .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('vendor', ['clean'], function () {
+gulp.task('vendor', function () {
     return gulp
         .src('./bower.json')
         .pipe(bowerLibs({
@@ -84,8 +86,8 @@ gulp.task('vendor', ['clean'], function () {
 });
 
 gulp.task('ng-config', function () {
-    gulp
-        .src('config.json')
+    var env = gulp
+        .src('env.json')
         .pipe(ngConfig('pds.environment', {
             environment: argv.env || 'prd',
             createModule: false,
@@ -93,6 +95,17 @@ gulp.task('ng-config', function () {
             pretty: true
         }))
         .pipe(gulp.dest('./src/js'));
+
+    var conf = gulp
+        .src('config.json')
+        .pipe(ngConfig('pds.environment', {
+            createModule: false,
+            wrap: true,
+            pretty: true
+        }))
+        .pipe(gulp.dest('./src/js'));
+
+    return merge(env, conf);
 });
 
 gulp.task('watch', function() {
@@ -116,6 +129,8 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('build', ['ng-config', 'vendor', 'scripts', 'css']);
+gulp.task('build', function (callback) {
+    runSequence('clean', ['vendor', 'scripts', 'css'])
+});
 gulp.task('default', ['watch', 'build']);
 gulp.task('serve', ['default', 'browser-sync']);

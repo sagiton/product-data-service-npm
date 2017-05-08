@@ -1,5 +1,5 @@
 (function (angular) {
-    angular.module('pds.common.route', ['ui.router', 'ncy-angular-breadcrumb']);
+    angular.module('pds.common.route', ['ui.router', 'ncy-angular-breadcrumb', 'pds.environment']);
     angular.module('pds.common.service', []);
     angular.module('pds.common.config', ['pascalprecht.translate']);
     angular.module('pds.common.controller', ['ngAnimate', 'ngSanitize', 'datatables', 'hl.sticky', 'dcbImgFallback', 'slickCarousel']);

@@ -3,11 +3,11 @@
         .module('pds.catalog.config')
         .config(ResourceConfig);
 
-    ResourceConfig.$inject = ['$provide', 'config', 'ResourceDecorator'];
+    ResourceConfig.$inject = ['$provide', 'env', 'ResourceDecorator'];
 
-    function ResourceConfig($provide, config, ResourceDecorator) {
+    function ResourceConfig($provide, env, ResourceDecorator) {
         $provide.decorator('$resource', ['$delegate', function ($delegate) {
-            return ResourceDecorator.appendBaseUrl($delegate, config.endPoint.productDataService);
+            return ResourceDecorator.appendBaseUrl($delegate, env.endPoint.productDataService);
         }]);
     }
 

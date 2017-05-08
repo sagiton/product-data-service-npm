@@ -1,5 +1,5 @@
 (function (angular) {
-  angular.module('pds.search.route', ['ui.router']);
+  angular.module('pds.search.route', ['pds.common.route', 'ui.router']);
   angular.module('pds.search.service', ['pds.navigation.model', 'pds.common.config']);
   angular.module('pds.search.config', []);
   angular.module('pds.search.controller', ['pds.search.service', 'ui.bootstrap']);
