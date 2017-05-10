@@ -1,7 +1,11 @@
 {
   "name": "product-data-service",
-  "version": "1.0.0",
+  "version": "1.0.0-SNAPSHOT.1",
   "main": "dist/pds.min.js",
+  "private": true,
+  "publishConfig": {
+    "registry": "https://nexus.sagiton.pl/repository/bower-snapshot/"
+  },
   "dependencies": {
     "jquery": "1.11.3",
     "datatables.net": "1.10.12",
