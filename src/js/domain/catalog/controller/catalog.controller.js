@@ -4,30 +4,37 @@
         .module('pds.catalog.controller')
         .controller("CatalogController", CatalogController);
 
-    CatalogController.$inject = ['$rootScope', 'urlParserService', 'CatalogService', 'MetaService', '_'];
+    CatalogController.$inject = ['$scope', 'urlParserService', '_'];
 
-    function CatalogController($rootScope, urlParserService, CatalogService, MetaService, _) {
+    function CatalogController($scope, urlParserService, _) {
         var CATEGORY_TYPE = 'sub_category';
         var vm = this;
-        var catalogId = urlParserService.getCatalogId();
+        vm.catalogId = urlParserService.getCatalogId();
         vm.isCategory = isCategory;
         vm.anyProductHasAttribute = anyProductHasAttribute;
         vm.anyProductHasValue = anyProductHasValue;
 
-        CatalogService.setOcsActiveNavigation();
-        MetaService.updateMetaByCategory(catalogId);
+        $scope.$on('pds.catalog.loaded', function (event, params) {
+            return initCatalog(params.catalog);
+        });
 
-        $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: catalogId});
+        $scope.$on('pds.catalog.loaded', function (event, params) {
+            angular
+                .element('#nav-primary-collapse')
+                .find('li')
+                .removeClass('active');
+            angular
+                .element('#ocs-nav')
+                .addClass('active');
+        });
 
-        CatalogService
-            .getById(catalogId)
-            .then(function (data) {
-                vm.catalog = data;
-                vm.catalog.subheadlines = getDescriptions(vm.catalog);
-                if (vm.catalog.productTableDefinition) {
-                    vm.detailsTable = buildDetailsTable(vm.catalog.productTableDefinition.value.elements, vm.catalog.children);
-                }
-            });
+        function initCatalog(catalog) {
+            vm.catalog = catalog;
+            vm.catalog.subheadlines = getDescriptions(vm.catalog);
+            if (vm.catalog.productTableDefinition) {
+                vm.detailsTable = buildDetailsTable(vm.catalog.productTableDefinition.value.elements, vm.catalog.children);
+            }
+        }
 
         function getDescriptions(resource) {
             var i = 1;

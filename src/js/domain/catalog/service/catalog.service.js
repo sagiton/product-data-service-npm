@@ -27,7 +27,6 @@
             getByIdAndType: getByIdAndType,
             redirectTo: navigateTo,
             navigateTo: navigateTo,
-            setOcsActiveNavigation: setOcsActiveNavigation,
             travelUpHierarchy: travelUpHierarchy,
             travelUpNavigationHierarchy: travelUpNavigationHierarchy,
             getIdFromLocation: getIdFromLocation,
@@ -121,16 +120,6 @@
 
         function resolveUriFromHierarchy(categoryId, locale) {
             return travelUpNavigationHierarchy(categoryId, locale).then(buildUri);
-        }
-
-        function setOcsActiveNavigation() {
-            angular
-                .element('#nav-primary-collapse')
-                .find('li')
-                .removeClass('active');
-            angular
-                .element('#ocs-nav')
-                .addClass('active');
         }
 
         function getIdFromLocation(uri) {

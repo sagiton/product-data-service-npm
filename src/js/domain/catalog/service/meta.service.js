@@ -3,28 +3,27 @@
         .module('pds.catalog.service')
         .service('MetaService', MetaService);
 
-    MetaService.$inject = ['$rootScope', '$q', '$location', 'CatalogService', 'imageUrlFilter', 'config'];
+    MetaService.$inject = ['$rootScope', '$scope', '$q', '$location', 'CatalogService', 'imageUrlFilter', 'config'];
 
     var TITLE_DELIMITER = ' | ';
     var LOCALE_DELIMITER = '-';
     var LOCALE_PROPER_DELIMITER = '_';
 
-    function MetaService($rootScope, $q, $location, CatalogService, imageUrlFilter, config) {
+    function MetaService($rootScope, $scope, $q, $location, CatalogService, imageUrlFilter, config) {
+        $scope.$on('pds.catalog.loaded', function (event, params) {
+            return updateMetaByCatalog(params.catalog);
+        });
 
         return {
-            updateMetaByCategory: updateMetaByCategory
+            updateMetaByCatalog: updateMetaByCatalog
         };
 
-        function updateMetaByCategory(categoryId) {
-            CatalogService
-                .getById(categoryId)
-                .then(function (currentCatalog) {
-                    return CatalogService
-                        .travelUpNavigationHierarchy(categoryId)
-                        .then(function (tree) {
-                            tree[0] = currentCatalog;
-                            return tree;
-                        });
+        function updateMetaByCatalog(catalog) {
+            return CatalogService
+                .travelUpNavigationHierarchy(catalog.id.value)
+                .then(function (tree) {
+                    tree[0] = catalog;
+                    return tree;
                 })
                 .then(function (tree) {
                     var q = $q.defer();
@@ -53,6 +52,7 @@
                         canonicalUrl: $location.absUrl()
                     };
 
+                    //TODO Project specific logic - externalize
                     if (!(currentNode.blockCanonicalTag || {}).value) {
                         var canonicalRef = (currentNode.canonicalRef || {}).value;
                         if(canonicalRef) {
