@@ -3,9 +3,9 @@
         .module('pds.catalog.route')
         .config(RouteConfig);
 
-    RouteConfig.$inject = ['$stateProvider', 'config'];
+    RouteConfig.$inject = ['$stateProvider'];
 
-    function RouteConfig($stateProvider, config) {
+    function RouteConfig($stateProvider) {
         $stateProvider.pdsRoute({
             name: 'catalog',
             url: '{catUrl:.*-[cp]$}',

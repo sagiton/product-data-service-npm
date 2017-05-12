@@ -1,15 +1,27 @@
 (function (angular) {
     angular
         .module('pds.common.config')
-        .factory('locale', ['config', '_', Locale]);
+        .provider('locale', LocaleProvider);
 
-    var discoveryMethods = [urlPatternDiscovery];
 
-    function Locale(config, _) {
+    function LocaleProvider() {
+        var discoveryMethods = [];
+
+        this.addDiscoveryMethod = function (method) {
+            discoveryMethods.push(method);
+            return this;
+        };
+
+        this.$get = ['_', function (config, _) {
+            return new Locale(_, discoveryMethods);
+        }];
+    }
+
+    function Locale(_, discoveryMethods) {
         var method = _.find(discoveryMethods, _.attempt);
         var result =  method ? method() : [];
-        var country = config.forceCountry || result[1];
-        var language = config.forceLanguage || result[2];
+        var country = result[1];
+        var language = result[2];
         return {
             country: country,
             language: language,
@@ -17,10 +29,5 @@
                 return this.language.toLowerCase() + "_" + this.country.toUpperCase();
             }
         };
-    }
-
-    var localeUrlPattern = /^\/([a-zA-Z]{2})\/([a-zA-Z]{2})/;
-    function urlPatternDiscovery() {
-        return localeUrlPattern.exec(new URI().path());
     }
 })(angular);

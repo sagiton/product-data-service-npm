@@ -5,7 +5,6 @@
             return {
                 restrict: 'EA',
                 scope: {
-                    catalogTemplate: '=',
                     catalogId: '='
                 },
                 transclude: true,
