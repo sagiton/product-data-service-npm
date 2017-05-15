@@ -21,3 +21,9 @@ Set building profile with _env_ flag: `gulp build --env rvw`
 #### Installing JS libraries
 If you need to install new JS library, please use `bower i {library-name} --save`, usually all of libraries hosted on Github have bower package registered you only need to find a package name.
 After installation rebuild the app with `gulp build` task, it will concatenate your new library into `vendor.min.js`
+
+
+#### Usage
+- Use _\<catalog-template catalog-id="id"\>_ directive to fetch the catalog and attach it to the template scope. Catalog variable name is _$catalog_
+- Listen on `pds.catalog.loaded` scope event to handle additional catalog logic after fetch
+- Example integration can be found in `./src/test/project/buderus`

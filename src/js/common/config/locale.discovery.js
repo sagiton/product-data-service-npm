@@ -12,7 +12,7 @@
             return this;
         };
 
-        this.$get = ['_', function (config, _) {
+        this.$get = ['_', function (_) {
             return new Locale(_, discoveryMethods);
         }];
     }
