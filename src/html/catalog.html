@@ -1,40 +1,37 @@
 <catalog-template catalog-id="vm.catalogId">
-<div ng-if="vm.isCategory()">
-    <section class="section fs-keyvisual p-a-0">
+
+    <section ng-if="$catalog.showImage()" class="section fs-keyvisual p-a-0">
         <div class="slide">
             <div class="slide-image slide-image-transparent-30">
-                <img class="img-responsive" ng-src="{{vm.catalog.keyVisual.value | imageUrl: 'keyvisual'}}" alt="{{vm.catalog.name.value}}" title="{{vm.catalog.name.value}}">
+                <img class="img-responsive" ng-src="{{$catalog.image.value | imageUrl: 'img-lg'}}" alt="{{$catalog.name.value}}" title="{{$catalog.name.value}}">
             </div>
             <div class="slide-caption text-center">
-                <h1 class="hl-1 slide-title">{{vm.catalog.name.value}}</h1>
-                <p>{{vm.catalog.descriptionShort.value}}</p>
+                <h1 class="hl-1 slide-title" ng-if="$catalog.name">{{$catalog.name.value}}</h1>
+                <p ng-if="$catalog.title">{{$catalog.title.value}}</p>
             </div>
         </div>
     </section>
     <!-- END Keyvisual -->
 
-    <section class="section fs-headline">
+    <section class="section fs-headline" ng-if="$catalog.description">
         <div class="container-fluid text-center">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <p>{{vm.catalog.descriptionLong.value}}</p>
+                    <p>{{$catalog.description.value}}</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- END Headline -->
-</div>
 
-<div ng-if="vm.isCategory() && vm.catalog.type.value != 'leaf_category'">
-    <section class="section fs-four-column-media-teaser">
+    <section ng-if="$catalog.showTiles()" class="section fs-four-column-media-teaser">
         <div class="container-fluid">
             <div class="flex-row">
-                <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="childrenCategory in vm.catalog.children" ocs-navigate="childrenCategory.id.value">
-                    <img class="card-img-top img-responsive img-widen" ng-src="{{childrenCategory.categoryImage.value | imageUrl: 'category'}}" alt="{{childrenCategory.name.value}}"
-                         title="{{childrenCategory.name.value}}">
-                    <div class="card-block" ng-if="childrenCategory.headline" equalize-teaser-height>
-                        <div class="card-title hl-4 text-wrap">{{childrenCategory.headline.value}}</div>
-                        <p class="card-text">{{childrenCategory.descriptionShort.value}}</p>
+                <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $catalog.tiles" ocs-navigate="tile.id.value">
+                    <img class="card-img-top img-responsive img-widen" ng-src="{{tile.image.value | imageUrl: 'img-sm'}}" alt="{{tile.name.value}}" title="{{tile.name.value}}">
+                    <div class="card-block" ng-if="tile.title" equalize-teaser-height>
+                        <div class="card-title hl-4 text-wrap">{{tile.title.value}}</div>
+                        <p class="card-text">{{tile.description.value}}</p>
                     </div>
                     <div class="card-block-link">
                         <span class="link-more" translate="MORE.DETAILS"></span>
@@ -44,14 +41,12 @@
         </div>
     </section>
     <!-- END 4-Column-Media-Teaser -->
-</div>
 
-<div ng-if="vm.catalog.type.value == 'leaf_category'">
-    <section class="section fs-two-column-square-media-text">
-        <div class="container-fluid bg-grey-light" ng-repeat="childrenProduct in vm.catalog.children">
+    <section ng-if="$catalog.showList()" class="section fs-two-column-square-media-text">
+        <div class="container-fluid bg-grey-light" ng-repeat="item in $catalog.list">
             <div class="flex-row">
                 <div class="col-sm-4 col-media">
-                    <div class="relative-container" ng-if="childrenProduct.new.value">
+                    <div class="relative-container" ng-if="item.new.value">
                         <div class="label-container small left">
                             <div class="label-wrapper-outer">
                                 <div class="label-wrapper-inner">
@@ -60,30 +55,27 @@
                             </div>
                         </div>
                     </div>
-                    <img class="img-responsive img-widen" ng-src="{{childrenProduct.productcategoryimage.value | imageUrl: 'product'}}" alt="{{childrenProduct.name.value}}"
-                         title="{{childrenProduct.name.value}}">
+                    <img class="img-responsive img-widen" ng-src="{{item.image.value | imageUrl: 'img-md'}}" alt="{{item.name.value}}" title="{{item.name.value}}">
                 </div>
                 <div class="col-sm-8 col-text">
                     <div class="hl-3 column-title text-primary">
-                        <a ocs-navigate="childrenProduct.id.value">{{childrenProduct.productname.value}}</a>
+                        <a ocs-navigate="item.id.value">{{item.title.value}}</a>
                     </div>
-                    <ul class="checklist">
-                        <li ng-repeat="highlight in childrenProduct.highlightCatOverview.value.elements">{{highlight}}</li>
+                    <ul class="checklist" ng-if="item.bullets.length">
+                        <li ng-repeat="bullet in item.bullets">{{bullet}}</li>
                     </ul>
                     <ul class="list-inline button-list">
-                        <li><a class="btn btn-primary" ocs-navigate="childrenProduct.id.value">{{'MORE.DETAILS' | translate}}</a></li>
+                        <li><a class="btn btn-primary" ocs-navigate="item.id.value" translate="MORE.DETAILS"></a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
     <!-- END 2-Column-Media-Text -->
-</div>
 
-<div ng-if="vm.catalog.type.value == 'product_details'">
-    <section class="section fs-two-column-media-text-with-logo bg-grey">
+    <section ng-if="$catalog.showTeaser()" class="section fs-two-column-media-text-with-logo bg-grey">
         <div class="container-fluid">
-            <div class="row" ng-if="vm.catalog.neuheitOcs.value">
+            <div class="row" ng-if="$catalog.new.value">
                 <div class="relative-container">
                     <div class="label-container large right">
                         <div class="label-wrapper-outer">
@@ -92,7 +84,7 @@
                             </div>
                         </div>
                         <div class="label-wrapper-outer">
-                            <img class="" src="/media/images/arbonia_1.jpg" alt="" title="">
+                            <img class="" ng-src="{{$catalog.newImage}}" alt="" title="">
                         </div>
                     </div>
                 </div>
@@ -102,20 +94,20 @@
                     <div class="js-slick-slider slick-image-slider"
                          data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'>
                         <div class="slide">
-                            <img class="img-responsive img-widen" ng-src="{{vm.catalog.productimage.value | imageUrl: 'product'}}" alt="{{vm.catalog.productname.value}}" title="{{vm.catalog.productname.value}}">
-                            <img class="img-overlay" ng-if="vm.catalog.mainErpLabel" ng-src="{{vm.catalog.mainErpLabel.value}}" />
+                            <img class="img-responsive img-widen" ng-src="{{$catalog.image.value | imageUrl: 'img-md'}}" alt="{{$catalog.name.value}}" title="{{$catalog.name.value}}">
+                            <img class="img-overlay" ng-if="$catalog.energyEfficiency.image" ng-src="{{$catalog.energyEfficiency.image.value}}" />
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-text">
-                    <h1 class="hl-2 product-name">{{vm.catalog.productname.value}}</h1>
-                    <p>{{vm.catalog.descriptionShort.value}}</p>
+                    <h1 class="hl-2 product-name">{{$catalog.name.value}}</h1>
+                    <p>{{$catalog.title.value}}</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- END 2-Column-Media-Text -->
-    <section class="section fs-two-column-headline-text bg-grey-dark" ng-if="vm.catalog.highlights.value.elements.length">
+    <section class="section fs-two-column-headline-text bg-grey-dark" ng-if="$catalog.showTechnicalInformation()">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4">
@@ -123,29 +115,33 @@
                 </div>
                 <div class="col-sm-8">
                     <ul class="checklist">
-                        <li ng-repeat="highlight in vm.catalog.highlights.value.elements">{{highlight}}</li>
+                        <li ng-repeat="info in $catalog.technicalInformation">{{info}}</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
     <!-- END 2-Column-Headline-Text -->
-    <section class="section fs-two-column-icon-accordion" ng-if="vm.catalog.subheadlines.length > 0">
+    <section class="section fs-two-column-icon-accordion" ng-if="$catalog.showMoreDetails()">
         <div class="container-fluid">
-            <h2 class="section-title text-primary text-center">{{vm.catalog.headlineOverview.value}}</h2>
+            <h2 class="section-title text-primary text-center">{{$catalog.moreDetails.title.value}}</h2>
             <div id="acrd-872921587" class="accordion panel-group m-b-0" role="tablist" aria-multiselectable="true">
-                <div class="panel" ng-repeat="subheadline in vm.catalog.subheadlines">
-                    <div id="acrd-872921587-heading-1" class="panel-heading" role="tab">
+                <div class="panel" ng-repeat="item in $catalog.moreDetails.elements">
+                    <div id="acrd-872921587-heading-{{$index}}" class="panel-heading" role="tab">
                         <h3 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#acrd-872921587" data-target="#acrd-872921587-panel-1"
-                               aria-controls="acrd-872921587-panel-1" aria-expanded="false">
-                                {{subheadline.title}}
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#acrd-872921587" data-target="#acrd-872921587-panel-{{$index}}"
+                               aria-controls="acrd-872921587-panel-{{$index}}" aria-expanded="false">
+                                {{item.title}}
                             </a>
                         </h3>
                     </div>
-                    <div id="acrd-872921587-panel-1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acrd-872921587-heading-1">
-                        <article class="panel-body article" ng-repeat="detailsDesc in subheadline.description">
-                            <p>{{detailsDesc}}</p>
+                    <div id="acrd-872921587-panel-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acrd-872921587-heading-{{$index}}">
+                        <article class="panel-body article">
+                            <p ng-if="!item.text.elements" ng-bind-html="item.text | convertWhitespaces"></p>
+                            <ul ng-if="item.text.elements">
+                                <li ng-repeat="el in item.text.elements">{{el}}</li>
+                            </ul>
+                            <img ng-if="item.image" class="img-responsive img-widen m-b-1" ng-src="{{item.image | imageUrl}}" alt="{{item.title}}" title="{{item.title}}" />
                         </article>
                     </div>
                 </div>
@@ -153,7 +149,7 @@
         </div>
     </section>
 
-    <section class="section fs-table-scrollable" ng-if="vm.isNotEmpty()">
+    <section class="section fs-table-scrollable" ng-if="$catalog.showTechnicalTable()">
         <div class="container-fluid">
             <h2 class="section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
             <div class="row scrollable-table-wrapper">
@@ -162,7 +158,7 @@
                         <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
                             <thead><tr><th class="table-center">&nbsp;</th></tr></thead>
                             <tbody>
-                            <tr ng-repeat="attribute in vm.catalog.productTableDefinition.value.elements | filter: vm.anyProductHasAttribute | filter: vm.isNotHeaderAttribute">
+                            <tr ng-repeat="attribute in $catalog.productTableDefinition.value.elements | filter: vm.anyProductHasAttribute | filter: vm.isNotHeaderAttribute">
                                 <td><span class="td-headline">{{attribute.name}}</span></td>
                             </tr>
                             </tbody>
@@ -198,113 +194,19 @@
         </div>
     </section>
 
-    <section class="section" ng-if="vm.catalog.footnotesTechData">
+    <section class="section" ng-if="$catalog.showFootnotes()">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10">
                     <div class="footnotes">
-                        <ol class="footnote-ordered-list" ng-if="vm.catalog.footnotesTechData.type == 'list'">
-                            <li ng-repeat="item in vm.catalog.footNotesTechData.value.elements">{{item}}</li>
+                        <ol class="footnote-ordered-list" ng-if="$catalog.footnotes.type == 'list'">
+                            <li ng-repeat="item in $catalog.footnotes.value.elements">{{item}}</li>
                         </ol>
-                        <p class="footnote-paragraph" ng-if="vm.catalog.footnotesTechData.type == 'string'">{{vm.catalog.footnotesTechData.value}}</p>
+                        <p class="footnote-paragraph" ng-if="$catalog.footnotes.type == 'string'">{{$catalog.footnotes.value}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
-</div>
-
-<div ng-if="vm.catalog.type.value == 'toolfinder'" ng-controller="ProductFinderController as vm">
-    <section class="section fs-keyvisual p-a-0">
-        <div class="slide">
-            <div class="slide-image slide-image-transparent-30">
-                <img class="img-responsive" ng-src="{{vm.selected.keyvisual | imageUrl: 'keyvisual'}}" alt="{{vm.selected.name.value}}" title="{{vm.selected.name.value}}">
-            </div>
-            <div class="slide-caption text-center">
-                <h2 class="hl-1 slide-title">{{vm.selected.name.value}}</h2>
-                <p class="hl-6">{{vm.selected.descriptionShort.value}}</p>
-            </div>
-        </div>
-    </section>
-    <section class="section fs-progress-bar bg-blue">
-        <div class="container-fluid">
-            <h2 class="section-title hl-4">{{vm.selected.descriptionLong.value}}</h2>
-            <div class="progress-container">
-                <div class="progress">
-                    <div class="progress-bar {{'progress-' + (25 * vm.selection.length)}}" role="progressbar" aria-valuenow="{{25 * vm.selection.length}}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="circle-container">
-                    <div ng-repeat="level in vm.levels" class="step-circle" ng-class="{active: level <= vm.selection.length + 1}"><span>{{level}}</span></div>
-                </div>
-                <div class="filter-container">
-                    <span class="selection" translate="YOUR.SELECTION"></span>
-                    <ul class="filter list-inline">
-                        <li ng-if="!vm.selection.length">&ndash;</li>
-                        <li ng-repeat="item in vm.selection">
-                            <span>{{item.name.value}}</span>
-                            <button ng-click="vm.remove(item)" type="button" class="btn icon-cancel"></button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section fs-four-column-product-category" ng-if="!vm.isCompleted()">
-        <div class="container-fluid">
-            <div class="row">
-                <a class="card col-xs-6 col-sm-4 col-md-3" target="_self" ng-repeat="child in vm.selected.children" ng-click="vm.select(child.id.value)">
-                    <img class="card-img-top img-responsive img-widen" ng-src="{{child.categoryImage.value | imageUrl: 'category'}}" alt="{{child.name.value}}" title="{{child.name.value}}">
-                    <div class="card-block">
-                        <p class="hl-6 card-text">{{child.name.value}}</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section ng-if="vm.isCompleted()" class="section fs-filter-finder">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-8">
-                    <h3 class="section-title hl-4" translate="YOUR.SELECTION.COUNT" translate-values="{count: vm.selected.children.length || 0}"></h3>
-                </div>
-                <div class="col-sm-4">
-                    <ul class="list-inline button-list text-sm-right">
-                        <li>
-                            <button type="button" class="btn btn-default" ng-click="vm.reset()" translate="RESET.PRODUCT.FINDER"></button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section ng-if="vm.isCompleted()" class="section fs-two-column-square-media-text">
-        <div class="container-fluid bg-grey-light" ng-repeat="item in vm.selected.children">
-            <div class="flex-row">
-                <div class="col-sm-4 col-media">
-                    <div class="relative-container" ng-if="item.new">
-                        <div class="label-container small left">
-                            <div class="label-wrapper-outer">
-                                <div class="label-wrapper-inner">
-                                    <div class="label-content" translate="NEW.LABEL"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <img class="img-responsive img-widen" ng-src="{{item.categoryImage.value | imageUrl: 'category'}}" alt="{{item.name.value}}" title="{{item.name.value}}">
-                </div>
-                <div class="col-sm-8 col-text">
-                    <h3 class="hl-3 column-title text-primary">{{item.name.value}}</h3>
-                    <ul class="checklist">
-                        <li ng-repeat="bullet in item.highlights track by $index">{{bullet}}</li>
-                    </ul>
-                    <ul class="list-inline button-list">
-                        <li><a class="btn btn-primary" ocs-navigate="vm.getProductFamily(item)">{{'MORE.DETAILS' | translate}}</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
 </catalog-template>

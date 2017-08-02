@@ -31,4 +31,17 @@
             }
         );
     }
+
+    Catalog.prototype.isLeafCatalog = function () {
+        return this.getType() == 'LEAF_CATEGORY';
+    };
+
+    Catalog.prototype.isProductFamily = function () {
+        return this.getType() == 'PRODUCT_FAMILY';
+    };
+
+    Catalog.prototype.getType = function() {
+        return this.type ? this.type.value : String();
+    };
+
 })(angular);

@@ -41,27 +41,5 @@
                 vm.productFamilies = result;
                 vm.productsLoaded = true;
             });
-
-        function initProductFamilies() {
-            return _.each(vm.products, function (product) {
-                catalogService
-                    .getProductFamily(product)
-                    .then(function (family) {
-                        return product.productFamilyId = family.id;
-                    });
-            })
-        }
-
-        function _initProductImages(products) {
-            _
-                .each(products, function (product) {
-                    var parent = product.parentId.type == 'list' ? product.parentId.value.elements[0] : product.parentId.value;
-                    catalogService
-                        .getByIdAndType(parent, 'product_details')
-                        .then(function (productFamily) {
-                            product.productimage = productFamily.productimage;
-                        });
-                });
-        }
     }
 })(angular);
