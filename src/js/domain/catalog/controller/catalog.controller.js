@@ -4,9 +4,9 @@
         .module('pds.catalog.controller')
         .controller("CatalogController", CatalogController);
 
-    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_'];
+    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_', 'MetaService'];
 
-    function CatalogController($scope, $rootScope, urlParserService, _) {
+    function CatalogController($scope, $rootScope, urlParserService, _, MetaService) {
         var CATEGORY_TYPE = 'sub_category';
         var ERP_LABEL_LOGO_KEY = 'ocsErpLogo';
         var vm = this;
@@ -16,13 +16,14 @@
         vm.anyProductHasAttribute = anyProductHasAttribute;
         vm.anyProductHasValue = anyProductHasValue;
 
+        MetaService.updateMetaByCategory(vm.catalogId);
         $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});
 
         $scope.$on('pds.catalog.loaded', function (event, params) {
             return initCatalog(params.catalog);
         });
 
-        $scope.$on('pds.catalog.loaded', function (event, params) {
+        $scope.$on('pds.catalog.loaded', function () {
             angular
                 .element('#nav-primary-collapse')
                 .find('li')

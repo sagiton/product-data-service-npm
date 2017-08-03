@@ -3,27 +3,30 @@
         .module('pds.catalog.service')
         .service('MetaService', MetaService);
 
-    MetaService.$inject = ['$rootScope', '$scope', '$q', '$location', 'CatalogService', 'imageUrlFilter', 'config'];
+    MetaService.$inject = ['$rootScope', '$q', '$location', 'CatalogService', 'imageUrlFilter', 'config'];
 
     var TITLE_DELIMITER = ' | ';
     var LOCALE_DELIMITER = '-';
     var LOCALE_PROPER_DELIMITER = '_';
+    var PATH_SEPARATOR = '/';
 
-    function MetaService($rootScope, $scope, $q, $location, CatalogService, imageUrlFilter, config) {
-        $scope.$on('pds.catalog.loaded', function (event, params) {
-            return updateMetaByCatalog(params.catalog);
-        });
+    function MetaService($rootScope, $q, $location, CatalogService, imageUrlFilter, config) {
 
         return {
-            updateMetaByCatalog: updateMetaByCatalog
+            updateMetaByCategory: updateMetaByCategory
         };
 
-        function updateMetaByCatalog(catalog) {
-            return CatalogService
-                .travelUpNavigationHierarchy(catalog.id.value)
-                .then(function (tree) {
-                    tree[0] = catalog;
-                    return tree;
+        function updateMetaByCategory(catalogId) {
+            var excludeHreflangs = false;
+            CatalogService
+                .getById(catalogId)
+                .then(function (currentCatalog) {
+                    return CatalogService
+                        .travelUpNavigationHierarchy(catalogId)
+                        .then(function (tree) {
+                            tree[0] = currentCatalog;
+                            return tree;
+                        });
                 })
                 .then(function (tree) {
                     var q = $q.defer();
@@ -52,10 +55,10 @@
                         canonicalUrl: $location.absUrl()
                     };
 
-                    //TODO Project specific logic - externalize
                     if (!(currentNode.blockCanonicalTag || {}).value) {
                         var canonicalRef = (currentNode.canonicalRef || {}).value;
                         if(canonicalRef) {
+                            excludeHreflangs = canonicalRef != catalogId;
                             CatalogService
                                 .resolveUriFromHierarchy(canonicalRef)
                                 .then(function (url) {
@@ -73,16 +76,24 @@
                     $rootScope.$broadcast('pds.header.update', params);
                 })
                 .then(function () {
+                    if (excludeHreflangs) {
+                        angular.element('link[hreflang]').remove();
+                        return false;
+                    }
                     angular
                         .element('link[hreflang]')
                         .each(function (index, link) {
                             var linkObject = angular.element(link);
                             var locale = linkObject.attr('hreflang');
-                            locale = locale.replace(LOCALE_DELIMITER, LOCALE_PROPER_DELIMITER);
+                            locale = locale.split(LOCALE_DELIMITER);
                             CatalogService
-                                .resolveUriFromHierarchy(categoryId, locale)
+                                .resolveUriFromHierarchy(catalogId, locale[0] + LOCALE_PROPER_DELIMITER + locale[1])
                                 .then(function (url) {
-                                    linkObject.attr('href', url);
+                                    linkObject.attr('href', url.replace(/\/[a-z]{2}\/[a-z]{2}\//, PATH_SEPARATOR + locale[1].toLowerCase() + PATH_SEPARATOR + locale[0].toLowerCase()  + PATH_SEPARATOR));
+                                    return !!url;
+                                })
+                                .then(function (result) {
+                                    return result || linkObject.remove();
                                 });
                         });
                 });
