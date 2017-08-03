@@ -4,9 +4,9 @@
         .module('pds.catalog.controller')
         .controller("CatalogController", CatalogController);
 
-    CatalogController.$inject = ['$scope', 'urlParserService', '_', '$filter'];
+    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_'];
 
-    function CatalogController($scope, urlParserService, _, $filter) {
+    function CatalogController($scope, $rootScope, urlParserService, _) {
         var CATEGORY_TYPE = 'sub_category';
         var ERP_LABEL_LOGO_KEY = 'ocsErpLogo';
         var vm = this;
@@ -15,6 +15,8 @@
         vm.isCategory = isCategory;
         vm.anyProductHasAttribute = anyProductHasAttribute;
         vm.anyProductHasValue = anyProductHasValue;
+
+        $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});
 
         $scope.$on('pds.catalog.loaded', function (event, params) {
             return initCatalog(params.catalog);
