@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var json = require('gulp-json-editor');
 var nop = require('gulp-nop');
+var bump = require('gulp-bump');
 var concat = require('gulp-concat');
 var concatUtil = require('gulp-concat-util');
 var browserSync = require('browser-sync');
@@ -137,5 +138,14 @@ gulp.task('browser-sync', function() {
 gulp.task('build', function (callback) {
     runSequence('clean', ['vendor', 'scripts', 'css'])
 });
+
+gulp.task('bump', function () {
+    var type = argv.type || 'prerelease';
+    gulp
+        .src(['./bower.json', './package.json'])
+        .pipe(bump({type: type}))
+        .pipe(gulp.dest('./'));
+});
+
 gulp.task('default', ['watch', 'build']);
 gulp.task('serve', ['default', 'browser-sync']);

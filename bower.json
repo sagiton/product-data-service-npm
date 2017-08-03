@@ -1,6 +1,6 @@
 {
   "name": "product-data-service",
-  "version": "1.0.0-SNAPSHOT.1",
+  "version": "2.0.0-SNAPSHOT.0",
   "main": "dist/pds.min.js",
   "private": true,
   "publishConfig": {
