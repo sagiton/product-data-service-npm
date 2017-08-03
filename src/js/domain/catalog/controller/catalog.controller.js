@@ -4,11 +4,13 @@
         .module('pds.catalog.controller')
         .controller("CatalogController", CatalogController);
 
-    CatalogController.$inject = ['$scope', 'urlParserService', '_'];
+    CatalogController.$inject = ['$scope', 'urlParserService', '_', '$filter'];
 
-    function CatalogController($scope, urlParserService, _) {
+    function CatalogController($scope, urlParserService, _, $filter) {
         var CATEGORY_TYPE = 'sub_category';
+        var ERP_LABEL_LOGO_KEY = 'ocsErpLogo';
         var vm = this;
+        vm.headerAttributes = ['marketGenericDescription', 'P11_KT1', 'name'];
         vm.catalogId = urlParserService.getCatalogId();
         vm.isCategory = isCategory;
         vm.anyProductHasAttribute = anyProductHasAttribute;
@@ -31,9 +33,25 @@
         function initCatalog(catalog) {
             vm.catalog = catalog;
             vm.catalog.subheadlines = getDescriptions(vm.catalog);
+            vm.catalog.energyEfficiency.image = findMainErpLabel(vm.catalog);
             if (vm.catalog.productTableDefinition) {
-                vm.detailsTable = buildDetailsTable(vm.catalog.productTableDefinition.value.elements, vm.catalog.children);
+                var tableDefinition = vm.catalog.productTableDefinition.value.elements;
+                vm.catalog.table = {};
+                vm.catalog.table.attributes = _
+                    .chain(tableDefinition)
+                    .filter(anyProductHasAttribute)
+                    .filter(isNotHeaderAttribute)
+                    .value();
+                vm.catalog.table.products = buildDetailsTable(tableDefinition, vm.catalog.children);
             }
+        }
+
+        function isNotHeaderAttribute(attr) {
+            return !isHeaderAttribute(attr);
+        }
+
+        function findMainErpLabel(product) {
+            return _.head(product.children)[ERP_LABEL_LOGO_KEY];
         }
 
         function getDescriptions(resource) {
@@ -50,33 +68,41 @@
             return subheadlines;
         }
 
-        function buildDetailsTable(tableDefinition, children) {
-            return _
-                .chain(children)
-                .map(function (elem) {
-                    return {
-                        rows: buildDetailsTableColumn(tableDefinition, elem),
-                        children: elem
-                    };
-                })
-                .value()
+        function buildDetailsTable(tableDefinition, products) {
+            return _.map(products, function (product) {
+                product.attributes = buildProductAttributes(tableDefinition, product);
+                product.header = _
+                    .chain(product)
+                    .at(vm.headerAttributes)
+                    .compact()
+                    .head()
+                    .value()
+                    .value;
+                product.name = product.productname;
+                return product;
+            });
         }
 
-        function buildDetailsTableColumn(tableDefinition, children) {
+        function buildProductAttributes(tableDefinition, product) {
             return _
                 .chain(tableDefinition)
                 .reject(isHeaderAttribute)
-                .map(function (elem) {
-                    var valueDetails = children[elem.value];
+                .filter(anyProductHasValue)
+                .map(function (attribute) {
+                    var productAttribute = product[attribute.value] || {};
                     return {
-                        name: elem.name,
-                        unit: elem.unit,
-                        id: elem.value,
-                        value: valueDetails ? valueDetails.value : undefined,
-                        type: valueDetails ? valueDetails.type : undefined
+                        name: attribute.name,
+                        unit: attribute.unit,
+                        id: attribute.value,
+                        value: productAttribute.value,
+                        type: productAttribute.type
                     }
                 })
                 .value();
+        }
+
+        function isHeaderAttribute(attr) {
+            return _.includes(vm.headerAttributes, attr.value);
         }
 
         function isCategory() {
@@ -90,10 +116,8 @@
             })
         }
 
-        function anyProductHasValue(value) {
-            return _.some(vm.catalog.children, function (product) {
-                return !!product[value.id];
-            });
+        function anyProductHasValue(attribute) {
+            return _.some(vm.catalog.children, attribute.value);
         }
     }
 

@@ -3,7 +3,7 @@
         .module('pds.common.filter')
         .filter('imageUrl', ImageUrlFilter);
 
-    ImageUrlFilter.$inject = ['env'];
+    ImageUrlFilter.$inject = ['env', 'locale'];
 
     var defaultImages = {
         sm: '/media/images/default-category-image_460x460.jpg',
@@ -12,9 +12,9 @@
         keyvisual: '/media/images/skv_keyvisual_1.jpg'
     };
 
-    function ImageUrlFilter(env) {
+    function ImageUrlFilter(env, locale) {
         return function (mediaObject, size) {
-            return mediaObject ? env.endPoint.ocsMediaEndpoint + "media/" + mediaObject : defaultImages[size || 'product'];
+            return mediaObject ? env.endPoint.ocsMediaEndpoint + locale.toString() + "/media/" + mediaObject : defaultImages[size || 'product'];
         }
     }
 })(angular);

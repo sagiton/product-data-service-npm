@@ -25,9 +25,11 @@
                         catalog.title = catalog.descriptionShort;
                         catalog.image = catalog.keyVisual || catalog.productimage;
                         catalog.showImage = function () {
-                            return !!catalog.image;
+                            return !!catalog.keyVisual;
                         };
-                        catalog.showTiles = _.negate(catalog.isLeafCatalog);
+                        catalog.showTiles = function () {
+                            return catalog.isRootCatalog() || catalog.isSubCatalog();
+                        };
                         catalog.tiles = _.map(catalog.children, function (child) {
                             return {
                                 id: child.id,
@@ -45,14 +47,14 @@
                                 title: child.productname,
                                 image: child.productcategoryimage,
                                 new: child.new,
-                                bullets: _.has(child, 'highlightCatOverview.value.elements') && child.highlightCatOverview.value.elements,
+                                bullets: _.has(child, 'highlightCatOverview.value.elements') && child.highlightCatOverview.value.elements
 
                             }
                         });
                         catalog.showTeaser = catalog.isProductFamily;
                         catalog.new = catalog.neuheitOcs;
                         catalog.newImage = '/media/new.png';
-                        catalog.name = catalog.productname;
+                        catalog.name = catalog.headline || catalog.productname;
                         catalog.energyEfficiency = {
                             image: catalog.mainErpLabel
                         };
@@ -63,16 +65,26 @@
                         catalog.showMoreDetails = function () {
                             return _.size(catalog.subheadlines) > 0;
                         };
+                        catalog.subheadlines = (function (catalog) {
+                            var i = 1;
+                            var subheadline = catalog.detailsSubheadline1;
+                            var description = catalog.detailsDescription1;
+                            var image = catalog.detailsImage1;
+                            var subheadlines = [];
+                            while(subheadline != null || description != null) {
+                                subheadlines.push({title: subheadline && subheadline.value, description: description && description.value, image: image && image.value});
+                                i++;
+                                description = catalog['detailsDescription' + i];
+                                subheadline = catalog['detailsSubheadline' + i];
+                                image = catalog['detailsImage' + i];
+                            }
+                            return subheadlines;
+                        })(catalog);
                         catalog.moreDetails = {
                             title: catalog.headlineOverview,
-                            elements: _.map(catalog.subheadlines, function (headline) {
-                                return {
-                                    title: headline.title,
-                                    text: headline.description,
-                                    image: headline.image
-                                }
-                            })
+                            elements: catalog.subheadlines
                         };
+
                         catalog.showTechnicalTable = function () {
                             return catalog.productTableDefinition && catalog.children; //FIXME Take logic from controller, Make this customizable
                         };

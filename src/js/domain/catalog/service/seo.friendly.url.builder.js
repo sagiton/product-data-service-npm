@@ -3,15 +3,14 @@
         .module('pds.catalog.service')
         .factory('SeoFriendlyUrlBuilder', SeoFriendlyUrlBuilderFactory);
 
-    SeoFriendlyUrlBuilderFactory.$inject = ['$window', '_', 'simplifyCharactersFilter'];
+    SeoFriendlyUrlBuilderFactory.$inject = ['$window', '_', 'simplifyCharactersFilter', 'config'];
 
     var fragmentSeparator = '-';
     var pathSeparator = '/';
-    var basePath = 'ocs';
 
-    function SeoFriendlyUrlBuilderFactory($window, _, simplifyCharactersFilter) {
+    function SeoFriendlyUrlBuilderFactory($window, _, simplifyCharactersFilter, config) {
         function SeoFriendlyUrlBuilder() {
-            this.path = buildBasePath($window);
+            this.path = buildBasePath();
             this.simplifyCharactersFilter = simplifyCharactersFilter;
         }
 
@@ -25,7 +24,7 @@
         };
 
         SeoFriendlyUrlBuilder.prototype.setPath = function (fragments) {
-            this.path = buildBasePath($window);
+            this.path = buildBasePath();
             this.addPath(fragments);
             return this;
         };
@@ -35,10 +34,11 @@
         };
 
         return SeoFriendlyUrlBuilder;
+
+        function buildBasePath() {
+            return $window.location.origin + $window.getBasePath() + config.pdsPathPrefix;
+        }
     }
 
-    function buildBasePath($window) {
-        return $window.location.origin + $window.getBasePath() + pathSeparator + basePath;
-    }
 
 })(angular);

@@ -29,6 +29,7 @@
     "gulp-concat-util": "^0.5.5",
     "gulp-concat-vendor": "0.0.4",
     "gulp-csso": "^3.0.0",
+    "gulp-json-editor": "^2.2.1",
     "gulp-main-bower-files": "^1.6.0",
     "gulp-ng-config": "^1.4.0",
     "gulp-nop": "0.0.3",

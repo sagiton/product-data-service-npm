@@ -1,8 +1,11 @@
 var history = require('connect-history-api-fallback');
 var modRewrite = require('connect-modrewrite');
-var pdsHtml = 'pds.html';
+var pdsPaths = ['pds.html', '/src/test/project/buderus/ocs.html'];
+var pdsHtml = pdsPaths[1];
 
 module.exports = {
+    open: false,
+    watchEvents: [],
     files: [
         "./dist/**/*.{css,js}",
         "./js/html/**/*.html"

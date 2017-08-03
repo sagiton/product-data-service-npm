@@ -2,9 +2,9 @@
  return angular.module("pds.environment")
 .constant("env", {
   "endPoint": {
-    "productDataService": "https://pds-buderus.kittelberger.net/stg/v2.1.1/",
-    "searchService": "https://ss-buderus.kittelberger.net/stg/v1.1.1/",
-    "ocsMediaEndpoint": "https://pds-buderus.kittelberger.net/stg/v2.1.1/"
+    "productDataService": "https://services.kittelberger.net/productdata/buderus/",
+    "searchService": "https://services.kittelberger.net/search/v1/",
+    "ocsMediaEndpoint": "https://services.kittelberger.net/productdata/buderus/"
   },
   "search": {
     "cmsChannelDiscriminator": "deCHCmsDiscriminator",

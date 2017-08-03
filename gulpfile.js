@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var json = require('gulp-json-editor');
 var nop = require('gulp-nop');
 var concat = require('gulp-concat');
 var concatUtil = require('gulp-concat-util');
@@ -95,9 +96,13 @@ gulp.task('ng-config', function () {
             pretty: true
         }))
         .pipe(gulp.dest('./src/js'));
-
+    var project = argv.project;
     var conf = gulp
         .src('config.json')
+        .pipe(json(function (file) {
+            file.config.pdsPathPrefix = project ? '/src/test/project/' + project : file.config.pdsPathPrefix;
+            return file;
+        }))
         .pipe(ngConfig('pds.environment', {
             createModule: false,
             wrap: true,
