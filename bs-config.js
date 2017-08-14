@@ -1,7 +1,12 @@
 var history = require('connect-history-api-fallback');
 var modRewrite = require('connect-modrewrite');
-var pdsPaths = ['pds.html', '/src/test/project/buderus/ocs.html'];
-var pdsHtml = pdsPaths[1];
+var pdsPathsDefault = 'pds.html';
+var pdsPaths = {
+    buderus: '/src/test/project/buderus/ocs.html',
+    boschtt: '/src/test/project/boschtt/ocs.html'
+};
+var pdsHtml = pdsPaths[process.env.npm_config_consumer] || pdsPathsDefault;
+console.log('Using OCS base: ' + pdsHtml);
 
 module.exports = {
     open: false,

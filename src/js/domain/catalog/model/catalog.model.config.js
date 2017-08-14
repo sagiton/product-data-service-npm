@@ -6,7 +6,9 @@
     CatalogConfig.$inject = ['env', 'CatalogProvider'];
 
     function CatalogConfig(env, catalogModelProvider) {
-        catalogModelProvider.productDataServiceEndPoint(env.endPoint.productDataService);
+        catalogModelProvider
+            .productDataServiceEndPoint(env.endPoint.productDataService)
+            .contentServiceEndPoint(env.endPoint.contentService);
     }
 
 })(angular);

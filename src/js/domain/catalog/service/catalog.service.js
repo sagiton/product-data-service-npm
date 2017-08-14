@@ -3,13 +3,12 @@
         .module("pds.catalog.service")
         .service("CatalogService", CatalogService);
 
-    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'SeoFriendlyUrlBuilder', 'catalogSearchListener', '_', '$q'];
+    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'SeoFriendlyUrlBuilder', 'catalogSearchListener', '_', '$q', 'locale'];
 
-    function CatalogService($window, Catalog, menuService, SeoFriendlyUrlBuilder, catalogSearchListener, _, $q) {
+    function CatalogService($window, Catalog, menuService, SeoFriendlyUrlBuilder, catalogSearchListener, _, $q, locale) {
         var self = this;
         var productPrefix = 'p';
         var categoryPrefix = 'c';
-        var productDetailsType = 'product_details';
 
         catalogSearchListener
             .listen()
@@ -24,6 +23,7 @@
             getByTag: getByTag,
             getNewProductFamilies: getNewProductFamilies,
             getById: getById,
+            getTemplate: getTemplate,
             getByIdAndType: getByIdAndType,
             redirectTo: navigateTo,
             navigateTo: navigateTo,
@@ -40,7 +40,7 @@
         }
 
         function getNewProductFamilies() {
-            return getByTag("product_details", "new");
+            return getByTag(Catalog.fallbackType(), "new");
         }
 
         function getById(categoryId) {
@@ -48,6 +48,20 @@
                 .then(function (type) {
                     return Catalog.get({id: categoryId, type: type}).$promise;
                 });
+        }
+
+        function getTemplate(catalogId, type) {
+            var catalog = new Catalog({
+                template: {name: 'ROOT_CATEGORY_TEMPLATE'},
+                model: {
+                    locale: locale.toString(),
+                    catalogRequest: {
+                        id: catalogId,
+                        type: 'CATEGORY'
+                    }
+                }
+            });
+            return catalog.$template();
         }
 
         function getByIdAndType(id, type) {
@@ -58,7 +72,7 @@
             return menuService
                 .findInNavigation(id)
                 .then(function (catalog) {
-                    return catalog ? catalog.type : productDetailsType;
+                    return catalog ? catalog.type : Catalog.fallbackType();
                 });
         }
 
@@ -111,7 +125,7 @@
                 }
                 builder.addPath(fragments);
 
-                if (node.type == productDetailsType) {
+                if (node.type == Catalog.fallbackType()) {
                     builder.setPath([node.name, node.id, productPrefix]);
                 }
             });
@@ -139,7 +153,7 @@
                 }))
                 .then(function (nodes) {
                     return _.find(nodes, function (node) {
-                        return node.type === productDetailsType;
+                        return node.type === Catalog.fallbackType();
                     });
                 });
         }

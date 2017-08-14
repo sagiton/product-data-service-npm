@@ -6,7 +6,7 @@
     NavigationConfig.$inject = ['env', 'NavigationProvider'];
 
     function NavigationConfig(env, NavigationProvider) {
-        NavigationProvider.navigationEndpoint(env.endPoint.productDataService);
+        NavigationProvider.navigationEndpoint(env.endPoint.contentService);
     }
 
 })(angular);

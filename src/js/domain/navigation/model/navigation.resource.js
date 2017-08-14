@@ -15,9 +15,6 @@
         });
 
     function Navigation($resource, locale, url) {
-        var methods = {
-            get: {method: 'GET', params: {locale: locale}, isArray: true, cache: true}
-        };
-        return $resource(url + '/:locale/catalog/hierarchy', null, methods);
+        return $resource(url + 'rest/document/display');
     }
 })(angular);

@@ -3,24 +3,33 @@
 		.module("pds.navigation.service")
 		.service("MenuService", MenuService);
 
-	MenuService.$inject = ['urlParserService', '_', 'Navigation', 'locale'];
+	MenuService.$inject = ['urlParserService', '_', 'Navigation', 'locale', '$q'];
 
-	function MenuService(urlParserService, _, Navigation, locale) {
+	function MenuService(urlParserService, _, Navigation, locale, $q) {
+        var NAVIGATION_TEMPLATE_NAME = 'CATALOG_HIERARCHY';
         var self = this;
         self.currentLocale = locale.toString();
         self.flatNavigation = {};
+        self.navigationCache = {};
         self.getMenu = getMenu;
         self.findInNavigation = findInNavigation;
         self.findParentInNavigation = findParentInNavigation;
 
 		function getMenu(locale) {
-			return Navigation
-				.get(locale ? {locale: locale} : {})
-                .$promise
+            var properLocale = locale || self.currentLocale;
+            var nav = new Navigation({
+                template: {name: NAVIGATION_TEMPLATE_NAME},
+                model: {locale: properLocale}
+            });
+            if (self.navigationCache[properLocale]) {
+                return $q.resolve(self.navigationCache[properLocale]);
+            }
+			return nav
+                .$save()
 				.then(function (res) {
-                    var segment = _.find(res, {name: urlParserService.getRootSegment()}) || res[0];
-                    return _.head(segment.children);
-				});
+                    self.navigationCache[properLocale] = res.root.children[0];
+                    return res.root.children[0];
+				})
 		}
 
 		function getFlatMenu(locale) {

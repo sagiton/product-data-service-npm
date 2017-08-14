@@ -4,7 +4,7 @@
   "metaTags": {
     "siteName": "Buderus"
   },
-  "pdsPathPrefix": "/src/test/project/buderus",
+  "pdsPathPrefix": "/ocs",
   "pdsTemplatePath": "/src/html",
   "forceLanguage": null
 });
