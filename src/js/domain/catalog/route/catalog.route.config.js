@@ -9,7 +9,7 @@
         $stateProvider.pdsRoute({
             name: 'catalog',
             url: '{catUrl:.*-[cp]$}',
-            templateUrl: 'catalog.html',
+            templateUrl: 'catalog3.html',
             controller: 'CatalogController as vm'
         });
     }

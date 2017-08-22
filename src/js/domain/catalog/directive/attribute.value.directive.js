@@ -39,7 +39,7 @@
                 link: function (scope, element, attrs, ctrl) {
                     scope.$sce = $sce;
                     for (var i = 0; i < templateStrategy.length; i++) {
-                        if (scope.value && templateStrategy[i].isApplicable(scope.value.value, scope.value.type)) {
+                        if (scope.value && templateStrategy[i].isApplicable(scope.value.value, scope.value.type.toLowerCase())) {
                             return element.html($compile(templateStrategy[i].template)(scope));
                         }
                     }

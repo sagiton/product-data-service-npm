@@ -81,6 +81,10 @@
 
         this.toTemplateView = function (template) {
             return template;
+        };
+
+        function findSection(sections, name) {
+            return _.find(sections, {name: name});
         }
 
         return this;

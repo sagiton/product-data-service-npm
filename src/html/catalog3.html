@@ -1,0 +1,234 @@
+<catalog-template catalog-id="vm.catalogId">
+    <div ng-repeat="section in vm.catalog.sections">
+        <div ng-init="$section = section.params" ng-include="'section-' + section.name"></div>
+    </div>
+</catalog-template>
+
+<script type="text/ng-template" id="section-KEYVISUAL">
+<section class="section fs-keyvisual p-a-0">
+    <div class="slide">
+        <div class="slide-image slide-image-transparent-30">
+            <img class="img-responsive" ng-src="{{$section.backgroundImgUrl | imageUrl: 'img-lg'}}" alt="{{vm.catalog.name.value}}" title="{{vm.catalog.name.value}}">
+        </div>
+        <div class="slide-caption text-center">
+            <h1 class="hl-1 slide-title" ng-if="$section.name">{{$section.name}}</h1>
+            <p ng-if="$section.subtitle">{{$section.subtitle}}</p>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-CATEGORY_DESCRIPTION">
+<section class="section fs-headline" ng-if="$section.text">
+    <div class="container-fluid text-center">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <p>{{$section.text}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-TILES">
+<section class="section fs-four-column-media-teaser" ng-if="$section.items.length">
+    <div class="container-fluid">
+        <div class="flex-row">
+            <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
+                <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-sm'}}" alt="{{tile.name.value}}" title="{{tile.name.value}}">
+                <div class="card-block" ng-if="tile.title" equalize-teaser-height>
+                    <div class="card-title hl-4 text-wrap">{{tile.title.value}}</div>
+                    <p class="card-text">{{tile.description.value}}</p>
+                </div>
+                <div class="card-block-link">
+                    <span class="link-more" translate="MORE.DETAILS"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-LIST">
+<section class="section fs-two-column-square-media-text">
+    <div class="container-fluid bg-grey-light" ng-repeat="item in $section.items">
+        <div class="flex-row">
+            <div class="col-sm-4 col-media">
+                <div class="relative-container" ng-if="item.new">
+                    <div class="label-container small left">
+                        <div class="label-wrapper-outer">
+                            <div class="label-wrapper-inner">
+                                <div class="label-content" translate="NEW.LABEL"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="img-responsive img-widen" ng-src="{{item.imageUrl | imageUrl: 'img-md'}}" alt="{{item.title}}" title="{{item.title}}">
+            </div>
+            <div class="col-sm-8 col-text">
+                <div class="hl-3 column-title text-primary">
+                    <a ocs-navigate="item.catalogId">{{item.title}}</a>
+                </div>
+                <ul class="checklist" ng-if="item.subtitle.length">
+                    <li ng-repeat="bullet in item.subtitle">{{bullet}}</li>
+                </ul>
+                <ul class="list-inline button-list">
+                    <li><a class="btn btn-primary" ocs-navigate="item.catalogId"><span translate="MORE.DETAILS"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-PRODUCT_HEADER">
+<section class="section fs-two-column-media-text-with-logo bg-grey">
+    <div class="container-fluid">
+        <div class="row" ng-if="$section.new">
+            <div class="relative-container">
+                <div class="label-container large right">
+                    <div class="label-wrapper-outer">
+                        <div class="label-wrapper-inner">
+                            <div class="label-content" translate="NEW.LABEL"></div>
+                        </div>
+                    </div>
+                    <div class="label-wrapper-outer">
+                        <img class="" ng-src="{{vm.catalog.newImage}}" alt="" title="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-media">
+                <div class="js-slick-slider slick-image-slider"
+                     data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'>
+                    <div class="slide">
+                        <img class="img-responsive img-widen" ng-src="{{$section.productImgUrl | imageUrl: 'img-md'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
+                        <img class="img-overlay" ng-if="vm.catalog.energyEfficiency.image" ng-src="{{vm.catalog.energyEfficiency.image.value}}" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-text">
+                <h1 class="hl-2 product-name">{{$section.productName}}</h1>
+                <p>{{$section.subtitle}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-TECHNICAL_INFORMATION">
+<section class="section fs-two-column-headline-text bg-grey-dark">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2 class="section-title" translate="TECHNICAL.INFORMATION"></h2>
+            </div>
+            <div class="col-sm-8">
+                <ul class="checklist">
+                    <li ng-repeat="info in $section.items">{{info}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-MORE_INFORMATION">
+<section class="section fs-two-column-icon-accordion">
+    <div class="container-fluid">
+        <h2 class="section-title text-primary text-center">{{vm.catalog.moreDetails.title.value}}</h2>
+        <div id="acrd-872921587" class="accordion panel-group m-b-0" role="tablist" aria-multiselectable="true">
+            <div class="panel" ng-repeat="item in vm.catalog.moreDetails.elements">
+                <div id="acrd-872921587-heading-{{$index}}" class="panel-heading" role="tab">
+                    <h3 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#acrd-872921587" data-target="#acrd-872921587-panel-{{$index}}"
+                           aria-controls="acrd-872921587-panel-{{$index}}" aria-expanded="false">
+                            {{item.title}}
+                        </a>
+                    </h3>
+                </div>
+                <div id="acrd-872921587-panel-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acrd-872921587-heading-{{$index}}">
+                    <article class="panel-body article">
+                        <p ng-if="!item.description.elements" ng-bind-html="item.description | convertWhitespaces"></p>
+                        <ul ng-if="item.description.elements">
+                            <li ng-repeat="el in item.description.elements">{{el}}</li>
+                        </ul>
+                        <img ng-if="item.image" class="img-responsive img-widen m-b-1" ng-src="{{item.image | imageUrl}}" alt="{{item.title}}" title="{{item.title}}" />
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE">
+<section class="section fs-table-scrollable">
+    <div class="container-fluid">
+        <h2 class="section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
+        <div class="row scrollable-table-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 p-r-0">
+                <a class="card card-sticky">
+                    <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
+                        <thead><tr><th class="table-center">&nbsp;</th></tr></thead>
+                        <tbody>
+                        <tr ng-repeat="attribute in $section.tableDefinition">
+                            <td><span class="td-headline">{{attribute.value.name}}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-8 col-md-9 p-l-0">
+                <div class="js-slick-slider slick-content-slider js-full-width-slick-track"
+                     data-slick='{"arrows": true, "appendArrows": ".scrollable-table-wrapper", "appendDots": ".scrollable-table-wrapper", "dots": true, "infinite": false, "speed": 500, "cssEase": "ease-in-out", "slidesToShow": 3, "slidesToScroll": 1, "responsive": [{ "breakpoint": 992, "settings": { "arrows": false, "slidesToShow": 2, "slidesToScroll": 2}}, { "breakpoint": 768, "settings": { "arrows": false, "slidesToShow": 1, "slidesToScroll": 1}}]}'>
+
+                    <div class="card" ng-repeat="product in $section.products" scrollable-table-card>
+                        <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
+                            <thead>
+                            <tr>
+                                <th class="table-center">{{product.header}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="attribute in $section.tableDefinition" synchronize-height>
+                                <td ng-init="value = product[attribute.key]">
+                                    <span attribute-value="value" attribute-alt="product.name" attribute-title="product.name"></span>
+                                    <span ng-if="attribute.unit != null">{{attribute.unit}}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-RELATED_PRODUCTS">
+<section class="section">
+
+
+</section>
+</script>
+
+<script type="text/ng-template">
+<section class="section" ng-if="vm.catalog.showFootnotes()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="footnotes">
+                    <ol class="footnote-ordered-list" ng-if="vm.catalog.footnotes.type == 'list'">
+                        <li ng-repeat="item in vm.catalog.footnotes.value.elements">{{item}}</li>
+                    </ol>
+                    <p class="footnote-paragraph" ng-if="vm.catalog.footnotes.type == 'string'">{{vm.catalog.footnotes.value}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</script>

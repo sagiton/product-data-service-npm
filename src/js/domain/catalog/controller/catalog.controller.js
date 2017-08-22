@@ -15,6 +15,7 @@
         vm.isCategory = isCategory;
         vm.anyProductHasAttribute = anyProductHasAttribute;
         vm.anyProductHasValue = anyProductHasValue;
+        vm.tableDefinitionContains = tableDefinitionContains;
 
         MetaService.updateMetaByCategory(vm.catalogId);
         $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});
@@ -54,7 +55,7 @@
         }
 
         function findMainErpLabel(product) {
-            return _.head(product.children)[ERP_LABEL_LOGO_KEY];
+            return product.children.length && _.head(product.children)[ERP_LABEL_LOGO_KEY];
         }
 
         function getDescriptions(resource) {
@@ -121,6 +122,10 @@
 
         function anyProductHasValue(attribute) {
             return _.some(vm.catalog.children, attribute.value);
+        }
+
+        function tableDefinitionContains(definition, key) {
+            return _.some(definition, {key: key});
         }
     }
 

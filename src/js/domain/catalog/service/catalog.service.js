@@ -50,18 +50,27 @@
                 });
         }
 
-        function getTemplate(catalogId, type) {
-            var catalog = new Catalog({
-                template: {name: 'ROOT_CATEGORY_TEMPLATE'},
-                model: {
-                    locale: locale.toString(),
-                    catalogRequest: {
-                        id: catalogId,
-                        type: 'CATEGORY'
-                    }
-                }
-            });
-            return catalog.$template();
+        function getTemplate(catalogId) {
+            return getTypeFromHierarchy(catalogId)
+                .then(function (type) {
+                    var catalog = new Catalog({
+                        template: {name: type},
+                        model: {
+                            locale: locale.toString(),
+                            channel: getOCSChannel(),
+                            catalogRequest: {
+                                id: catalogId,
+                                channel: getOCSChannel(),
+                                type: type
+                            }
+                        }
+                    });
+                    return catalog.$template();
+                });
+        }
+
+        function getOCSChannel() {
+            return angular.element('meta[name="ocs-channel"]').attr('content')
         }
 
         function getByIdAndType(id, type) {

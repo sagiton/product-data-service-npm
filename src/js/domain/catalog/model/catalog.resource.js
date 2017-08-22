@@ -31,7 +31,7 @@
             });
             return result;
         };
-        var CatalogResource = $resource(pdsUrl + '/:locale/:type/:queryType/:id', null, {
+        var CatalogResource = $resource(pdsUrl + ':locale/:type/:queryType/:id', null, {
                 get: {
                     method: 'GET',
                     params: {locale: locale, queryType: 'id'},

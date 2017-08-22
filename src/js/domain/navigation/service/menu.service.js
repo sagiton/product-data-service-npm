@@ -18,8 +18,14 @@
 		function getMenu(locale) {
             var properLocale = locale || self.currentLocale;
             var nav = new Navigation({
-                template: {name: NAVIGATION_TEMPLATE_NAME},
-                model: {locale: properLocale}
+                template: {
+                    name: NAVIGATION_TEMPLATE_NAME,
+                    channel: getOCSChannel()
+                },
+                model: {
+                    locale: properLocale,
+                    channel: getOCSChannel()
+                }
             });
             if (self.navigationCache[properLocale]) {
                 return $q.resolve(self.navigationCache[properLocale]);
@@ -27,10 +33,18 @@
 			return nav
                 .$save()
 				.then(function (res) {
+                    if(!res.root) {
+                        return {};
+                    }
                     self.navigationCache[properLocale] = res.root.children[0];
                     return res.root.children[0];
 				})
 		}
+
+
+        function getOCSChannel() {
+            return angular.element('meta[name="ocs-channel"]').attr('content')
+        }
 
 		function getFlatMenu(locale) {
             return getMenu(locale)
