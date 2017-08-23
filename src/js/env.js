@@ -2,10 +2,10 @@
  return angular.module("pds.environment")
 .constant("env", {
   "endPoint": {
-    "productDataService": "http://localhost:8090/catalog-service-dev/",
+    "productDataService": "https://dev02.sagiton.pl/catalog-service-dev/",
     "contentService": "http://localhost:8082/boschtt-cs-dev/",
     "searchService": "https://services.kittelberger.net/search/v1/",
-    "ocsMediaEndpoint": "http://localhost:8090/asset-service-dev/asset/"
+    "ocsMediaEndpoint": "https://dev02.sagiton.pl/asset-service-dev/asset/"
   },
   "search": {
     "cmsChannelDiscriminator": "deCHCmsDiscriminator",

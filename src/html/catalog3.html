@@ -11,7 +11,7 @@
             <img class="img-responsive" ng-src="{{$section.backgroundImgUrl | imageUrl: 'img-lg'}}" alt="{{vm.catalog.name.value}}" title="{{vm.catalog.name.value}}">
         </div>
         <div class="slide-caption text-center">
-            <h1 class="hl-1 slide-title" ng-if="$section.name">{{$section.name}}</h1>
+            <h1 class="hl-1 slide-title" ng-if="$section.title">{{$section.title}}</h1>
             <p ng-if="$section.subtitle">{{$section.subtitle}}</p>
         </div>
     </div>
@@ -35,10 +35,10 @@
     <div class="container-fluid">
         <div class="flex-row">
             <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
-                <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-sm'}}" alt="{{tile.name.value}}" title="{{tile.name.value}}">
+                <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-sm'}}" alt="{{tile.title}}" title="{{tile.title}}">
                 <div class="card-block" ng-if="tile.title" equalize-teaser-height>
-                    <div class="card-title hl-4 text-wrap">{{tile.title.value}}</div>
-                    <p class="card-text">{{tile.description.value}}</p>
+                    <div class="card-title hl-4 text-wrap">{{tile.title}}</div>
+                    <p class="card-text">{{tile.subtitle}}</p>
                 </div>
                 <div class="card-block-link">
                     <span class="link-more" translate="MORE.DETAILS"></span>
@@ -104,7 +104,7 @@
                      data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'>
                     <div class="slide">
                         <img class="img-responsive img-widen" ng-src="{{$section.productImgUrl | imageUrl: 'img-md'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
-                        <img class="img-overlay" ng-if="vm.catalog.energyEfficiency.image" ng-src="{{vm.catalog.energyEfficiency.image.value}}" />
+                        <img class="img-overlay" ng-if="$section.energyEfficiency.image" ng-src="{{$section.energyEfficiency.image}}" />
                     </div>
                 </div>
             </div>
@@ -122,11 +122,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-4">
-                <h2 class="section-title" translate="TECHNICAL.INFORMATION"></h2>
+                <h2 class="section-title">
+                    <span ng-if="$section.title">{{$section.title}}</span>
+                    <span ng-if="!$section.title" translate="TECHNICAL.INFORMATION"></span>
+                </h2>
             </div>
             <div class="col-sm-8">
                 <ul class="checklist">
-                    <li ng-repeat="info in $section.items">{{info}}</li>
+                    <li ng-repeat="info in $section.list">{{info}}</li>
                 </ul>
             </div>
         </div>
@@ -188,15 +191,15 @@
                         <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
                             <thead>
                             <tr>
-                                <th class="table-center">{{product.header}}</th>
+                                <th class="table-center">{{product.header.value}}</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             <tr ng-repeat="attribute in $section.tableDefinition" synchronize-height>
-                                <td ng-init="value = product[attribute.key]">
+                                <td ng-init="value = product[attribute.key] || {}">
                                     <span attribute-value="value" attribute-alt="product.name" attribute-title="product.name"></span>
-                                    <span ng-if="attribute.unit != null">{{attribute.unit}}</span>
+                                    <span ng-if="attribute.value.unit">{{attribute.value.unit}}</span>
                                 </td>
                             </tr>
                             </tbody>

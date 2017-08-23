@@ -48,7 +48,7 @@
                 },
                 template: {
                     method: 'POST',
-                    url: csUrl + '/rest/document/display',
+                    url: csUrl + 'rest/document/display',
                     transformResponse: function (data, headers, status) {
                         return toCatalogTemplateView(transformResponse(data, headers, status));
                     }
@@ -91,8 +91,13 @@
             return this.type ? this.type.value.toLowerCase() : String();
         };
 
+        CatalogResource.prototype.technicalDataTable = function () {
+            var section = _.find(this.sections, {name: 'TECHNICAL_DATA_TABLE'});
+            return section && section.params;
+        };
+
         CatalogResource.fallbackType = function () {
-            return 'product_family';
+            return 'PRODUCT_FAMILY';
         };
 
         return CatalogResource;

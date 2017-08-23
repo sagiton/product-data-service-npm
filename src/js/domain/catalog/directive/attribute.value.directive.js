@@ -8,13 +8,13 @@
     var templateStrategy = [
         {
             isApplicable: function (val, type) {
-                return type == 'string' && IMAGE_EXTENSIONS.indexOf(val.slice(val.lastIndexOf(DOT))) >= 0;
+                return type && type.toLowerCase() == 'string' && IMAGE_EXTENSIONS.indexOf(val.slice(val.lastIndexOf(DOT))) >= 0;
             },
             template: IMAGE_MEDIA_TEMPLATE
         },
         {
             isApplicable: function (val, type) {
-                return type == 'asset';
+                return type && type.toLowerCase() == 'asset';
             },
             template: OTHER_MEDIA_TEMPLATE
         },
@@ -39,7 +39,7 @@
                 link: function (scope, element, attrs, ctrl) {
                     scope.$sce = $sce;
                     for (var i = 0; i < templateStrategy.length; i++) {
-                        if (scope.value && templateStrategy[i].isApplicable(scope.value.value, scope.value.type.toLowerCase())) {
+                        if (scope.value && templateStrategy[i].isApplicable(scope.value.value, scope.value.type)) {
                             return element.html($compile(templateStrategy[i].template)(scope));
                         }
                     }

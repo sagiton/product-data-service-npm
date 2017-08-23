@@ -27,8 +27,8 @@
                     var breadcrumbsContainer = angular.element('#nav-breadcrumbs');
                     breadcrumbsContainer.find('.dropdown-menu').append(breadcrumbs);
 
-                    //TODO Move this stuff
-                    if (_.last($scope.$breadcrumbs).type == 'product_details') {
+                    //TODO Move this stuff, but where.......................................................................
+                    if (_.last($scope.$breadcrumbs).type == 'PRODUCT_FAMILY') {
                         breadcrumbsContainer.addClass('dark-breadcrumb');
                     }
 

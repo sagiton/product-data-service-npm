@@ -10,7 +10,6 @@
         var CATEGORY_TYPE = 'sub_category';
         var ERP_LABEL_LOGO_KEY = 'ocsErpLogo';
         var vm = this;
-        vm.headerAttributes = ['marketGenericDescription', 'P11_KT1', 'name'];
         vm.catalogId = urlParserService.getCatalogId();
         vm.isCategory = isCategory;
         vm.anyProductHasAttribute = anyProductHasAttribute;
@@ -36,77 +35,28 @@
 
         function initCatalog(catalog) {
             vm.catalog = catalog;
-            vm.catalog.subheadlines = getDescriptions(vm.catalog);
-            vm.catalog.energyEfficiency.image = findMainErpLabel(vm.catalog);
-            if (vm.catalog.productTableDefinition) {
-                var tableDefinition = vm.catalog.productTableDefinition.value.elements;
-                vm.catalog.table = {};
-                vm.catalog.table.attributes = _
+            vm.catalog.energyEfficiency = vm.catalog.energyEfficiency || {};
+            var technicalDataTable = vm.catalog.technicalDataTable();
+            if (technicalDataTable) {
+                var tableDefinition = technicalDataTable.tableDefinition;
+                technicalDataTable.tableDefinition = _
                     .chain(tableDefinition)
-                    .filter(anyProductHasAttribute)
-                    .filter(isNotHeaderAttribute)
+                    .filter(function(attr) {
+                        return technicalDataTable.showAttributesWithNoValues || anyProductHasValue(technicalDataTable.products, attr);
+                    })
+                    .filter(isNotHeaderAttribute.bind(this, technicalDataTable.products))
                     .value();
-                vm.catalog.table.products = buildDetailsTable(tableDefinition, vm.catalog.children);
             }
         }
 
-        function isNotHeaderAttribute(attr) {
-            return !isHeaderAttribute(attr);
+        function isNotHeaderAttribute(products, attr) {
+            return !isHeaderAttribute(products, attr);
         }
 
-        function findMainErpLabel(product) {
-            return product.children.length && _.head(product.children)[ERP_LABEL_LOGO_KEY];
-        }
-
-        function getDescriptions(resource) {
-            var i = 1;
-            var subheadline = resource.detailsSubheadline1;
-            var description = resource.detailsDescription1;
-            var subheadlines = [];
-            while(subheadline != null || description != null) {
-                subheadlines.push({title: subheadline && subheadline.value, description: description});
-                i++;
-                description = resource['detailsDescription' + i];
-                subheadline = resource['detailsSubheadline' + i];
-            }
-            return subheadlines;
-        }
-
-        function buildDetailsTable(tableDefinition, products) {
-            return _.map(products, function (product) {
-                product.attributes = buildProductAttributes(tableDefinition, product);
-                product.header = _
-                    .chain(product)
-                    .at(vm.headerAttributes)
-                    .compact()
-                    .head()
-                    .value()
-                    .value;
-                product.name = product.productname;
-                return product;
+        function isHeaderAttribute(products, attr) {
+            return _.some(products, function (product) {
+                return product.header.key == attr.key;
             });
-        }
-
-        function buildProductAttributes(tableDefinition, product) {
-            return _
-                .chain(tableDefinition)
-                .reject(isHeaderAttribute)
-                .filter(anyProductHasValue)
-                .map(function (attribute) {
-                    var productAttribute = product[attribute.value] || {};
-                    return {
-                        name: attribute.name,
-                        unit: attribute.unit,
-                        id: attribute.value,
-                        value: productAttribute.value,
-                        type: productAttribute.type
-                    }
-                })
-                .value();
-        }
-
-        function isHeaderAttribute(attr) {
-            return _.includes(vm.headerAttributes, attr.value);
         }
 
         function isCategory() {
@@ -120,8 +70,8 @@
             })
         }
 
-        function anyProductHasValue(attribute) {
-            return _.some(vm.catalog.children, attribute.value);
+        function anyProductHasValue(products, attribute) {
+            return _.some(products, attribute.key);
         }
 
         function tableDefinitionContains(definition, key) {
