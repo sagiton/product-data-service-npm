@@ -10,7 +10,12 @@
             name: 'catalog',
             url: '{catUrl:.*-[cp]$}',
             templateUrl: 'catalog3.html',
-            controller: 'CatalogController as vm'
+            controller: 'CatalogController as vm',
+            resolve: {
+                redirect: ['MetaService', function (metaService) {
+                    return metaService.redirectOnInvalidUrl();
+                }]
+            }
         });
     }
 })(angular);

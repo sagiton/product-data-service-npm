@@ -9,12 +9,16 @@
                 return this;
             };
 
-            this.$get = ['$resource', 'locale', function ($resource, locale) {
-                return new Navigation($resource, locale, url);
+            this.$get = ['$resource', '$cacheFactory', function ($resource, $cacheFactory) {
+                return new Navigation($resource, $cacheFactory, url);
             }]
         });
 
-    function Navigation($resource, locale, url) {
-        return $resource(url + 'rest/document/display');
+    function Navigation($resource, $cacheFactory, url) {
+        var catalogCache = $cacheFactory("navigation");
+        var methods = {
+            get: {method: 'GET', cache: catalogCache}
+        };
+        return $resource(url + 'rest/document/display', null, methods);
     }
 })(angular);

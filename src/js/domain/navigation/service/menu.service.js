@@ -10,7 +10,6 @@
         var self = this;
         self.currentLocale = locale.toString();
         self.flatNavigation = {};
-        self.navigationCache = {};
         self.getMenu = getMenu;
         self.findInNavigation = findInNavigation;
         self.findParentInNavigation = findParentInNavigation;
@@ -27,16 +26,13 @@
                     channel: getOCSChannel()
                 }
             });
-            if (self.navigationCache[properLocale]) {
-                return $q.resolve(self.navigationCache[properLocale]);
-            }
-			return nav
-                .$save()
+			return Navigation
+                .get({query: nav})
+                .$promise
 				.then(function (res) {
                     if(!res.root) {
                         return {};
                     }
-                    self.navigationCache[properLocale] = res.root.children[0];
                     return res.root.children[0];
 				})
 		}

@@ -7,12 +7,8 @@
     CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_', 'MetaService'];
 
     function CatalogController($scope, $rootScope, urlParserService, _, MetaService) {
-        var CATEGORY_TYPE = 'sub_category';
-        var ERP_LABEL_LOGO_KEY = 'ocsErpLogo';
         var vm = this;
         vm.catalogId = urlParserService.getCatalogId();
-        vm.isCategory = isCategory;
-        vm.anyProductHasAttribute = anyProductHasAttribute;
         vm.anyProductHasValue = anyProductHasValue;
         vm.tableDefinitionContains = tableDefinitionContains;
 
@@ -35,6 +31,9 @@
 
         function initCatalog(catalog) {
             vm.catalog = catalog;
+            if (_.get(vm.catalog, 'redirectCategory.id') > 0) {
+                return CatalogService.redirectTo(vm.catalog.redirectCategory.id.value);
+            }
             vm.catalog.energyEfficiency = vm.catalog.energyEfficiency || {};
             var technicalDataTable = vm.catalog.technicalDataTable();
             if (technicalDataTable) {
@@ -57,17 +56,6 @@
             return _.some(products, function (product) {
                 return product.header.key == attr.key;
             });
-        }
-
-        function isCategory() {
-            return vm.catalog && vm.catalog.type.value == CATEGORY_TYPE;
-        }
-
-        function anyProductHasAttribute(item, index) {
-            return _.some(vm.catalog.children, function (product) {
-                var element = vm.catalog.productTableDefinition.value.elements[index];
-                return product[(element  || {}).value];
-            })
         }
 
         function anyProductHasValue(products, attribute) {

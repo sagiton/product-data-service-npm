@@ -3,17 +3,18 @@
         .module('pds.catalog.service')
         .service('MetaService', MetaService);
 
-    MetaService.$inject = ['$rootScope', '$q', '$location', 'CatalogService', 'imageUrlFilter', 'config'];
+    MetaService.$inject = ['$rootScope', '$q', '$location', '$window', 'CatalogService', 'imageUrlFilter', 'config', 'urlParserService'];
 
     var TITLE_DELIMITER = ' | ';
     var LOCALE_DELIMITER = '-';
     var LOCALE_PROPER_DELIMITER = '_';
     var PATH_SEPARATOR = '/';
 
-    function MetaService($rootScope, $q, $location, CatalogService, imageUrlFilter, config) {
+    function MetaService($rootScope, $q, $location, $window, CatalogService, imageUrlFilter, config, urlParserService) {
 
         return {
-            updateMetaByCategory: updateMetaByCategory
+            updateMetaByCategory: updateMetaByCategory,
+            redirectOnInvalidUrl: redirectOnInvalidUrl
         };
 
         function updateMetaByCategory(catalogId) {
@@ -97,6 +98,16 @@
                                 });
                         });
                 });
+        }
+
+        function redirectOnInvalidUrl() {
+            return CatalogService
+                .resolveUriFromHierarchy(urlParserService.getCatalogId())
+                .then(function (url) {
+                    if (encodeURI(url) != URI().toString()) {
+                        $window.location.href = url;
+                    }
+                })
         }
     }
 })(angular);

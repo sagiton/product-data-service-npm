@@ -46,7 +46,9 @@
         '\u017E':   'z', //ž
         '\u0161':   's', //š
         '\u0165':   't', //ť
-        '\u0148':   'n'  //ň
+        '\u0148':   'n', //ň
+        '\u2019':   '-', //’
+        '\u00e0':   'a'  //à
     };
     var characterRegex = _
         .map(CHARACTER_MAP, function (val, key) {

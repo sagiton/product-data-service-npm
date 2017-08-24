@@ -8,7 +8,7 @@
 <section class="section fs-keyvisual p-a-0">
     <div class="slide">
         <div class="slide-image slide-image-transparent-30">
-            <img class="img-responsive" ng-src="{{$section.backgroundImgUrl | imageUrl: 'img-lg'}}" alt="{{vm.catalog.name.value}}" title="{{vm.catalog.name.value}}">
+            <img class="img-responsive" ng-src="{{$section.backgroundImgUrl | imageUrl: 'img-xlg'}}" alt="{{$section.name}}" title="{{$section.name}}">
         </div>
         <div class="slide-caption text-center">
             <h1 class="hl-1 slide-title" ng-if="$section.title">{{$section.title}}</h1>
@@ -35,7 +35,7 @@
     <div class="container-fluid">
         <div class="flex-row">
             <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
-                <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-sm'}}" alt="{{tile.title}}" title="{{tile.title}}">
+                <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-md'}}" alt="{{tile.title}}" title="{{tile.title}}">
                 <div class="card-block" ng-if="tile.title" equalize-teaser-height>
                     <div class="card-title hl-4 text-wrap">{{tile.title}}</div>
                     <p class="card-text">{{tile.subtitle}}</p>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <img class="img-responsive img-widen" ng-src="{{item.imageUrl | imageUrl: 'img-md'}}" alt="{{item.title}}" title="{{item.title}}">
+                <img class="img-responsive img-widen" ng-src="{{item.imageUrl | imageUrl: 'img-lg'}}" alt="{{item.title}}" title="{{item.title}}">
             </div>
             <div class="col-sm-8 col-text">
                 <div class="hl-3 column-title text-primary">
@@ -103,7 +103,7 @@
                 <div class="js-slick-slider slick-image-slider"
                      data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'>
                     <div class="slide">
-                        <img class="img-responsive img-widen" ng-src="{{$section.productImgUrl | imageUrl: 'img-md'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
+                        <img class="img-responsive img-widen" ng-src="{{$section.productImgUrl | imageUrl: 'img-lg'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
                         <img class="img-overlay" ng-if="$section.energyEfficiency.image" ng-src="{{$section.energyEfficiency.image}}" />
                     </div>
                 </div>
@@ -118,19 +118,22 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_INFORMATION">
-<section class="section fs-two-column-headline-text bg-grey-dark">
+<section class="section fs-two-column-headline-text bg-grey-dark bg-blue">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4">
-                <h2 class="section-title">
+            <div class="col-sm-3">
+                <div class="hl-3 section-title">
                     <span ng-if="$section.title">{{$section.title}}</span>
                     <span ng-if="!$section.title" translate="TECHNICAL.INFORMATION"></span>
-                </h2>
+                </div>
+                <a ng-if="$section.link" class="link-more" ng-href="{{$section.link | imageUrl}}" target="_blank">{{'PRODUCT.LEAFLET' | translate}}</a>
             </div>
             <div class="col-sm-8">
-                <ul class="checklist">
+                <!--TODO Style depending on consumer (checklist, bullets)-->
+                <ul class="technical-information-list" ng-if="$section.list">
                     <li ng-repeat="info in $section.list">{{info}}</li>
                 </ul>
+                <span ng-if="$section.description">{{$section.description | convertWhitespaces}}</span>
             </div>
         </div>
     </div>
@@ -213,13 +216,36 @@
 </script>
 
 <script type="text/ng-template" id="section-RELATED_PRODUCTS">
-<section class="section">
+<section class="section fs-three-column-media-teaser bg-pattern">
+    <div class="container-fluid">
+        <h2 class="hl-2 section-title text-primary text-center">{{::$section.title}}</h2>
 
+        <div class="flex-row js-slick-slider slick-content-slider"
+             data-slick='{"arrows": false, "dots": true, "infinite": false, "speed": 1000, "cssEase": "ease-in-out", "slidesToShow": 3, "slidesToScroll": 3, "responsive": [{ "breakpoint": 992, "settings": { "slidesToShow": 2, "slidesToScroll": 2}}, { "breakpoint": 768, "settings": { "slidesToShow": 1, "slidesToScroll": 1}}]}'>
 
+            <a ng-repeat="related in $section.products" class="card col-xs-12 col-sm-6 col-md-4" ocs-navigate="related.categoryId">
+                <img class="card-img-top img-responsive img-widen" ng-src="{{::related.componentImageUrl | imageUrl}}" alt="{{related.productName}}" title="{{related.productName}}">
+                <div class="card-block">
+                    <h3 class="hl-4 card-title">{{::related.productName}}</h3>
+                    <span class="link-more" translate="MORE.DETAILS"></span>
+                </div>
+            </a>
+        </div>
+    </div>
 </section>
 </script>
 
-<script type="text/ng-template">
+<script type="text/ng-template" id="section-SEO_TEXT">
+<section class="section fs-category-text">
+    <div class="container-fluid">
+        <div class="row">
+            <div ng-include="$section.seoText | imageUrl"></div>
+        </div>
+    </div>
+</section>
+</script>
+
+<script type="text/ng-template" id="section-FOOTNOTES">
 <section class="section" ng-if="vm.catalog.showFootnotes()">
     <div class="container-fluid">
         <div class="row">
