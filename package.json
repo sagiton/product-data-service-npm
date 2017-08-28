@@ -1,6 +1,6 @@
 {
   "name": "product-data-service",
-  "version": "2.0.0-SNAPSHOT.2",
+  "version": "2.0.1-0",
   "description": "Product data service",
   "main": "index.html",
   "scripts": {

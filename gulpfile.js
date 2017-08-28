@@ -48,17 +48,24 @@ gulp.task('css', function() {
         .pipe(gulp.dest(pathsCss.dist));
 });
 
+gulp.task('scripts-concat-only', function () {
+    return createDist(false, 'pds.js');
+});
+
 gulp.task('scripts', ['ng-config'], function() {
-    var isPrd = !argv.env || (argv.env == 'prd');
+    return createDist(!argv.env || (argv.env == 'prd'), 'pds.min.js');
+});
+
+function createDist(minify, filename) {
     return gulp
         .src(paths.scripts)
-        .pipe(isPrd ? nop() : sourcemaps.init())
-        .pipe(isPrd ? (uglify().on('error', handleError)) : nop())
-        .pipe(concat('pds.min.js'))
+        .pipe(minify ? nop() : sourcemaps.init())
+        .pipe(minify ? (uglify().on('error', handleError)) : nop())
+        .pipe(concat(filename))
         .pipe(concatUtil.header('/*! ' + pkg.name + ' - v' + pkg.version + ' - <%=new Date().toISOString()%> */ \n\n'))
-        .pipe(isPrd ? nop() : sourcemaps.write())
+        .pipe(minify ? nop() : sourcemaps.write())
         .pipe(gulp.dest(paths.dist));
-});
+}
 
 gulp.task('vendor', function () {
     return gulp
@@ -136,7 +143,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('build', function (callback) {
-    runSequence('clean', ['vendor', 'scripts', 'css'])
+    runSequence('clean', ['vendor', 'scripts-concat-only', 'scripts', 'css'])
 });
 
 gulp.task('bump', function () {
