@@ -4,9 +4,15 @@
   "metaTags": {
     "siteName": "Buderus"
   },
+  "urlSchema": {
+    "trailingSlash": true
+  },
   "pdsPathPrefix": "/ocs",
   "pdsTemplatePath": "/src/html",
-  "forceLanguage": null
+  "forceLanguage": null,
+  "search": {
+    "defaultImage": "default-search"
+  }
 });
 
 })();

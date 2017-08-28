@@ -12,7 +12,7 @@
                 $timeout(function () {
                     angular
                         .element(document)
-                        .find('.card.card-sticky table tr')
+                        .find('.card.card-column table tr')
                         .eq(scope.$index + 1)
                         .css('height', element.css('height'));
                 }, 500);

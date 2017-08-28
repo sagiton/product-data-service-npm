@@ -3,12 +3,13 @@
         .module("pds.search.controller")
         .controller("SearchController", SearchController);
 
-    SearchController.$inject = ['$anchorScroll', 'SearchService', 'cmsSearchListener', '$rootScope', '$location', '$window', '_'];
+    SearchController.$inject = ['$anchorScroll', 'SearchService', 'cmsSearchListener', '$rootScope', '$location', '$window', '_', 'translateFilter'];
 
-    function SearchController($anchorScroll, SearchService, cmsSearchListener, $rootScope, $location, $window, _) {
+    function SearchController($anchorScroll, SearchService, cmsSearchListener, $rootScope, $location, $window, _, translateFilter) {
         var vm = this;
         vm.finalSearchResults = [];
         vm.searchTerm = $location.search().terms;
+        vm.contactText = translateFilter('SEARCH.NO.RESULT.CHECKLIST.3', {contactLink: "<a href='" + translateFilter('SEARCH.CONTACT.URL') + "' class='link-inline' target='_self'>" + translateFilter('SEARCH.CONTACT') + "</a>"});
         vm.onSearchInput = onSearchInput;
         vm.goToAnchor = goToAnchor;
         vm.goMore = goMore;

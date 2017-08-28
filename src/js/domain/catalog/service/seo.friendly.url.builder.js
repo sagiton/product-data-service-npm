@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, URI) {
     angular
         .module('pds.catalog.service')
         .factory('SeoFriendlyUrlBuilder', SeoFriendlyUrlBuilderFactory);
@@ -9,9 +9,10 @@
     var pathSeparator = '/';
 
     function SeoFriendlyUrlBuilderFactory($window, _, simplifyCharactersFilter, config) {
-        function SeoFriendlyUrlBuilder() {
+        function SeoFriendlyUrlBuilder(options) {
             this.path = buildBasePath();
             this.simplifyCharactersFilter = simplifyCharactersFilter;
+            this.options = options;
         }
 
         SeoFriendlyUrlBuilder.prototype.addPath = function(fragments) {
@@ -30,15 +31,15 @@
         };
 
         SeoFriendlyUrlBuilder.prototype.build = function () {
-            return this.path;
+            return this.path + (this.options.trailingSlash ? '/' : '');
         };
 
         return SeoFriendlyUrlBuilder;
 
         function buildBasePath() {
-            return $window.location.origin + $window.getBasePath() + config.pdsPathPrefix;
+            return URI().origin() + $window.getBasePath() + config.pdsPathPrefix;
         }
     }
 
 
-})(angular);
+})(angular, URI);

@@ -37,7 +37,7 @@
             <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
                 <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-md'}}" alt="{{tile.title}}" title="{{tile.title}}">
                 <div class="card-block" ng-if="tile.title" equalize-teaser-height>
-                    <div class="card-title hl-4 text-wrap">{{tile.title}}</div>
+                    <div class="card-title hl-4">{{tile.title}}</div>
                     <p class="card-text">{{tile.subtitle}}</p>
                 </div>
                 <div class="card-block-link">
@@ -128,7 +128,7 @@
                 </div>
                 <a ng-if="$section.link" class="link-more" ng-href="{{$section.link | imageUrl}}" target="_blank">{{'PRODUCT.LEAFLET' | translate}}</a>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-offset-1 col-sm-8">
                 <!--TODO Style depending on consumer (checklist, bullets)-->
                 <ul class="technical-information-list" ng-if="$section.list">
                     <li ng-repeat="info in $section.list">{{info}}</li>
@@ -175,7 +175,7 @@
         <h2 class="section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
         <div class="row scrollable-table-wrapper">
             <div class="col-xs-6 col-sm-4 col-md-3 p-r-0">
-                <a class="card card-sticky">
+                <a class="card card-column card-sticky">
                     <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
                         <thead><tr><th class="table-center">&nbsp;</th></tr></thead>
                         <tbody>
@@ -190,7 +190,7 @@
                 <div class="js-slick-slider slick-content-slider js-full-width-slick-track"
                      data-slick='{"arrows": true, "appendArrows": ".scrollable-table-wrapper", "appendDots": ".scrollable-table-wrapper", "dots": true, "infinite": false, "speed": 500, "cssEase": "ease-in-out", "slidesToShow": 3, "slidesToScroll": 1, "responsive": [{ "breakpoint": 992, "settings": { "arrows": false, "slidesToShow": 2, "slidesToScroll": 2}}, { "breakpoint": 768, "settings": { "arrows": false, "slidesToShow": 1, "slidesToScroll": 1}}]}'>
 
-                    <div class="card" ng-repeat="product in $section.products" scrollable-table-card>
+                    <div class="card card-column" ng-repeat="product in $section.products" scrollable-table-card>
                         <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
                             <thead>
                             <tr>

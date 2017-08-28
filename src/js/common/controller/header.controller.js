@@ -11,7 +11,7 @@
         var vm = this;
         vm.url = $location.absUrl();
         vm.locale = locale.toString();
-        vm.brand = config.brand;
+        vm.brand = config.metaTags.brand;
         vm.country = locale.country;
         vm.language = locale.language;
 
