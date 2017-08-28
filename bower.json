@@ -1,6 +1,6 @@
 {
   "name": "product-data-service",
-  "version": "2.0.0-SNAPSHOT.1",
+  "version": "2.0.0-SNAPSHOT.2",
   "main": "dist/pds.min.js",
   "publishConfig": {
     "registry": "https://nexus.sagiton.pl/repository/bower-snapshot/"
