@@ -8,9 +8,11 @@
 
     function CatalogController($scope, $rootScope, urlParserService, _, MetaService) {
         var vm = this;
+        var PRODUCT_COUNT_LAYOUT_BREAKPOINT = 4;
         vm.catalogId = urlParserService.getCatalogId();
         vm.anyProductHasValue = anyProductHasValue;
         vm.tableDefinitionContains = tableDefinitionContains;
+        vm.responsiveChange = responsiveChange;
 
         MetaService.updateMetaByCategory(vm.catalogId);
         $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});
@@ -45,6 +47,7 @@
                     })
                     .filter(isNotHeaderAttribute.bind(this, technicalDataTable.products))
                     .value();
+                vm.responsiveChange();
             }
         }
 
@@ -64,6 +67,11 @@
 
         function tableDefinitionContains(definition, key) {
             return _.some(definition, {key: key});
+        }
+
+        function responsiveChange(e, table, columns) {
+            var technicalDataTable = vm.catalog.technicalDataTable();
+            technicalDataTable.partitions = _.chunk(technicalDataTable.products, _.every(columns) ? PRODUCT_COUNT_LAYOUT_BREAKPOINT : Number.POSITIVE_INFINITY);
         }
     }
 

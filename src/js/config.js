@@ -5,7 +5,7 @@
     "siteName": "Buderus"
   },
   "urlSchema": {
-    "trailingSlash": true
+    "trailingSlash": false
   },
   "pdsPathPrefix": "/ocs",
   "pdsTemplatePath": "/src/html",

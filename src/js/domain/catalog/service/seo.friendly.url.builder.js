@@ -12,7 +12,7 @@
         function SeoFriendlyUrlBuilder(options) {
             this.path = buildBasePath();
             this.simplifyCharactersFilter = simplifyCharactersFilter;
-            this.options = options;
+            this.options = options || {};
         }
 
         SeoFriendlyUrlBuilder.prototype.addPath = function(fragments) {
@@ -31,7 +31,7 @@
         };
 
         SeoFriendlyUrlBuilder.prototype.build = function () {
-            return this.path + (this.options.trailingSlash ? '/' : '');
+            return this.path + (config.urlSchema.trailingSlash ? '/' : '');
         };
 
         return SeoFriendlyUrlBuilder;

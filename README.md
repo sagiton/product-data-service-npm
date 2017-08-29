@@ -7,7 +7,7 @@
 1. `npm i` | Install Npm dependencies
 2. `bower i` | Install bower libraries
 3. `gulp build watch` | build project with default profile (prd) and listen on changes
-4. `npm run serve` | Deploys a mock static node server on localhost:3000 and opens index.html in browser
+4. `npm run serve --consumer=...` | Deploys a mock static node server on localhost:3000 use consumer buderus or boschtt to test the project on live template
 
 #### Gulpfile build task
 gulpfile.js defines build task which does the following:
@@ -24,6 +24,6 @@ After installation rebuild the app with `gulp build` task, it will concatenate y
 
 
 #### Usage
-- Use _\<catalog-template catalog-id="id"\>_ directive to fetch the catalog and attach it to the template scope. Catalog variable name is _$catalog_
+- Use _\<catalog-template catalog-id="id"\>_ directive to fetch the catalog and attach it to the template scope.
 - Listen on `pds.catalog.loaded` scope event to handle additional catalog logic after fetch
 - Example integration can be found in `./src/test/project/buderus`

@@ -66,10 +66,11 @@
                 <img class="img-responsive img-widen" ng-src="{{item.imageUrl | imageUrl: 'img-lg'}}" alt="{{item.title}}" title="{{item.title}}">
             </div>
             <div class="col-sm-8 col-text">
+                <div class="product-type text-primary" ng-if="item.heading">{{item.heading}}</div>
                 <div class="hl-3 column-title text-primary">
                     <a ocs-navigate="item.catalogId">{{item.title}}</a>
                 </div>
-                <ul class="checklist" ng-if="item.subtitle.length">
+                <ul class="children-list" ng-if="item.subtitle.length">
                     <li ng-repeat="bullet in item.subtitle">{{bullet}}</li>
                 </ul>
                 <ul class="list-inline button-list">
@@ -79,6 +80,49 @@
         </div>
     </div>
 </section>
+</script>
+
+<script type="text/ng-template" id="section-LIST_CARD">
+    <section class="section fs-two-column-media-text" ng-repeat="item in $section.items">
+        <div class="container-fluid">
+            <div class="row">
+                <a ng-if="item.hasDetails" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-image'"></a>
+                <div ng-if="!item.hasDetails" class="card" ng-include="'product-card-image'"></div>
+
+                <div class="col-sm-6 col-text">
+                    <a ng-if="item.hasDetails" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-details'"></a>
+                    <div ng-if="!item.hasDetails" class="card" ng-include="'product-card-details'"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</script>
+
+<script type="text/ng-template" id="product-card-image">
+    <div class="col-sm-6 col-media">
+        <div class="relative-container" ng-if="item.new">
+            <div class="label-container small left">
+                <div class="label-wrapper-outer">
+                    <div class="label-wrapper-inner">
+                        <div class="label-content" translate="NEW.LABEL"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="img-responsive img-widen" ng-src="{{item.imageUrl | imageUrl: 'img-lg'}}" alt="{{item.title}}" title="{{item.title}}" />
+    </div>
+</script>
+
+<script type="text/ng-template" id="product-card-details">
+    <div class="product-type text-primary">{{item.heading}}</div>
+    <div class="hl-3 product-name text-primary">{{item.title}}</div>
+
+    <ul class="product-benefits" ng-if="item.subtitle.length">
+        <li ng-repeat="sub in item.subtitle">{{sub}}</li>
+    </ul>
+    <div ng-if="!item.subtitle.length">{{item.subtitle}}</div>
+
+    <a class="link-more" ng-if="item.hasDetails" ocs-navigate="item.catalogId"><span translate="DETAILED_PRODUCT_DESCRIPTION"></span>&nbsp;{{item.title}}</a>
 </script>
 
 <script type="text/ng-template" id="section-PRODUCT_HEADER">
@@ -169,7 +213,7 @@
 </section>
 </script>
 
-<script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE">
+<script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE_SLIDER">
 <section class="section fs-table-scrollable">
     <div class="container-fluid">
         <h2 class="section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
@@ -215,6 +259,32 @@
 </section>
 </script>
 
+<script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE">
+    <section class="section fs-table">
+        <div class="container-fluid">
+            <h2 class="hl-2 section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
+
+            <table ocs-data-table="$section.products" odt-responsive-change="vm.responsiveChange($event, $table, $columns)" ng-repeat="partition in $sections.partitions" class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th ng-repeat="header in partition">{{header.title.value}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="attribute in $section.tableDefinition">
+                    <td>{{attribute.value.name}}&nbsp;</td>
+                    <td ng-repeat="product in partition" ng-init="value = product[attribute.key]">
+                        <span attribute-value="value" attribute-alt="product.name" attribute-title="product.name"></span>
+                        <span ng-if="attribute.value.unit">{{attribute.value.unit}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</script>
+
 <script type="text/ng-template" id="section-RELATED_PRODUCTS">
 <section class="section fs-three-column-media-teaser bg-pattern">
     <div class="container-fluid">
@@ -246,15 +316,18 @@
 </script>
 
 <script type="text/ng-template" id="section-FOOTNOTES">
-<section class="section" ng-if="vm.catalog.showFootnotes()">
+<section class="section">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">
                 <div class="footnotes">
-                    <ol class="footnote-ordered-list" ng-if="vm.catalog.footnotes.type == 'list'">
-                        <li ng-repeat="item in vm.catalog.footnotes.value.elements">{{item}}</li>
+                    <ol class="footnote-ordered-list" ng-if="$section.list">
+                        <li ng-repeat="item in $section.list">{{item}}</li>
                     </ol>
-                    <p class="footnote-paragraph" ng-if="vm.catalog.footnotes.type == 'string'">{{vm.catalog.footnotes.value}}</p>
+                    <p class="footnote-paragraph" ng-if="$section.value">{{$section.value}}</p>
+                    <p ng-if="$section.labels.system" class="footnote-paragraph">{{'ERP_SYSTEM_LABEL' | translate}}</p>
+                    <p ng-if="$section.labels.product" class="footnote-paragraph">{{'ERP_PRODUCT_LABEL' | translate}}</p>
+                    <p ng-if="$section.labels.boiler" class="footnote-paragraph">{{'B1_BOILER_LABEL' | translate}}</p>
                 </div>
             </div>
         </div>

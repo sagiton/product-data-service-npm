@@ -8,7 +8,7 @@
     function RouteConfig($stateProvider) {
         $stateProvider.pdsRoute({
             name: 'catalog',
-            url: '{catUrl:.*-[cp]$}',
+            url: '{catUrl:.*-[cp][/]?}',
             templateUrl: 'catalog3.html',
             controller: 'CatalogController as vm',
             resolve: {
