@@ -7,7 +7,6 @@
 
     function MenuController(menuService, _, config) {
         var vm = this;
-        vm.itemLimit = config.navigationMaxElements;
         vm.menu = vm.menu || {
             name: angular.element('#ocs-nav').children('a').text()
         };

@@ -124,7 +124,7 @@
                                     ng-init="subLevel = vm.menu.children; lvl = vm.menu"
                                     ng-include="'nav-level'"></ul>
                                 <script type="text/ng-template" id="nav-level">
-                                    <li ng-repeat="lvl in subLevel | limitTo: vm.itemLimit as limitedLevel">
+                                    <li ng-repeat="lvl in subLevel | limitTo: vm.menu.maxNavigationItems as limitedLevel">
                                         <span ng-if="lvl.children.length" class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
                                         <a target="_self" ocs-navigate="lvl.id">{{lvl.name}}</a>
                                         <ul simple-submenu

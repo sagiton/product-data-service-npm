@@ -33,6 +33,7 @@
                     if(!res.root) {
                         return {};
                     }
+                    res.root.children[0].maxNavigationItems = res.root.maxNavigationItems;
                     return res.root.children[0];
 				})
 		}
