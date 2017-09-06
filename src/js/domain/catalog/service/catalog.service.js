@@ -21,7 +21,7 @@
 
         return {
             getByTag: getByTag,
-            getNewProductFamilies: getNewProductFamilies,
+            getNewProducts: getNewProducts,
             getById: getById,
             getTemplate: getTemplate,
             getByIdAndType: getByIdAndType,
@@ -39,8 +39,15 @@
             return Catalog.query({type: type, id: tag, queryType: 'tag'}).$promise;
         }
 
-        function getNewProductFamilies() {
-            return getByTag(Catalog.fallbackType(), "new");
+        function getNewProducts() {
+            var catalog = new Catalog({
+                template: {name: 'NEW_PRODUCTS'},
+                model: {
+                    locale: locale.toString(),
+                    channel: getOCSChannel()
+                }
+            });
+            return catalog.$template();
         }
 
         function getById(categoryId) {

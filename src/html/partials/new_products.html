@@ -1,0 +1,31 @@
+<section class="section fs-four-column-media-teaser">
+    <div class="container-fluid text-center">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="section-title hl-3" translate="NEW.HITS"></h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <slick class="flex-row js-slick-slider slick-content-slider" settings="$ctrl.slickSettings" ng-if="$ctrl.productsLoaded">
+            <a class="card col-xs-6 col-sm-4 col-md-3 left no-animate" ng-repeat="product in $ctrl.products" ocs-navigate="product.id">
+                <div class="relative-container">
+                    <div class="label-container small right">
+                        <div class="label-wrapper-outer">
+                            <div class="label-wrapper-inner">
+                                <div class="label-content" translate="NEW.LABEL"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="card-img-top img-responsive img-widen" ng-src="{{product.image | imageUrl}}"
+                     alt="{{product.name}}" title="{{product.name}}">
+                <div class="card-block" ng-if="product.name" equalize-teaser-height>
+                    <h3 class="card-title hl-4 text-wrap">{{product.name}}</h3>
+                    <p class="card-text">{{product.description}}</p>
+                    <span class="link-more" translate="MORE.DETAILS"></span>
+                </div>
+            </a>
+        </slick>
+    </div>
+</section>

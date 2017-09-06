@@ -1,15 +1,19 @@
-(function(angular) {
+(function (angular) {
     angular
-        .module('pds.catalog.controller')
-        .controller("NewProductController", NewProductController);
+        .module('pds.catalog.directive')
+        .component('ocsNewProducts', {
+            templateUrl: ['config', function(config) {
+                return config.pdsTemplatePath + '/partials/new_products.html'
+            }],
+            controller: NewProductsController
+        });
 
-    NewProductController.$inject = ['CatalogService', '_'];
+    NewProductsController.$inject = ['CatalogService']
 
-    function NewProductController(catalogService, _) {
-        var vm = this;
+    function NewProductsController(CatalogService) {
+        var self = this;
 
-        vm.productsLoaded = false;
-        vm.slickSettings = {
+        self.slickSettings = {
             "arrows": false,
             "dots": true,
             "infinite": false,
@@ -35,11 +39,11 @@
             ]
         };
 
-        catalogService
-            .getNewProductFamilies()
-            .then(function (result) {
-                vm.productFamilies = result;
-                vm.productsLoaded = true;
+        CatalogService
+            .getNewProducts()
+            .then(function (products) {
+                self.products = products
+                self.productsLoaded = true;
             });
     }
 })(angular);
