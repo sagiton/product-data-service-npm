@@ -1,0 +1,19 @@
+<span class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
+<a ocs-navigate="$ctrl.menu.id" ng-bind="$ctrl.menu.name">Produkte</a>
+<ul simple-submenu
+    class="nav submenu"
+    ng-if="$ctrl.menu.children.length"
+    ng-init="subLevel = $ctrl.menu.children"
+    ng-include="'nav-level'"></ul>
+<script type="text/ng-template" id="nav-level">
+    <li ng-repeat="lvl in subLevel | limitTo: $ctrl.menu.maxNavigationItems as limitedLevel">
+        <span ng-if="lvl.children.length" class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
+        <a target="_self" ocs-navigate="lvl.id">{{lvl.name}}</a>
+        <ul simple-submenu
+            class="nav submenu"
+            ng-if="lvl.children.length"
+            ng-init="subLevel = lvl.children"
+            ng-include="'nav-level'"></ul>
+    </li>
+    <li><a ng-if="limitedLevel.length < subLevel.length" ocs-navigate="$parent.lvl.id" class="btn btn-show hidden-xs hidden-sm no-animate">Alles anzeigen</a></li>
+</script>

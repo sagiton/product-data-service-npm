@@ -115,27 +115,7 @@
                             <li class="active">
                                 <a href="index.html">Home</a>
                             </li>
-                            <li id="ocs-nav" class="active ng-cloak" ng-controller="MenuController as vm">
-                                <span class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
-                                <a ocs-navigate="vm.menu.id" ng-bind="vm.menu.name">Produkte</a>
-                                <ul simple-submenu
-                                    class="nav submenu"
-                                    ng-if="vm.menu.children.length"
-                                    ng-init="subLevel = vm.menu.children; lvl = vm.menu"
-                                    ng-include="'nav-level'"></ul>
-                                <script type="text/ng-template" id="nav-level">
-                                    <li ng-repeat="lvl in subLevel | limitTo: vm.menu.maxNavigationItems as limitedLevel">
-                                        <span ng-if="lvl.children.length" class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
-                                        <a target="_self" ocs-navigate="lvl.id">{{lvl.name}}</a>
-                                        <ul simple-submenu
-                                            class="nav submenu"
-                                            ng-if="lvl.children.length"
-                                            ng-init="subLevel = lvl.children"
-                                            ng-include="'nav-level'"></ul>
-                                    </li>
-                                    <li><a ng-if="limitedLevel.length < subLevel.length" ocs-navigate="$parent.lvl.id" class="btn btn-show hidden-xs hidden-sm no-animate">Alles anzeigen</a></li>
-                                </script>
-                            </li>
+                            <li ocs-navigation-menu class="active ng-cloak"></li>
                             <li>
                                 <a>Abonnements</a>
                             </li>
