@@ -306,7 +306,7 @@
 </script>
 
 <script type="text/ng-template" id="section-SEO_TEXT">
-<section class="section fs-category-text">
+<section ng-if="$section.seoText" class="section fs-category-text">
     <div class="container-fluid">
         <div class="row">
             <div ng-include="$section.seoText | imageUrl"></div>
