@@ -6,8 +6,9 @@
     function SceConfig($sceDelegateProvider) {
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            'https://pds-bosch-tt.kittelberger.net/**',
-            'https://ss-bosch-tt.kittelberger.net/**',
+            'https://services.kittelberger.net/**',
+            'https://dev02.sagiton.pl/**',
+            'http://localhost:8080/**',
             'https://mycliplister.com/**'
         ]);
     }
