@@ -41,8 +41,8 @@
 
         CatalogService
             .getNewProducts()
-            .then(function (products) {
-                self.products = products
+            .then(function (data) {
+                self.products = data.products
                 self.productsLoaded = true;
             });
     }
