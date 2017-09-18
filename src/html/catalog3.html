@@ -83,19 +83,19 @@
 </script>
 
 <script type="text/ng-template" id="section-LIST_CARD">
-    <section class="section fs-two-column-media-text" ng-repeat="item in $section.items">
-        <div class="container-fluid">
-            <div class="row">
-                <a ng-if="item.hasDetails" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-image'"></a>
-                <div ng-if="!item.hasDetails" class="card" ng-include="'product-card-image'"></div>
+<section class="section fs-two-column-media-text" ng-repeat="item in $section.items">
+    <div class="container-fluid">
+        <div class="row">
+            <a ng-if="!item.detailsHidden" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-image'"></a>
+            <div ng-if="item.detailsHidden" class="card" ng-include="'product-card-image'"></div>
 
-                <div class="col-sm-6 col-text">
-                    <a ng-if="item.hasDetails" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-details'"></a>
-                    <div ng-if="!item.hasDetails" class="card" ng-include="'product-card-details'"></div>
-                </div>
+            <div class="col-sm-6 col-text">
+                <a ng-if="!item.detailsHidden" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-details'"></a>
+                <div ng-if="item.detailsHidden" class="card" ng-include="'product-card-details'"></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </script>
 
 <script type="text/ng-template" id="product-card-image">
@@ -114,7 +114,7 @@
 </script>
 
 <script type="text/ng-template" id="product-card-details">
-    <div class="product-type text-primary">{{item.heading}}</div>
+    <div class="product-type text-primary">{{item.type}}</div>
     <div class="hl-3 product-name text-primary">{{item.title}}</div>
 
     <ul class="product-benefits" ng-if="item.subtitle.length">
@@ -122,7 +122,7 @@
     </ul>
     <div ng-if="!item.subtitle.length">{{item.subtitle}}</div>
 
-    <a class="link-more" ng-if="item.hasDetails" ocs-navigate="item.catalogId"><span translate="DETAILED_PRODUCT_DESCRIPTION"></span>&nbsp;{{item.title}}</a>
+    <a class="link-more" ng-if="!item.detailsHidden" ocs-navigate="item.catalogId"><span translate="DETAILED_PRODUCT_DESCRIPTION"></span>&nbsp;{{item.title}}</a>
 </script>
 
 <script type="text/ng-template" id="section-PRODUCT_HEADER">
