@@ -66,15 +66,18 @@
                 <img class="img-responsive img-widen" ng-src="{{item.imageUrl | imageUrl: 'img-lg'}}" alt="{{item.title}}" title="{{item.title}}">
             </div>
             <div class="col-sm-8 col-text">
-                <div class="product-type text-primary" ng-if="item.heading">{{item.heading}}</div>
+                <div class="product-type text-primary" ng-if="item.type">{{item.type}}</div>
                 <div class="hl-3 column-title text-primary">
-                    <a ocs-navigate="item.catalogId">{{item.title}}</a>
+                    <a ng-if="!item.detailsHidden" ocs-navigate="item.catalogId">{{item.title}}</a>
+                    <div ng-if="item.detailsHidden">{{item.title}}</div>
                 </div>
                 <ul class="children-list" ng-if="item.subtitle.length">
                     <li ng-repeat="bullet in item.subtitle">{{bullet}}</li>
                 </ul>
                 <ul class="list-inline button-list">
-                    <li><a class="btn btn-primary" ocs-navigate="item.catalogId"><span translate="MORE.DETAILS"></span></a></li>
+                    <li>
+                        <a ng-if="!item.detailsHidden" class="btn btn-primary" ocs-navigate="item.catalogId"><span translate="MORE.DETAILS"></span></a>
+                    </li>
                 </ul>
             </div>
         </div>
