@@ -328,9 +328,9 @@
                         <li ng-repeat="item in $section.list">{{item}}</li>
                     </ol>
                     <p class="footnote-paragraph" ng-if="$section.value">{{$section.value}}</p>
-                    <p ng-if="$section.labels.system" class="footnote-paragraph">{{'ERP_SYSTEM_LABEL' | translate}}</p>
-                    <p ng-if="$section.labels.product" class="footnote-paragraph">{{'ERP_PRODUCT_LABEL' | translate}}</p>
-                    <p ng-if="$section.labels.boiler" class="footnote-paragraph">{{'B1_BOILER_LABEL' | translate}}</p>
+                    <p ng-if="$section.labels.system" class="footnote-paragraph" translate="ERP_SYSTEM_LABEL"></p>
+                    <p ng-if="$section.labels.product" class="footnote-paragraph" translate="ERP_PRODUCT_LABEL"></p>
+                    <p ng-if="$section.labels.boiler" class="footnote-paragraph" translate="B1_BOILER_LABEL"></p>
                 </div>
             </div>
         </div>
