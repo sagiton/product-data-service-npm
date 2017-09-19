@@ -92,7 +92,8 @@
         };
 
         CatalogResource.prototype.technicalDataTable = function () {
-            var section = _.find(this.sections, {name: 'TECHNICAL_DATA_TABLE'});
+            var section = _.find(this.sections, {name: 'TECHNICAL_DATA_TABLE'})
+                       || _.find(this.sections, {name: 'TECHNICAL_DATA_TABLE_SLIDER'});
             return section && section.params;
         };
 
