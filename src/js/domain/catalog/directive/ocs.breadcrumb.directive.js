@@ -3,7 +3,7 @@
         .module('pds.catalog.directive')
         .directive('ocsBreadcrumb', OcsBreadcrumb);
 
-    var crumbTemplate = "<li ng-repeat=\"crumb in $breadcrumbs\" ng-class=\"{'active': $last}\">"
+    var crumbTemplate = "<li ng-repeat=\"crumb in $breadcrumbs\" ng-class=\"{'active ocs-breadcrumb-last': $last}\">"
             + "<a ocs-navigate=\"crumb.id\">{{crumb.name}}</a>"
         + "</li>";
 
@@ -13,9 +13,11 @@
             scope: {
                 ocsNavigate: '='
             },
-            controller: ['$scope', '$compile', 'BreadcrumbService', '_', BreadcrumbController]
+            controller: BreadcrumbController
         }
     }
+
+    BreadcrumbController.$inject = ['$scope', '$compile', 'BreadcrumbService', '_']
 
     function BreadcrumbController($scope, $compile, BreadcrumbService, _) {
         $scope.$on('pds.breadcrumb.update', function (event, params) {

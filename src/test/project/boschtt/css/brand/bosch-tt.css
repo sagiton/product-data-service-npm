@@ -2983,7 +2983,10 @@ a.card:hover {
 
 #nav-breadcrumbs.open .dropdown-menu { display: flex; flex-direction: column-reverse; right: 0; }
 
-#nav-breadcrumbs .active { display: none; }
+#nav-breadcrumbs .active {
+    display: none;
+    pointer-events: none;
+}
 
 #nav-breadcrumbs li + li > a { border-top: 0; border-bottom: 1px solid #e1e1e2; }
 

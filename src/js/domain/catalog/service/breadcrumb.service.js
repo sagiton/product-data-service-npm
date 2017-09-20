@@ -12,7 +12,7 @@
 
         function build(categoryId) {
             return CatalogService
-                .travelUpNavigationHierarchy(categoryId)
+                .getTemplate(categoryId, 'BREADCRUMBS')
                 .then(decorateWithUrls)
                 .then(function (tree) {
                     return _
@@ -25,12 +25,12 @@
                                 type: node.type
                             }
                         })
-                        .reverse()
                         .value();
                 });
         }
 
-        function decorateWithUrls(tree) {
+        function decorateWithUrls(response) {
+            var tree = response.nodes
             return $q
                 .all(_.map(tree, function (node) {
                     return CatalogService

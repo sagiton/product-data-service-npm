@@ -57,18 +57,18 @@
                 });
         }
 
-        function getTemplate(catalogId) {
+        function getTemplate(catalogId, type) {
             return getTypeFromHierarchy(catalogId)
-                .then(function (type) {
+                .then(function (typeFromHierarchy) {
                     var catalog = new Catalog({
-                        template: {name: type},
+                        template: {name: type || typeFromHierarchy},
                         model: {
                             locale: locale.toString(),
                             channel: getOCSChannel(),
                             catalogRequest: {
                                 id: catalogId,
                                 channel: getOCSChannel(),
-                                type: type
+                                type: typeFromHierarchy
                             }
                         }
                     });

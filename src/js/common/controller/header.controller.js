@@ -35,6 +35,7 @@
             });
         });
 
+        //FIXME
         $scope.$on('pds.breadcrumb.update', function (event, params) {
             BreadcrumbService
                 .build(params.catalogId)
