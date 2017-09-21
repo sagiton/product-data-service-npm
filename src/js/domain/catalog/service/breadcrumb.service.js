@@ -6,13 +6,16 @@
     BreadcrumbService.$inject = ['CatalogService', '_', '$q'];
 
     function BreadcrumbService(CatalogService, _, $q) {
+        var templatePromise
+
         return {
             build: build
         };
 
         function build(categoryId) {
-            return CatalogService
-                .getTemplate(categoryId, 'BREADCRUMBS')
+            templatePromise = templatePromise || CatalogService.getTemplate(categoryId, 'BREADCRUMBS')
+            
+            return templatePromise
                 .then(decorateWithUrls)
                 .then(function (tree) {
                     return _
