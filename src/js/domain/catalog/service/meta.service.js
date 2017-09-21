@@ -20,7 +20,7 @@
         function updateMetaByCategory(catalogId) {
             var excludeHreflangs = false;
             CatalogService
-                .getTemplate(catalogId)
+                .getCatalogTemplate(catalogId)
                 .then(function (currentCatalog) {
                     return CatalogService
                         .travelUpNavigationHierarchy(catalogId)

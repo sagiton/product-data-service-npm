@@ -9,6 +9,7 @@
         var self = this;
         var productPrefix = 'p';
         var categoryPrefix = 'c';
+        var catalogTemplate;
 
         catalogSearchListener
             .listen()
@@ -22,6 +23,7 @@
         return {
             getByTag: getByTag,
             getNewProducts: getNewProducts,
+            getCatalogTemplate: getCatalogTemplate,
             getById: getById,
             getTemplate: getTemplate,
             getByIdAndType: getByIdAndType,
@@ -55,6 +57,11 @@
                 .then(function (type) {
                     return Catalog.get({id: categoryId, type: type}).$promise;
                 });
+        }
+
+        function getCatalogTemplate(catalogId) {
+            catalogTemplate = catalogTemplate || getTemplate(catalogId)
+            return catalogTemplate
         }
 
         function getTemplate(catalogId, type) {

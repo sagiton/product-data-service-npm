@@ -12,7 +12,7 @@
                 link: function (scope, element, attrs, ctrl) {
                     scope.$watch('catalogId', function (val) {
                         val && CatalogService
-                            .getTemplate(val)
+                            .getCatalogTemplate(val)
                             .then(function (catalog) {
                                 scope.$catalog = catalog;
                                 $rootScope.$broadcast('pds.catalog.loaded', {catalog: catalog});
