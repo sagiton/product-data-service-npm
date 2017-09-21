@@ -1,5 +1,5 @@
 (function (angular) {
-    var VALUE_TEMPLATE = '<span>{{value.value || \'-\'}}</span>';
+    var VALUE_TEMPLATE = '<span>{{(value || {}).value == null ? \'-\' : value.value}}</span>';
     var IMAGE_MEDIA_TEMPLATE = '<img ng-src="{{value.value}}" alt="{{alt.value}}" title="{{title.value}}"/>';
     var OTHER_MEDIA_TEMPLATE = '<span><a ng-href="{{value.value | imageUrl}}" title="{{title.value}}" target="_blank"><span translate="DOWNLOAD.NOW"></span>&nbsp;<i class="glyphicon glyphicon-download-alt"></i></a></span>';
     var LIST_TEMPLATE = '<span ng-repeat="el in value.value">{{el + (!$last ? ", ": "")}}</span>';
