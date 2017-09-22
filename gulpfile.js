@@ -62,7 +62,7 @@ function createDist(minify, filename) {
         .pipe(minify ? nop() : sourcemaps.init())
         .pipe(minify ? (uglify().on('error', handleError)) : nop())
         .pipe(concat(filename))
-        .pipe(concatUtil.header('/*! ' + pkg.name + ' - v' + pkg.version + ' - <%=new Date().toISOString()%> */ \n\n'))
+        .pipe(minify ? concatUtil.header('/*! ' + pkg.name + ' - v' + pkg.version + ' - <%=new Date().toISOString()%> */ \n\n') : nop())
         .pipe(minify ? nop() : sourcemaps.write())
         .pipe(gulp.dest(paths.dist));
 }
@@ -121,7 +121,7 @@ gulp.task('ng-config', function () {
     return merge(env, conf);
 });
 
-gulp.task('watch', function() {
+gulp.task('observe', function() {
     gulp.watch(['config.json'], ['scripts']);
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(pathsCss.css, ['css']);
@@ -154,5 +154,6 @@ gulp.task('bump', function () {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['watch', 'build']);
+gulp.task('default', ['observe', 'build']);
 gulp.task('serve', ['default', 'browser-sync']);
+gulp.task('watch', ['vendor', 'observe']);
