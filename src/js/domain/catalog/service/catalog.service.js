@@ -55,7 +55,11 @@
         function getById(categoryId) {
             return getTypeFromHierarchy(categoryId)
                 .then(function (type) {
-                    return Catalog.get({id: categoryId, type: type}).$promise;
+                    return Catalog.get({
+                        id: categoryId,
+                        type: type,
+                        channel: getOCSChannel()
+                    }).$promise;
                 });
         }
 
@@ -104,12 +108,12 @@
             return getById(categoryId)
                 .then(function (data) {
                     tree.push({
-                        id: data.id.value,
-                        type: data.type.value,
-                        name: data.name.value
+                        id: data.id,
+                        type: data.type,
+                        name: data.name
                     });
                     if (data && data.parentId) {
-                        return travelUpHierarchy(data.parentId.value, tree);
+                        return travelUpHierarchy(data.parentId, tree);
                     }
                     return tree;
                 });
@@ -136,7 +140,8 @@
         }
 
         function resolveUri(categoryId) {
-            return travelUpHierarchy(categoryId).then(buildUri);
+            return travelUpHierarchy(categoryId)
+                .then(buildUri);
         }
 
         function buildUri(tree) {

@@ -4,9 +4,9 @@
         .module('pds.catalog.controller')
         .controller("CatalogController", CatalogController);
 
-    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_', 'MetaService'];
+    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_', 'MetaService', 'CatalogService'];
 
-    function CatalogController($scope, $rootScope, urlParserService, _, MetaService) {
+    function CatalogController($scope, $rootScope, urlParserService, _, MetaService, CatalogService) {
         var vm = this;
         var PRODUCT_COUNT_LAYOUT_BREAKPOINT = 4;
         vm.catalogId = urlParserService.getCatalogId();
@@ -33,8 +33,8 @@
 
         function initCatalog(catalog) {
             vm.catalog = catalog;
-            if (_.get(vm.catalog, 'redirectCategory.id') > 0) {
-                return CatalogService.redirectTo(vm.catalog.redirectCategory.id.value);
+            if (_.get(vm.catalog, 'redirectCategory.id')) {
+                return CatalogService.redirectTo(vm.catalog.redirectCategory.id);
             }
             vm.catalog.energyEfficiency = vm.catalog.energyEfficiency || {};
             var technicalDataTable = vm.catalog.technicalDataTable();

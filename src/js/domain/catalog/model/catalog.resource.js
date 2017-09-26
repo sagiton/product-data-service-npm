@@ -31,10 +31,10 @@
             });
             return result;
         };
-        var CatalogResource = $resource(pdsUrl + ':locale/:type/:queryType/:id', null, {
+        var CatalogResource = $resource(pdsUrl + 'hierarchy/:channel/:locale/:type/:id', null, {
                 get: {
                     method: 'GET',
-                    params: {locale: locale, queryType: 'id'},
+                    params: {locale: locale},
                     cache: catalogCache,
                     transformResponse: function (data, headers, status) {
                         return toCatalogView(transformResponse(data, headers, status))

@@ -38,7 +38,7 @@
             catalog.showTeaser = catalog.isProductFamily;
             catalog.new = catalog.neuheitOcs;
             catalog.newImage = '/media/new.png';
-            catalog.name = catalog.headline || catalog.productname;
+            catalog.name = catalog.name || catalog.headline || catalog.productname;
             catalog.energyEfficiency = {
                 image: catalog.mainErpLabel
             };
