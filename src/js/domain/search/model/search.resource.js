@@ -18,6 +18,6 @@
         var methods = {
             localize: {method: 'GET', isArray: true, params: {type: 'localize'}}
         };
-        return $resource(url + '/resource/:type/:locale', {locale: locale}, methods);
+        return $resource(url + 'resource/:type/:locale', {locale: locale}, methods);
     }
 })(angular);

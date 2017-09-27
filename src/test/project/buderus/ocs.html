@@ -134,26 +134,8 @@
                 </ul>
             </div>
         </div>
-        <div class="container-fluid search-container" ng-controller="QuicksearchController as vm">
-            <form id="header-search" method="post" role="search" ng-submit="vm.doSearch()">
-                <div class="form-group has-feedback">
-                    <input
-                        type="text"
-                        class="form-control"
-                        ng-model="vm.quicksearch"
-                        ng-model-options="{debounce: 200}"
-                        typeahead-wait-ms="100"
-                        typeahead-focus-first="false"
-                        typeahead-on-select="vm.goTo($item)"
-                        ng-change="vm.suggest()"
-                        uib-typeahead="result as result.name for result in vm.suggest()"
-                        typeahead-loading="load"
-                        placeholder="Search term" />
-
-                    <button type="submit"><i class="icon-search"></i></button>
-                    <button class="close-search"><i class="icon-close"></i></button>
-                </div>
-            </form>
+        <div class="container-fluid search-container">
+            <ocs-quick-search></ocs-quick-search>
         </div>
         <nav id="nav-primary" class="navbar navbar-default">
             <div class="container-fluid">
@@ -186,7 +168,7 @@
                             </li>
                         </ul>
                         <ul class="hidden-xs nav navigation-icons">
-                            <li><a class="open-search" href=""><i class="icon-search"></i></a></li>
+                            <li><a active-search class="open-search" href=""><i class="icon-search"></i></a></li>
                             <li><a href=""><i class="icon-contact"></i></a></li>
                             <li><a href=""><i class="icon-store-locator"></i></a></li>
                         </ul>

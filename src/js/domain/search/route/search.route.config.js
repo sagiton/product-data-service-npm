@@ -3,16 +3,16 @@
         .module('pds.search.route')
         .config(RouteConfig);
 
-    RouteConfig.$inject = ['$stateProvider', 'config'];
+    RouteConfig.$inject = ['$stateProvider'];
 
-    function RouteConfig($stateProvider, config) {
+    function RouteConfig($stateProvider) {
         $stateProvider.pdsRoute({
             name: 'search',
             params: {
                 terms: null
             },
-            templateUrl: 'search.html',
-            controller: 'SearchController as vm'
+            url: 'search.html',
+            templateUrl: 'search.html'
         });
     }
 })(angular);

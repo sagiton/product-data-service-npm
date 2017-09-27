@@ -1,0 +1,20 @@
+<form id="header-search" method="post" role="search" ng-submit="$ctrl.doSearch()">
+    <div class="form-group has-feedback">
+        <input
+            active-search
+            type="search"
+            class="form-control"
+            ng-model="$ctrl.quicksearch"
+            ng-model-options="{debounce: 200}"
+            typeahead-wait-ms="100"
+            typeahead-focus-first="false"
+            typeahead-on-select="$ctrl.goTo($item)"
+            ng-change="$ctrl.suggest()"
+            uib-typeahead="result as result.name for result in $ctrl.suggest()"
+            typeahead-loading="load"
+            placeholder="{{'SEARCH.PLACEHOLDER' | translate}}" />
+
+        <span class="form-control-feedback icon-search" aria-hidden="true"></span>
+        <button hidden="hidden" type="submit"><i class="icon-search"></i></button>
+    </div>
+</form>
