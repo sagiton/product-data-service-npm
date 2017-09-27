@@ -67,7 +67,8 @@
 
                         <div class="search-result media" ng-repeat="item in results track by $index">
                             <div class="media-left">
-                                <a><img class="media-object" ng-src="{{item.imageUrl || config.search.defaultImage}}" alt="{{item.name}}" title="{{item.name}}"></a>
+                                <a><img src class="media-object" http-src="item.imageUrl"
+                                        alt="{{item.name}}" title="{{item.name}}"></a>
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">{{item.name}}</h4>

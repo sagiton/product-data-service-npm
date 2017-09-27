@@ -5,7 +5,7 @@
       return {
         restrict: 'EA',
         link: function (scope, element, attrs) {
-          initNavCollapse(element);
+          // initNavCollapse(element);
         }
       }
     })

@@ -7,5 +7,5 @@
     angular.module('pds.common.factory', []);
     angular.module('pds.common.directive', []);
     angular.module('pds.common.filter', ['pds.environment']);
-    angular.module('pds.common', ['pds.common.controller', 'pds.common.route', 'pds.common.service', 'pds.common.config', 'pds.common.model']);
+    angular.module('pds.common', ['pds.common.controller', 'pds.common.route', 'pds.common.service', 'pds.common.config', 'pds.common.model', 'pds.common.directive']);
 })(angular);
