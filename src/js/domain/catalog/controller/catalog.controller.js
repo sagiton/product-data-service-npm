@@ -10,9 +10,11 @@
         var vm = this;
         var PRODUCT_COUNT_LAYOUT_BREAKPOINT = 4;
         vm.catalogId = urlParserService.getCatalogId();
+
         vm.anyProductHasValue = anyProductHasValue;
         vm.tableDefinitionContains = tableDefinitionContains;
         vm.responsiveChange = responsiveChange;
+        vm.isArray = _.isArray;
 
         MetaService.updateMetaByCategory(vm.catalogId);
         $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});

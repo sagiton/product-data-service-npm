@@ -180,7 +180,7 @@
                 <ul class="technical-information-list" ng-if="$section.list">
                     <li ng-repeat="info in $section.list">{{info}}</li>
                 </ul>
-                <span ng-if="$section.description">{{$section.description | convertWhitespaces}}</span>
+                <span ng-if="$section.description" ng-bind-html="$section.description"></span>
             </div>
         </div>
     </div>
@@ -190,24 +190,25 @@
 <script type="text/ng-template" id="section-MORE_INFORMATION">
 <section class="section fs-two-column-icon-accordion">
     <div class="container-fluid">
-        <h2 class="section-title text-primary text-center">{{vm.catalog.moreDetails.title.value}}</h2>
+        <h2 class="section-title text-primary text-center">{{$section.headlineDetails}}</h2>
         <div id="acrd-872921587" class="accordion panel-group m-b-0" role="tablist" aria-multiselectable="true">
-            <div class="panel" ng-repeat="item in vm.catalog.moreDetails.elements">
+            <div class="panel" ng-repeat="item in $section.items">
                 <div id="acrd-872921587-heading-{{$index}}" class="panel-heading" role="tab">
                     <h3 class="panel-title">
                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#acrd-872921587" data-target="#acrd-872921587-panel-{{$index}}"
                            aria-controls="acrd-872921587-panel-{{$index}}" aria-expanded="false">
-                            {{item.title}}
+                            {{item.subHeadline}}
                         </a>
                     </h3>
                 </div>
                 <div id="acrd-872921587-panel-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acrd-872921587-heading-{{$index}}">
                     <article class="panel-body article">
-                        <p ng-if="!item.description.elements" ng-bind-html="item.description | convertWhitespaces"></p>
-                        <ul ng-if="item.description.elements">
-                            <li ng-repeat="el in item.description.elements">{{el}}</li>
+                        <p ng-if="!vm.isArray(item.description)" ng-bind-html="item.description | convertWhitespaces"></p>
+                        <ul ng-if="vm.isArray(item.description)">
+                            <li ng-repeat="el in item.description">{{el}}</li>
                         </ul>
-                        <img ng-if="item.image" class="img-responsive img-widen m-b-1" ng-src="{{item.image | imageUrl}}" alt="{{item.title}}" title="{{item.title}}" />
+                        <img ng-if="item.imageUrl" class="img-responsive img-widen m-b-1" ng-src="{{item.imageUrl | imageUrl}}"
+                             alt="{{item.title}}" title="{{item.title}}" />
                     </article>
                 </div>
             </div>
