@@ -219,7 +219,7 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE_SLIDER">
-<section class="section fs-table-scrollable">
+<section class="section fs-table-scrollable" full-width-table>
     <div class="container-fluid">
         <h2 class="section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
         <div class="row scrollable-table-wrapper">
@@ -236,12 +236,13 @@
                 </a>
             </div>
             <div class="col-xs-6 col-sm-8 col-md-9 p-l-0">
-                <div class="js-slick-slider slick-content-slider"
+                <div class="js-slick-slider slick-content-slider js-full-width-slick-track"
                      data-slick='{"arrows": true, "appendArrows": ".scrollable-table-wrapper", "appendDots": ".scrollable-table-wrapper",
                       "dots": true, "infinite": false, "speed": 500, "cssEase": "ease-in-out", "slidesToShow": 3, "slidesToScroll": 1, "responsive": [
                          { "breakpoint": 992, "settings": { "arrows": false, "slidesToShow": 2, "slidesToScroll": 2}},
                          { "breakpoint": 768, "settings": { "arrows": false, "slidesToShow": 1, "slidesToScroll": 1}}
-                      ]}'>
+                      ]}'
+                     full-width-table>
 
                     <div class="card card-column" ng-repeat="product in $section.products" scrollable-table-card>
                         <table class="table js-data-table" data-ordering="false" data-paging="false" data-searching="false" data-info="false"
