@@ -71,7 +71,8 @@
                     <a ng-if="!item.detailsHidden" ocs-navigate="item.catalogId">{{item.title}}</a>
                     <div ng-if="item.detailsHidden">{{item.title}}</div>
                 </div>
-                <ul class="children-list" ng-if="item.subtitle.length">
+                <p ng-if="!vm.isArray(item.subtitle)">{{item.subtitle}}</p>
+                <ul ng-if="vm.isArray(item.subtitle)" class="children-list">
                     <li ng-repeat="bullet in item.subtitle">{{bullet}}</li>
                 </ul>
                 <ul class="list-inline button-list">
