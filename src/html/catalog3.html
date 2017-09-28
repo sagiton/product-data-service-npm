@@ -203,7 +203,7 @@
                 </div>
                 <div id="acrd-872921587-panel-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acrd-872921587-heading-{{$index}}">
                     <article class="panel-body article">
-                        <p ng-if="!vm.isArray(item.description)" ng-bind-html="item.description | convertWhitespaces"></p>
+                        <p ng-if="!vm.isArray(item.description)" ng-bind-html="item.description"></p>
                         <ul ng-if="vm.isArray(item.description)">
                             <li ng-repeat="el in item.description">{{el}}</li>
                         </ul>
