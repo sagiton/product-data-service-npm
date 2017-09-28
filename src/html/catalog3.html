@@ -332,7 +332,7 @@
         <div class="row">
             <div class="col-md-10">
                 <div class="footnotes">
-                    <ol class="footnote-ordered-list" ng-if="!vm.isArray($section.list)">
+                    <ol class="footnote-ordered-list" ng-if="!vm.isArray($section.list) && $section.list">
                         <li>{{$section.list}}</li>
                     </ol>
                     <ol class="footnote-ordered-list" ng-if="vm.isArray($section.list)">
