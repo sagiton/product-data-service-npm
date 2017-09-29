@@ -3,6 +3,5 @@
 node_modules
 _res/assets
 bower_components
-dist
 src/js/env.js
 src/js/config.js
