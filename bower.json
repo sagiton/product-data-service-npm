@@ -5,6 +5,9 @@
   "publishConfig": {
     "registry": "https://nexus.sagiton.pl/repository/bower-snapshot/"
   },
+  "scripts": {
+    "preinstall": "gulp build"
+  },
   "dependencies": {
     "jquery": "1.11.3",
     "datatables.net": "1.10.12",
