@@ -146,6 +146,10 @@ gulp.task('build', function (callback) {
     runSequence('clean', ['vendor', 'scripts-concat-only', 'scripts', 'css'])
 });
 
+gulp.task('build-without-vendor', function (callback) {
+    runSequence('clean', ['scripts-concat-only', 'scripts', 'css'])
+})
+
 gulp.task('bump', function () {
     var type = argv.type || 'prerelease';
     gulp
