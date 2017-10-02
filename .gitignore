@@ -5,3 +5,5 @@ _res/assets
 bower_components
 src/js/env.js
 src/js/config.js
+src/js/templates.js
+dist

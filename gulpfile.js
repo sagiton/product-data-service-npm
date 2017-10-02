@@ -18,10 +18,12 @@ var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
+var ngTemplates = require('gulp-ng-templates');
 
 var paths = {
     build: './',
     scripts: ['./src/js/**/*.js'],
+    templates: './src/html/**/*.html',
     dist: './dist/js'
 };
 
@@ -121,10 +123,21 @@ gulp.task('ng-config', function () {
     return merge(env, conf);
 });
 
+gulp.task('templates', function () {
+    return gulp.src(paths.templates)
+        .pipe(ngTemplates({
+            filename: 'templates.js',
+            module: 'pds.environment',
+            standalone: false
+        }))
+        .pipe(gulp.dest('./src/js'));
+});
+
 gulp.task('observe', function() {
     gulp.watch(['config.json'], ['scripts']);
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(pathsCss.css, ['css']);
+    gulp.watch(paths.templates, ['templates']);
 });
 
 gulp.task('browser-sync', function() {
@@ -143,11 +156,11 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('build', function (callback) {
-    runSequence('clean', ['vendor', 'scripts-concat-only', 'scripts', 'css'])
+    runSequence('clean', ['vendor', 'templates', 'scripts-concat-only', 'scripts', 'css'])
 });
 
 gulp.task('build-without-vendor', function (callback) {
-    runSequence('clean', ['scripts-concat-only', 'scripts', 'css'])
+    runSequence('clean', ['templates', 'scripts-concat-only', 'scripts', 'css'])
 })
 
 gulp.task('bump', function () {

@@ -2,9 +2,7 @@
     angular
         .module('pds.search.directive')
         .component('ocsQuickSearch', {
-            templateUrl: ['config', function(config) {
-                return config.pdsTemplatePath + '/component/quick_search.html'
-            }],
+            templateUrl: 'component/quick_search.html',
             transclude: true,
             controller: ocsQuickSearchController
         });

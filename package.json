@@ -33,6 +33,7 @@
     "gulp-json-editor": "^2.2.1",
     "gulp-main-bower-files": "^1.6.0",
     "gulp-ng-config": "^1.4.0",
+    "gulp-ng-templates": "0.0.10",
     "gulp-nop": "0.0.3",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.9.1",

@@ -9,9 +9,7 @@
         return {
             restrict: 'A',
             scope: true,
-            templateUrl: function() {
-                return config.pdsTemplatePath + '/component/navigation_menu.html'
-            },
+            templateUrl: 'component/navigation_menu.html',
             controller: NavigationMenuController,
             controllerAs: '$ctrl'
         }

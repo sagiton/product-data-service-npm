@@ -2,9 +2,7 @@
     angular
         .module('pds.catalog.directive')
         .component('ocsNewProducts', {
-            templateUrl: ['config', function(config) {
-                return config.pdsTemplatePath + '/component/new_products.html'
-            }],
+            templateUrl: 'component/new_products.html',
             controller: NewProductsController
         });
 
