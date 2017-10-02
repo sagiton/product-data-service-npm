@@ -9,7 +9,9 @@
         $stateProvider.pdsRoute({
             name: 'catalog',
             url: '{catUrl:.*-[cp][/]?}',
-            templateUrl: 'catalog3.html',
+            templateProvider: function($templateCache){
+                return $templateCache.get('catalog3.html')
+            },
             controller: 'CatalogController as vm',
             resolve: {
                 redirect: ['MetaService', function (metaService) {

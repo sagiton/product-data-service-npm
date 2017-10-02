@@ -9,7 +9,6 @@
         $locationProvider.html5Mode(true);
         $stateProvider.pdsRoute = function (route) {
             route.url = urlPath(route.url);
-            route.templateUrl = htmlPath(route.templateUrl);
             $stateProvider.state(route);
         };
 
