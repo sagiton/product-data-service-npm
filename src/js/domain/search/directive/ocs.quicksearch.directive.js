@@ -2,7 +2,9 @@
     angular
         .module('pds.search.directive')
         .component('ocsQuickSearch', {
-            templateUrl: 'component/quick_search.html',
+            template:  ['$templateCache', function($templateCache) {
+                return $templateCache.get('component/quick_search.html')
+            }],
             transclude: true,
             controller: ocsQuickSearchController
         });

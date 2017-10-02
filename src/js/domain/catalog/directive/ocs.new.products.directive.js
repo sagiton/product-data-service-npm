@@ -2,7 +2,9 @@
     angular
         .module('pds.catalog.directive')
         .component('ocsNewProducts', {
-            templateUrl: 'component/new_products.html',
+            template:  ['$templateCache', function($templateCache) {
+                return $templateCache.get('component/new_products.html')
+            }],
             controller: NewProductsController
         });
 

@@ -2,7 +2,9 @@
     angular
         .module('pds.search.directive')
         .component('ocsSearch', {
-            templateUrl: 'component/search.html',
+            template:  ['$templateCache', function($templateCache) {
+                return $templateCache.get('component/search.html')
+            }],
             controller: ocsSearchController
         });
 

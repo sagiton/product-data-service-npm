@@ -3,13 +3,15 @@
         .module('pds.catalog.directive')
         .directive('ocsNavigationMenu', OcsNavigationMenu);
 
-    OcsNavigationMenu.$inject = ['config']
+    OcsNavigationMenu.$inject = ['config', '$templateCache']
 
-    function OcsNavigationMenu(config) {
+    function OcsNavigationMenu(config, $templateCache) {
         return {
             restrict: 'A',
             scope: true,
-            templateUrl: 'component/navigation_menu.html',
+            template:  function() {
+                return $templateCache.get('component/navigation_menu.html')
+            },
             controller: NavigationMenuController,
             controllerAs: '$ctrl'
         }
