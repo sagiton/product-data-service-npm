@@ -2,7 +2,7 @@
   "name": "product-data-service-npm",
   "version": "2.0.1-0",
   "description": "Product data service",
-  "main": "dist",
+  "main": "dist/js/pds.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "lite-server -c=bs-config.js"
