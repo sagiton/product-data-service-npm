@@ -16,8 +16,5 @@
             return config.pdsPathPrefix + '/' + path;
         }
 
-        function htmlPath(path) {
-            return config.pdsTemplatePath + '/' + path;
-        }
     }
 })(angular);

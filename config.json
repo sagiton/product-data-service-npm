@@ -1,13 +1,12 @@
 {
     "config": {
         "metaTags": {
-            "siteName": "Buderus"
+            "siteName": "BoschTT"
         },
         "urlSchema": {
             "trailingSlash": false
         },
-        "pdsPathPrefix": "/ocs",
-        "pdsTemplatePath": "/src/html",
+        "pdsPathPrefix": "/residential",
         "forceLanguage": null,
         "search": {
             "defaultImage": "default-search"
