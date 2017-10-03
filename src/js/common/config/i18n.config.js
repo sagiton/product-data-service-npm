@@ -5,7 +5,7 @@
             if (window.cmsTranslations) {
                 $translateProvider
                     .translations('this', window.cmsTranslations)
-                    .useSanitizeValueStrategy('sanitize')
+                    .useSanitizeValueStrategy('sanitizeParameters')
                     .preferredLanguage('this')
                     .use('this');
             }
