@@ -3,16 +3,18 @@
         .module('pds.catalog.service')
         .factory('SeoFriendlyUrlBuilder', SeoFriendlyUrlBuilderFactory);
 
-    SeoFriendlyUrlBuilderFactory.$inject = ['$window', '_', 'simplifyCharactersFilter', 'config'];
+    SeoFriendlyUrlBuilderFactory.$inject = ['$window', '_', 'simplifyCharactersFilter'];
 
     var fragmentSeparator = '-';
     var pathSeparator = '/';
+    var ocsBasePath = 'ocs';
 
-    function SeoFriendlyUrlBuilderFactory($window, _, simplifyCharactersFilter, config) {
+    function SeoFriendlyUrlBuilderFactory($window, _, simplifyCharactersFilter) {
         function SeoFriendlyUrlBuilder(options) {
-            this.path = buildBasePath();
+            options = options || {};
+            this.ocsBasePath = options.ocsBasePath || ocsBasePath;
+            this.path = this.buildBasePath();
             this.simplifyCharactersFilter = simplifyCharactersFilter;
-            this.options = options || {};
         }
 
         SeoFriendlyUrlBuilder.prototype.addPath = function(fragments) {
@@ -25,20 +27,20 @@
         };
 
         SeoFriendlyUrlBuilder.prototype.setPath = function (fragments) {
-            this.path = buildBasePath();
+            this.path = this.buildBasePath();
             this.addPath(fragments);
             return this;
         };
 
         SeoFriendlyUrlBuilder.prototype.build = function () {
-            return this.path + (config.urlSchema.trailingSlash ? '/' : '');
+            return this.path;
+        };
+
+        SeoFriendlyUrlBuilder.prototype.buildBasePath = function() {
+            return URI().origin() + $window.getBasePath() + pathSeparator + this.ocsBasePath;
         };
 
         return SeoFriendlyUrlBuilder;
-
-        function buildBasePath() {
-            return URI().origin() + $window.getBasePath() + config.pdsPathPrefix;
-        }
     }
 
 

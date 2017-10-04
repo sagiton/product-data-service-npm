@@ -3,12 +3,10 @@
         .module("pds.catalog.service")
         .service("CatalogService", CatalogService);
 
-    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'SeoFriendlyUrlBuilder', 'catalogSearchListener', '_', '$q', 'locale'];
+    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'CatalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale'];
 
-    function CatalogService($window, Catalog, menuService, SeoFriendlyUrlBuilder, catalogSearchListener, _, $q, locale) {
+    function CatalogService($window, Catalog, menuService, catalogUrlSchema, catalogSearchListener, _, $q, locale) {
         var self = this;
-        var productPrefix = 'p';
-        var categoryPrefix = 'c';
         var catalogTemplate;
 
         catalogSearchListener
@@ -145,19 +143,7 @@
         }
 
         function buildUri(tree) {
-            var builder = new SeoFriendlyUrlBuilder();
-            _.forEachRight(tree, function (node) {
-                var fragments = [node.name];
-                if (tree.indexOf(node) == 0) {
-                    fragments.push(node.id, categoryPrefix);
-                }
-                builder.addPath(fragments);
-
-                if (node.type == Catalog.fallbackType()) {
-                    builder.setPath([node.name, node.id, productPrefix]);
-                }
-            });
-            return builder.build();
+            return catalogUrlSchema.build(tree);
         }
 
         function resolveUriFromHierarchy(categoryId, locale) {
