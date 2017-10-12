@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`service: MenuService should return  menu 1`] = `
+Object {
+  "a": "h",
+  "maxNavigationItems": undefined,
+}
+`;
+
+exports[`service: MenuService should return menu 1`] = `
+Object {
+  "a": "h",
+  "maxNavigationItems": undefined,
+}
+`;

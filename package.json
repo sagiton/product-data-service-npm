@@ -4,8 +4,14 @@
   "description": "Product data service",
   "main": "dist/js/pds.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "serve": "lite-server -c=bs-config.js"
+  },
+  "jest": {
+    "roots": [
+      "src/js-tests"
+    ],
+    "setupTestFrameworkScriptFile": "./src/js-tests/jest.init.js"
   },
   "publishConfig": {
     "registry": "https://nexus.sagiton.pl/repository/npm-snapshot/"
@@ -17,6 +23,9 @@
   "author": "mateusz.rutski@sagiton.pl",
   "license": "private",
   "devDependencies": {
+    "angular-mocks": "^1.6.6",
+    "babel-jest": "^21.2.0",
+    "babel-preset-env": "^1.6.0",
     "bower-nexus3-resolver": "^1.0.2",
     "browser-sync": "^2.18.8",
     "connect-history-api-fallback": "^1.3.0",
@@ -39,6 +48,8 @@
     "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "^2.0.0",
     "http-proxy-middleware": "^0.17.3",
+    "jasmine": "^2.8.0",
+    "jest": "^21.2.1",
     "lite-server": "^2.2.2",
     "lodash": "^4.17.2",
     "main-bower-files": "^2.13.1",

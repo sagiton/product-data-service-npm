@@ -3,9 +3,9 @@
 		.module("pds.navigation.service")
 		.service("MenuService", MenuService);
 
-	MenuService.$inject = ['urlParserService', '_', 'Navigation', 'locale', '$q'];
+	MenuService.$inject = ['_', 'Navigation', 'locale'];
 
-	function MenuService(urlParserService, _, Navigation, locale, $q) {
+	function MenuService(_, Navigation, locale) {
         var NAVIGATION_TEMPLATE_NAME = 'CATALOG_HIERARCHY';
         var self = this;
         self.currentLocale = locale.toString();
