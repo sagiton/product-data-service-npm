@@ -4,14 +4,8 @@
   "description": "Product data service",
   "main": "dist/js/pds.min.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "serve": "lite-server -c=bs-config.js"
-  },
-  "jest": {
-    "roots": [
-      "src/js-tests"
-    ],
-    "setupTestFrameworkScriptFile": "./src/js-tests/jest.init.js"
   },
   "publishConfig": {
     "registry": "https://nexus.sagiton.pl/repository/npm-snapshot/"

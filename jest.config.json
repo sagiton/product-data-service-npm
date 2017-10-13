@@ -1,0 +1,7 @@
+{
+    "collectCoverageFrom": ["**/*.js", "!**/js-tests/**", "!**/node_modules/**", "!**/bower_components/**"],
+    "roots": ["src/js-tests"],
+    "setupTestFrameworkScriptFile": "./src/js-tests/jest.init.js",
+    "coverageDirectory": "./src/js-tests/coverage",
+    "coverageReporters": ["html"]
+}

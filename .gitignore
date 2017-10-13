@@ -7,3 +7,4 @@ src/js/env.js
 src/js/config.js
 src/js/templates.js
 dist
+src/js-tests/coverage
