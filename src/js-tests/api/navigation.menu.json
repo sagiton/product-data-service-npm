@@ -1,0 +1,308 @@
+{
+    "name" : "CATALOG_HIERARCHY",
+    "root": {
+        "id": "669445",
+        "children": [
+            {
+                "id": "669446",
+                "children": [
+                    {
+                        "id": "669447",
+                        "children": [],
+                        "name": "Heizkessel",
+                        "type": "LEAF_CATEGORY"
+                    },
+                    {
+                        "id": "669462",
+                        "children": [
+                            {
+                                "id": "669463",
+                                "children": [
+                                    {
+                                        "id": "1106916",
+                                        "name": "UT-L",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIMAT Heizkessel UT-L",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669464",
+                                "children": [
+                                    {
+                                        "id": "1106917",
+                                        "name": "UT-M",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIMAT Heißwasserkessel UT-M",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669465",
+                                "children": [
+                                    {
+                                        "id": "1106918",
+                                        "name": "UT-H",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIMAT Heißwasserkessel UT-H",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669466",
+                                "children": [
+                                    {
+                                        "id": "1106919",
+                                        "name": "UT-HZ",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIMAT Heißwasserkessel UT-HZ",
+                                "type": "PRODUCT_FAMILY"
+                            }
+                        ],
+                        "name": "Heißwasserkessel",
+                        "type": "LEAF_CATEGORY"
+                    },
+                    {
+                        "id": "669471",
+                        "children": [
+                            {
+                                "id": "669472",
+                                "children": [
+                                    {
+                                        "id": "1106758",
+                                        "name": "U-ND",
+                                        "type": "PRODUCT"
+                                    },
+                                    {
+                                        "id": "1106759",
+                                        "name": "U-HD",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIVERSAL Dampfkessel U-ND, U-HD",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669473",
+                                "children": [
+                                    {
+                                        "id": "1106911",
+                                        "name": "U-MB",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIVERSAL Dampfkessel U-MB",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669474",
+                                "children": [
+                                    {
+                                        "id": "1106913",
+                                        "name": "UL-SX",
+                                        "type": "PRODUCT"
+                                    },
+                                    {
+                                        "id": "1106912",
+                                        "name": "UL-S",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIVERSAL Dampfkessel UL-S, UL-SX",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669475",
+                                "children": [
+                                    {
+                                        "id": "1106914",
+                                        "name": "ZFR",
+                                        "type": "PRODUCT"
+                                    },
+                                    {
+                                        "id": "1106915",
+                                        "name": "ZFR-X",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIVERSAL Dampfkessel ZFR, ZFR-X",
+                                "type": "PRODUCT_FAMILY"
+                            }
+                        ],
+                        "name": "Dampfkessel",
+                        "type": "LEAF_CATEGORY"
+                    },
+                    {
+                        "id": "669480",
+                        "children": [
+                            {
+                                "id": "669481",
+                                "children": [
+                                    {
+                                        "id": "727826",
+                                        "name": "BHKW-Modul CHP CE 12 NA",
+                                        "type": "PRODUCT"
+                                    },
+                                    {
+                                        "id": "762957",
+                                        "name": "BHKW-Modul CHP CE 19-2 NA",
+                                        "type": "PRODUCT"
+                                    },
+                                    {
+                                        "id": "1106923",
+                                        "name": "CHP CE 50-400 NA",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "BHKW-Module",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669482",
+                                "children": [
+                                    {
+                                        "id": "1107093",
+                                        "name": "BHKW-Systeme",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "BHKW-Systeme",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669483",
+                                "children": [
+                                    {
+                                        "id": "1107094",
+                                        "name": "Druckluft-Wärme-Kraftwerk",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "Druckluft-Wärme-Kraftwerk",
+                                "type": "PRODUCT_FAMILY"
+                            }
+                        ],
+                        "name": "Blockheizkraftwerke",
+                        "type": "LEAF_CATEGORY"
+                    },
+                    {
+                        "id": "669484",
+                        "children": [
+                            {
+                                "id": "669517",
+                                "children": [
+                                    {
+                                        "id": "669518",
+                                        "children": [
+                                            {
+                                                "id": "1107117",
+                                                "name": "HHR // Hochtemperaturwärmepumpen und Kältemaschinen HHR",
+                                                "type": "PRODUCT"
+                                            }
+                                        ],
+                                        "name": "Hochtemperatur-Wärmepumpen und Kältemaschinen HHR",
+                                        "type": "PRODUCT_FAMILY"
+                                    }
+                                ],
+                                "name": "Großwärmepumpen",
+                                "type": "LEAF_CATEGORY"
+                            }
+                        ],
+                        "name": "Kühlung & Lüftung",
+                        "type": "CATEGORY"
+                    },
+                    {
+                        "id": "669519",
+                        "children": [
+                            {
+                                "id": "669520",
+                                "children": [
+                                    {
+                                        "id": "1107125",
+                                        "name": "Eigenbefeuerter Abhitzekessel",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "4-Zug Abhitzekessel",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669521",
+                                "children": [
+                                    {
+                                        "id": "1106924",
+                                        "name": "UNIVERSAL Abhitzedampfkessel HRSB",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "UNIVERSAL Abhitzedampfkessel",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669522",
+                                "children": [
+                                    {
+                                        "id": "1107126",
+                                        "name": "Abhitzekessel",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "Abhitzekessel",
+                                "type": "PRODUCT_FAMILY"
+                            },
+                            {
+                                "id": "669523",
+                                "children": [
+                                    {
+                                        "id": "1107127",
+                                        "name": "ORC-Systeme",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "ORC-Systeme",
+                                "type": "PRODUCT_FAMILY"
+                            }
+                        ],
+                        "name": "Abhitzesysteme",
+                        "type": "LEAF_CATEGORY"
+                    },
+                    {
+                        "id": "732005",
+                        "children": [
+                            {
+                                "id": "669460",
+                                "children": [
+                                    {
+                                        "id": "1107087",
+                                        "name": "Solarthermische Großanlagen",
+                                        "type": "PRODUCT"
+                                    }
+                                ],
+                                "name": "Solarthermische Großanlagen",
+                                "type": "PRODUCT_FAMILY"
+                            }
+                        ],
+                        "name": "Trinkwassererwärmung",
+                        "type": "LEAF_CATEGORY"
+                    },
+                    {
+                        "id": "669524",
+                        "children": [],
+                        "name": "Komponenten",
+                        "type": "CATEGORY"
+                    }
+                ],
+                "name": "Produkte",
+                "type": "CATEGORY"
+            }
+        ],
+        "name": "Commercial & Industrial",
+        "type": "ROOT_CATEGORY",
+        "maxNavigationItems": 6
+    }
+}

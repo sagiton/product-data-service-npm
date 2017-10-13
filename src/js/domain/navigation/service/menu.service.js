@@ -69,9 +69,12 @@
         }
 
         function findParentInNavigation(childId, locale) {
-            return _.find(self.flatNavigation[locale || self.currentLocale], function (val) {
-                return !!_.find(val.children, {id: childId});
-            });
+            return getFlatMenu(locale)
+                .then(function(flat) {
+                    return _.find(flat, function (val) {
+                        return !!_.find(val.children, {id: childId});
+                    });
+                })
         }
 	}
 
