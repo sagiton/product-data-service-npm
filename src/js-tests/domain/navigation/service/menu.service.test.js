@@ -1,6 +1,3 @@
-import 'angular-mocks'
-import '../../../../js/domain/navigation/service/menu.service'
-import '../../../../js/domain/catalog/service/url.parser.service'
 import * as _ from 'lodash'
 import ResourceWrapper from '../../../__mocks__/resource.mock'
 import {getMenu} from "../../../__mocks__/api.service.mock";
@@ -36,6 +33,7 @@ describe('service: MenuService', () => {
     })
 
     it('should find parent in navigation', async () => {
+        await MenuService.findInNavigation()
         const node = await MenuService.findParentInNavigation('1106917');
         const node2 = await MenuService.findParentInNavigation('669445');
         expect({node, node2}).toMatchSnapshot()

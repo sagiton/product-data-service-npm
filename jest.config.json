@@ -1,7 +1,8 @@
 {
-    "collectCoverageFrom": ["**/*.js", "!**/js-tests/**", "!**/node_modules/**", "!**/bower_components/**"],
-    "roots": ["src/js-tests"],
+    "roots": ["./src/js-tests"],
     "setupTestFrameworkScriptFile": "./src/js-tests/jest.init.js",
+
+    "collectCoverageFrom": ["**/*.js", "!**/js-tests/**", "!**/node_modules/**", "!**/bower_components/**"],
     "coverageDirectory": "./src/js-tests/coverage",
-    "coverageReporters": ["html"]
+    "coverageReporters": ["html", "text-summary"]
 }

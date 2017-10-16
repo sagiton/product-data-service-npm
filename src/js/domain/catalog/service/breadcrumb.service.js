@@ -14,37 +14,27 @@
 
         function build(categoryId) {
             templatePromise = templatePromise || CatalogService.getTemplate(categoryId, 'BREADCRUMBS')
-            
+
             return templatePromise
                 .then(decorateWithUrls)
                 .then(function (tree) {
-                    return _
-                        .chain(tree)
-                        .map(function (node) {
-                            return {
-                                id: node.id,
-                                name: node.name,
-                                url: node.url,
-                                type: node.type
-                            }
-                        })
-                        .value();
+                    return _.map(tree, function (node) {
+                        return _.pick(node, 'id', 'name', 'url', 'type')
+                    })
                 });
         }
 
         function decorateWithUrls(response) {
             var tree = response.nodes
-            return $q
-                .all(_.map(tree, function (node) {
-                    return CatalogService
-                        .resolveUriFromHierarchy(node.id)
-                        .then(function (url) {
-                            node.url = url;
-                        });
-                }))
-                .then(function () {
-                    return tree;
-                })
+            var promises = _.map(tree, function (node) {
+                return CatalogService
+                    .resolveUriFromHierarchy(node.id)
+                    .then(function (url) {
+                        node.url = url;
+                        return node
+                    });
+            })
+            return $q.all(promises)
         }
     }
 
