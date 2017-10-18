@@ -7,7 +7,7 @@
   "urlSchema": {
     "trailingSlash": false
   },
-  "pdsPathPrefix": "/ocs",
+  "pdsPathPrefix": "/residential",
   "forceLanguage": null,
   "search": {
     "defaultImage": "default-search"

@@ -20,7 +20,7 @@ describe('service: BreadcrumbService', () => {
         BreadcrumbService = $injector.get('BreadcrumbService')
     }));
 
-    it('should return menu', async () => {
+    it('should return breadcrumbs', async () => {
         spyOn(catalogService, 'getTemplate').and.returnValue(Promise.resolve({
             nodes: [
                 {

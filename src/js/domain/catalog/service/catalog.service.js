@@ -19,20 +19,13 @@
             });
 
         return {
-            getByTag: getByTag,
             getNewProducts: getNewProducts,
             getCatalogTemplate: getCatalogTemplate,
-            getById: getById,
             getTemplate: getTemplate,
-            getByIdAndType: getByIdAndType,
             redirectTo: navigateTo,
-            navigateTo: navigateTo,
-            travelUpHierarchy: travelUpHierarchy,
             travelUpNavigationHierarchy: travelUpNavigationHierarchy,
             getIdFromLocation: getIdFromLocation,
-            resolveUri: resolveUri,
             resolveUriFromHierarchy: resolveUriFromHierarchy,
-            getProductFamily: getProductFamily
         };
 
         function getByTag(type, tag) {

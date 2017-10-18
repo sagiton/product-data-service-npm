@@ -8,6 +8,8 @@ function ResourceMock(val) {
         static get(val) {
             return new Method()
         }
+
+        static $template() {}
     }
 
     class Method {
