@@ -10,7 +10,9 @@
         var categoryPrefix = 'c';
         var productDetailsType = 'product_details';
         var schemas = {
-            'comercial-e-industrial': industrialSchema //TODO Make this locale independent
+            'comercial-e-industrial': industrialSchema, //TODO Make this locale independent
+            'gewerbe-industrie': industrialSchema,
+            'commercial-industrial': industrialSchema
         };
 
         function getSiteChannel() {
