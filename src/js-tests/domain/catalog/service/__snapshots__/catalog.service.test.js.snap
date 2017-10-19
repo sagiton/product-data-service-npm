@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`service: CatalogService should travelUpNavigationHierarchy 1`] = `
+Array [
+  Object {
+    "id": "catalogId1",
+    "type": "catalogType1",
+  },
+  Object {
+    "id": "catalogId2",
+    "type": "catalogType2",
+  },
+]
+`;
