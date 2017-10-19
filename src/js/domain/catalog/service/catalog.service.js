@@ -12,7 +12,7 @@
         catalogSearchListener
             .listen()
             .then(function (params) {
-                return resolveUriFromHierarchy(params.target.resourceId);
+                return resolveUriFromHierarchy(params.target.resourceId, null, params.consumer);
             })
             .then(function (uri) {
                 $window.location.href = uri;
@@ -135,12 +135,15 @@
                 .then(buildUri);
         }
 
-        function buildUri(tree) {
-            return catalogUrlSchema.build(tree);
+        function buildUri(tree, channel) {
+            return catalogUrlSchema.build(tree, channel);
         }
 
-        function resolveUriFromHierarchy(categoryId, locale) {
-            return travelUpNavigationHierarchy(categoryId, locale).then(buildUri);
+        function resolveUriFromHierarchy(categoryId, locale, channel) {
+            return travelUpNavigationHierarchy(categoryId, locale)
+                .then(function(tree) {
+                    return buildUri(tree, channel)
+                });
         }
 
         function getIdFromLocation(uri) {

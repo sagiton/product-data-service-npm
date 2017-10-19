@@ -17,6 +17,7 @@
         self.suggest = _.throttle(suggest, 200);
         self.goTo = goTo;
         self.doSearch = doSearch;
+        self.searchPageUrl = angular.element('#header-search').attr('search-page-url') || 'search.html';
 
         //FIXME a hack to proceed to state `search` after entering search.html
         var path = $location.path();
@@ -38,7 +39,7 @@
 
         function doSearch($item) {
             if (!$item || $item.which === 13) {
-                $window.navigate('search.html?terms=' + self.quicksearch);
+                $window.navigate(self.searchPageUrl + '?terms=' + self.quicksearch);
             }
         }
     }
