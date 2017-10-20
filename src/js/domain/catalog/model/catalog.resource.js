@@ -36,9 +36,7 @@
                     method: 'GET',
                     params: {locale: locale},
                     cache: catalogCache,
-                    transformResponse: function (data, headers, status) {
-                        return toCatalogView(transformResponse(data, headers, status))
-                    }
+                    transformResponse: transformResponse
                 },
                 query: {
                     method: 'GET',
@@ -49,9 +47,7 @@
                 template: {
                     method: 'POST',
                     url: csUrl + 'rest/document/display',
-                    transformResponse: function (data, headers, status) {
-                        return toCatalogTemplateView(transformResponse(data, headers, status));
-                    }
+                    transformResponse: transformResponse
                 }
             }
         );
