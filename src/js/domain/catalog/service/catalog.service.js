@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
     angular
         .module("pds.catalog.service")
         .service("CatalogService", CatalogService);
@@ -6,7 +6,6 @@
     CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'CatalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale'];
 
     function CatalogService($window, Catalog, menuService, catalogUrlSchema, catalogSearchListener, _, $q, locale) {
-        var self = this;
         var catalogTemplate;
 
         catalogSearchListener
@@ -27,10 +26,6 @@
             getIdFromLocation: getIdFromLocation,
             resolveUriFromHierarchy: resolveUriFromHierarchy,
         };
-
-        function getByTag(type, tag) {
-            return Catalog.query({type: type, id: tag, queryType: 'tag'}).$promise;
-        }
 
         function getNewProducts() {
             var catalog = new Catalog({
@@ -82,10 +77,6 @@
             return angular.element('meta[name="ocs-channel"]').attr('content')
         }
 
-        function getByIdAndType(id, type) {
-            return Catalog.get({id: id, type: type}).$promise;
-        }
-
         function getTypeFromHierarchy(id) {
             return menuService
                 .findInNavigation(id)
@@ -115,7 +106,7 @@
                 .findInNavigation(categoryId, locale)
                 .then(function (item) {
                     var tree = [];
-                    while(item != null) {
+                    while (item != null) {
                         tree.push(item);
                         item = menuService.findParentInNavigation(item.id, locale);
                     }
@@ -132,17 +123,13 @@
 
         function resolveUri(categoryId) {
             return travelUpHierarchy(categoryId)
-                .then(buildUri);
-        }
-
-        function buildUri(tree, channel) {
-            return catalogUrlSchema.build(tree, channel);
+                .then(catalogUrlSchema.build);
         }
 
         function resolveUriFromHierarchy(categoryId, locale, channel) {
             return travelUpNavigationHierarchy(categoryId, locale)
-                .then(function(tree) {
-                    return buildUri(tree, channel)
+                .then(function (tree) {
+                    return catalogUrlSchema.build(tree, channel)
                 });
         }
 
@@ -152,21 +139,6 @@
             return parts[parts.length - 2];
         }
 
-        function getProductFamily(product) {
-            if (!product) {
-                return $q.resolve(null);
-            }
-            var elements = product.parentId.value.elements || [product.parentId.value];
-            return $q
-                .all(_.map(elements, function (parentId) {
-                    return menuService.findInNavigation(parentId) || {};
-                }))
-                .then(function (nodes) {
-                    return _.find(nodes, function (node) {
-                        return node.type === Catalog.fallbackType();
-                    });
-                });
-        }
     }
 
 })(angular);
