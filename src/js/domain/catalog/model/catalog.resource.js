@@ -15,12 +15,12 @@
                 return this;
             };
 
-            this.$get = ['$resource', '$cacheFactory', 'locale', '$http', '_', 'CatalogHelper', function ($resource, $cacheFactory, locale, $http, _, CatalogHelper) {
-                return new Catalog($resource, $cacheFactory, locale, pdsUrl, csUrl, $http, _, CatalogHelper);
+            this.$get = ['$resource', '$cacheFactory', 'locale', '$http', '_', function ($resource, $cacheFactory, locale, $http, _) {
+                return new Catalog($resource, $cacheFactory, locale, pdsUrl, csUrl, $http, _);
             }];
         });
 
-    function Catalog($resource, $cacheFactory, locale, pdsUrl, csUrl, $http, _, catalogHelper) {
+    function Catalog($resource, $cacheFactory, locale, pdsUrl, csUrl, $http, _) {
         var catalogCache = $cacheFactory("catalog");
         var customTransformations = [redirectChildren];
         var transformations = $http.defaults.transformResponse.concat(customTransformations);
@@ -61,14 +61,6 @@
                 return child.redirectCategory ? child.redirectCategory : child;
             });
             return data;
-        }
-
-        function toCatalogView(catalog) {
-            return catalogHelper.toView(catalog);
-        }
-
-        function toCatalogTemplateView(catalog) {
-            return catalogHelper.toTemplateView(catalog);
         }
 
         CatalogResource.prototype.isLeafCatalog = function () {
