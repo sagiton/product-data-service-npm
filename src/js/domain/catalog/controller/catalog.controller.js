@@ -59,7 +59,7 @@
 
         function isHeaderAttribute(products, attr) {
             return _.some(products, function (product) {
-                return product.header.key == attr.key;
+                return product.header && product.header.key == attr.key;
             });
         }
 

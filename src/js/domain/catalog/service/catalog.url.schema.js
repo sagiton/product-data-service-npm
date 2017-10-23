@@ -1,14 +1,14 @@
 (function (angular) {
     angular
         .module('pds.catalog.service')
-        .service('CatalogUrlSchema', CatalogUrlSchema);
+        .service('catalogUrlSchema', CatalogUrlSchema);
 
     CatalogUrlSchema.$inject = ['SeoFriendlyUrlBuilder', '_'];
 
     function CatalogUrlSchema(SeoFriendlyUrlBuilder, _) {
         var productPrefix = 'p';
         var categoryPrefix = 'c';
-        var productDetailsType = 'product_details';
+
         var schemas = {
             'comercial-e-industrial': industrialSchema, //TODO Make this locale independent
             'gewerbe-industrie': industrialSchema,
@@ -19,47 +19,47 @@
             return angular.element('meta[name="channel"]').attr('content') || '';
         }
 
-        this.build = function (tree) {
-            if (!_.size(tree)) {
+        this.build = function (catalogs) {
+            if (!_.size(catalogs)) {
                 return String();
             }
-            return getSchema(getSiteChannel())(tree);
+            return getSchema(getSiteChannel())(catalogs);
         };
 
         function getSchema(name) {
             return schemas[name] || residentialSchema;
         }
 
-        function industrialSchema(tree) {
+        function industrialSchema(catalogs) {
             var builder = new SeoFriendlyUrlBuilder({ocsBasePath: getSiteChannel() + '/ocs'});
-            _.forEachRight(tree, function (node, index) {
-                var fragments = [node.name];
-                if (index == 0) {
-                    fragments.push(node.id, categoryPrefix);
+            _.forEachRight(catalogs, function (catalog, index) {
+                var fragments = [catalog.name];
+                if (index === 0) {
+                    fragments.push(catalog.id, categoryPrefix);
                 }
                 builder.addPath(fragments);
 
-                if (node.type == productDetailsType) {
-                    builder.setPath([node.name, node.id, productPrefix]);
+                if (catalog.isProductFamily()) {
+                    builder.setPath([catalog.name, catalog.id, productPrefix]);
                 }
             });
             return builder.build();
         }
 
-        function residentialSchema(tree) {
+        function residentialSchema(catalogs) {
             var builder = new SeoFriendlyUrlBuilder();
-            _.forEachRight(tree, function (node, index) {
-                var fragments = [node.name];
-                if (index == 0) {
-                    fragments.push(node.id, categoryPrefix);
+            _.forEachRight(catalogs, function (catalog, index) {
+                var fragments = [catalog.name];
+                if (index === 0) {
+                    fragments.push(catalog.id, categoryPrefix);
                 }
-                if (index == tree.length - 1) {
+                if (index === catalogs.length - 1) {
                     fragments.unshift(getSiteChannel());
                 }
                 builder.addPath(fragments);
 
-                if (node.type == productDetailsType) {
-                    builder.setPath([node.name, node.id, productPrefix]);
+                if (catalog.isProductFamily()) {
+                    builder.setPath([catalog.name, catalog.id, productPrefix]);
                 }
             });
             return builder.build();

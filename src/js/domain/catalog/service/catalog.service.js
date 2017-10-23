@@ -3,7 +3,7 @@
         .module("pds.catalog.service")
         .service("CatalogService", CatalogService);
 
-    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'CatalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale'];
+    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'catalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale'];
 
     function CatalogService($window, Catalog, menuService, catalogUrlSchema, catalogSearchListener, _, $q, locale) {
         var catalogTemplate;
@@ -21,7 +21,7 @@
             getNewProducts: getNewProducts,
             getCatalogTemplate: getCatalogTemplate,
             getTemplate: getTemplate,
-            redirectTo: navigateTo,
+            redirectTo: redirectTo,
             travelUpNavigationHierarchy: travelUpNavigationHierarchy,
             getIdFromLocation: getIdFromLocation,
             resolveUriFromHierarchy: resolveUriFromHierarchy,
@@ -38,86 +38,80 @@
             return catalog.$template();
         }
 
-        function getById(categoryId) {
-            return getTypeFromHierarchy(categoryId)
-                .then(function (type) {
-                    return Catalog.get({
-                        id: categoryId,
-                        type: type,
-                        channel: getOCSChannel()
-                    }).$promise;
-                });
-        }
-
         function getCatalogTemplate(catalogId) {
             catalogTemplate = catalogTemplate || getTemplate(catalogId)
             return catalogTemplate
         }
 
         function getTemplate(catalogId, type) {
-            return getTypeFromHierarchy(catalogId)
-                .then(function (typeFromHierarchy) {
-                    var catalog = new Catalog({
-                        template: {name: type || typeFromHierarchy},
-                        model: {
-                            locale: locale.toString(),
+            return getCatalogFromHierarchy(catalogId)
+                .then(function (catalog) {
+                    catalog.template = {
+                        name: type || catalog.type
+                    }
+                    catalog.model = {
+                        locale: locale.toString(),
+                        channel: getOCSChannel(),
+                        catalogRequest: {
+                            id: catalogId,
                             channel: getOCSChannel(),
-                            catalogRequest: {
-                                id: catalogId,
-                                channel: getOCSChannel(),
-                                type: typeFromHierarchy
-                            }
+                            type: catalog.type
                         }
-                    });
+                    }
                     return catalog.$template();
                 });
         }
 
-        function getOCSChannel() {
-            return angular.element('meta[name="ocs-channel"]').attr('content')
-        }
-
-        function getTypeFromHierarchy(id) {
-            return menuService
-                .findInNavigation(id)
-                .then(function (catalog) {
-                    return catalog ? catalog.type : Catalog.fallbackType();
-                });
-        }
-
-        function travelUpHierarchy(categoryId, tree) {
-            tree = tree || [];
-            return getById(categoryId)
-                .then(function (data) {
-                    tree.push({
-                        id: data.id,
-                        type: data.type,
-                        name: data.name
-                    });
-                    if (data && data.parentId) {
-                        return travelUpHierarchy(data.parentId, tree);
-                    }
-                    return tree;
+        function redirectTo(id) {
+            return resolveUri(id)
+                .then(function (uri) {
+                    $window.location.href = uri;
                 });
         }
 
         function travelUpNavigationHierarchy(categoryId, locale) {
             return menuService
                 .findInNavigation(categoryId, locale)
-                .then(function (item) {
-                    var tree = [];
-                    while (item != null) {
-                        tree.push(item);
-                        item = menuService.findParentInNavigation(item.id, locale);
+                .then(function (catalog) {
+                    var catalogs = [];
+                    while (catalog !== null) {
+                        catalogs.push(catalog);
+                        catalog = menuService.findParentInNavigation(catalog.id, locale);
                     }
-                    return $q.all(tree);
+                    return $q.all(catalogs);
                 });
         }
 
-        function navigateTo(id) {
-            return resolveUri(id)
-                .then(function (uri) {
-                    $window.location.href = uri;
+        function getIdFromLocation(uri) {
+            uri = uri || new URI().toString();
+            var parts = uri.split('-');
+            return parts[parts.length - 2];
+        }
+
+        function resolveUriFromHierarchy(categoryId, locale, channel) {
+            return travelUpNavigationHierarchy(categoryId, locale)
+                .then(function (catalogs) {
+                    return catalogUrlSchema.build(catalogs, channel)
+                });
+        }
+
+        function getById(categoryId) {
+            return getCatalogFromHierarchy(categoryId)
+                .then(function (catalog) {
+                    catalog.channel = getOCSChannel()
+                    return catalog.get().$promise;
+                });
+        }
+
+        function travelUpHierarchy(categoryId) {
+            return getById(categoryId)
+                .then(function (catalog) {
+                    var catalogs = [];
+                    while (catalog !== null) {
+                        catalogs.push(catalog);
+                        catalog = getById(catalog.parentId, locale);
+                    }
+                    return $q.all(catalogs);
                 });
         }
 
@@ -126,17 +120,22 @@
                 .then(catalogUrlSchema.build);
         }
 
-        function resolveUriFromHierarchy(categoryId, locale, channel) {
-            return travelUpNavigationHierarchy(categoryId, locale)
-                .then(function (tree) {
-                    return catalogUrlSchema.build(tree, channel)
+
+        function getCatalogFromHierarchy(id) {
+            return menuService
+                .findInNavigation(id)
+                .then(function (catalog) {
+                    var params = !catalog ? null : {
+                        id: catalog.id,
+                        type: catalog.type,
+                        channel: getOCSChannel()
+                    }
+                    return new Catalog(params)
                 });
         }
 
-        function getIdFromLocation(uri) {
-            uri = uri || new URI().toString();
-            var parts = uri.split('-');
-            return parts[parts.length - 2];
+        function getOCSChannel() {
+            return angular.element('meta[name="ocs-channel"]').attr('content')
         }
 
     }

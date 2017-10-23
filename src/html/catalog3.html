@@ -121,10 +121,10 @@
     <div class="product-type text-primary">{{item.type}}</div>
     <div class="hl-3 product-name text-primary">{{item.title}}</div>
 
-    <ul class="product-benefits" ng-if="item.subtitle.length">
+    <ul class="product-benefits" ng-if="vm.isArray(item.subtitle)">
         <li ng-repeat="sub in item.subtitle">{{sub}}</li>
     </ul>
-    <div ng-if="!item.subtitle.length">{{item.subtitle}}</div>
+    <div ng-if="!vm.isArray(item.subtitle)">{{item.subtitle}}</div>
 
     <a class="link-more" ng-if="!item.detailsHidden" ocs-navigate="item.catalogId"><span translate="DETAILED_PRODUCT_DESCRIPTION"></span>&nbsp;{{item.title}}</a>
 </script>

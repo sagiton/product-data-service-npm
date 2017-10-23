@@ -60,23 +60,23 @@
         }
 
         CatalogResource.prototype.isLeafCatalog = function () {
-            return this.getType() == 'leaf_category';
+            return this.getType() === 'leaf_category';
         };
 
         CatalogResource.prototype.isProductFamily = function () {
-            return this.getType() == 'product_family';
+            return this.getType() === 'product_family';
         };
 
         CatalogResource.prototype.isSubCatalog = function () {
-            return this.getType() == 'sub_category';
+            return this.getType() === 'sub_category';
         };
 
         CatalogResource.prototype.isRootCatalog = function () {
-            return this.getType() == 'root_category';
+            return this.getType() === 'root_category';
         };
 
         CatalogResource.prototype.getType = function() {
-            return this.type ? this.type.value.toLowerCase() : String();
+            return this.type ? this.type.toLowerCase() : String();
         };
 
         CatalogResource.prototype.technicalDataTable = function () {
