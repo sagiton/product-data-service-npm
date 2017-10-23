@@ -5,11 +5,13 @@
 
     ImageUrlFilter.$inject = ['env', 'locale', 'ocsChannel'];
 
+    var rootSrc = '/_res/images/'
+
     var defaultImages = {
-        'img-sm': '/src/media/default-460x460.jpg',
-        'img-md': '/src/media/default-640x372.jpg',
-        'img-lg': '/src/media/default-680x440.jpg',
-        'img-xlg': '/src/media/default-1600x560.jpg'
+        'img-sm':  rootSrc + 'default-460x460.jpg',
+        'img-md':  rootSrc + 'default-640x372.jpg',
+        'img-lg':  rootSrc + 'default-680x440.jpg',
+        'img-xlg': rootSrc + 'default-1600x560.jpg'
     };
 
     function ImageUrlFilter(env, locale, ocsChannel) {

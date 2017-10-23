@@ -31,7 +31,7 @@
 </script>
 
 <script type="text/ng-template" id="section-TILES">
-<section class="section fs-four-column-media-teaser" ng-if="$section.items.length">
+<section class="section fs-four-column-media-teaser" ng-if="vm.isArray($section.items)">
     <div class="container-fluid">
         <div class="flex-row">
             <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
