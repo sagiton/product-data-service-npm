@@ -122,7 +122,7 @@
     <div class="hl-3 product-name text-primary">{{item.title}}</div>
 
     <ul class="product-benefits" ng-if="vm.isArray(item.subtitle)">
-        <li ng-repeat="sub in item.subtitle">{{sub}}</li>
+        <li ng-repeat="sub in item.subtitle track by $index" ng-if="sub">{{sub}}</li>
     </ul>
     <div ng-if="!vm.isArray(item.subtitle)">{{item.subtitle}}</div>
 
@@ -178,8 +178,8 @@
             </div>
             <div class="col-sm-offset-1 col-sm-8">
                 <!--TODO Style depending on consumer (checklist, bullets)-->
-                <ul class="technical-information-list" ng-if="$section.list">
-                    <li ng-repeat="info in $section.list">{{info}}</li>
+                <ul class="technical-information-list" ng-if="vm.isArray($section.list)">
+                    <li ng-repeat="info in $section.list track by $index" ng-if="info">{{info}}</li>
                 </ul>
                 <span ng-if="$section.description" ng-bind-html="$section.description"></span>
             </div>
@@ -206,7 +206,7 @@
                     <article class="panel-body article">
                         <p ng-if="!vm.isArray(item.description)" ng-bind-html="item.description"></p>
                         <ul ng-if="vm.isArray(item.description)">
-                            <li ng-repeat="el in item.description">{{el}}</li>
+                            <li ng-repeat="el in item.description track by $index" ng-if="el">{{el}}</li>
                         </ul>
                         <img ng-if="item.imageUrl" class="img-responsive img-widen m-b-1" ng-src="{{item.imageUrl | imageUrl}}"
                              alt="{{item.title}}" title="{{item.title}}" />
@@ -338,7 +338,7 @@
                         <li>{{$section.list}}</li>
                     </ol>
                     <ol class="footnote-ordered-list" ng-if="vm.isArray($section.list)">
-                        <li ng-repeat="item in $section.list">{{item}}</li>
+                        <li ng-repeat="item in $section.list track by $index" ng-if="item">{{item}}</li>
                     </ol>
                     <p class="footnote-paragraph" ng-if="$section.value">{{$section.value}}</p>
                     <p ng-if="$section.labels.system" class="footnote-paragraph" translate="ERP_SYSTEM_LABEL"></p>
