@@ -219,7 +219,7 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE_SLIDER">
-<section class="section fs-table-scrollable" full-width-table>
+<section section-technical-data-table="$section" class="section fs-table-scrollable" full-width-table>
     <div class="container-fluid">
         <h2 class="section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
         <div class="row scrollable-table-wrapper">
@@ -271,11 +271,11 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE">
-    <section class="section fs-table">
+    <section section-technical-data-table="$section" class="section fs-table">
         <div class="container-fluid">
             <h2 class="hl-2 section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
 
-            <table ocs-data-table="$section.products" odt-responsive-change="vm.responsiveChange($event, $table, $columns)"
+            <table ocs-data-table="$section.products" odt-responsive-change="$ctrl.responsiveChange($event, $table, $columns)"
                    ng-repeat="partition in $section.partitions" class="table js-data-table" data-ordering="false"
                    data-paging="false" data-searching="false" data-info="false" data-auto-width="false" data-responsive="true">
                 <thead>
@@ -299,7 +299,7 @@
 </script>
 
 <script type="text/ng-template" id="section-RELATED_PRODUCTS">
-<section class="section fs-three-column-media-teaser bg-pattern">
+<section class="section fs-three-column-media-teaser bg-pattern" ng-if="vm.isArray($section.products)">
     <div class="container-fluid">
         <h2 class="hl-2 section-title text-primary text-center">{{::$section.title}}</h2>
 

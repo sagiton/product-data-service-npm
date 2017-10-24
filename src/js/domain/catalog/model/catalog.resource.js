@@ -53,9 +53,11 @@
         );
 
         function redirectChildren(data, headers, status) {
-            data.children = _.map(data.children, function (child) {
-                return child.redirectCategory ? child.redirectCategory : child;
-            });
+            if(data && _.isArray(data.children)) {
+                data.children = _.map(data.children, function (child) {
+                    return child.redirectCategory ? child.redirectCategory : child;
+                });
+            }
             return data;
         }
 
@@ -77,12 +79,6 @@
 
         CatalogResource.prototype.getType = function() {
             return this.type ? this.type.toLowerCase() : String();
-        };
-
-        CatalogResource.prototype.technicalDataTable = function () {
-            var section = _.find(this.sections, {name: 'TECHNICAL_DATA_TABLE'})
-                       || _.find(this.sections, {name: 'TECHNICAL_DATA_TABLE_SLIDER'});
-            return section && section.params;
         };
 
         CatalogResource.fallbackType = function () {
