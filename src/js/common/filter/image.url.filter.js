@@ -5,7 +5,7 @@
 
     ImageUrlFilter.$inject = ['env', 'locale', 'ocsChannel'];
 
-    var rootSrc = '/_res/images/'
+    var rootSrc = '/media/images/'
 
     var defaultImages = {
         'img-sm':  rootSrc + 'default-460x460.jpg',
