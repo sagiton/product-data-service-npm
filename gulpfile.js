@@ -19,6 +19,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ngTemplates = require('gulp-ng-templates');
+var gulpif = require('gulp-if');
 
 var paths = {
     build: './',
@@ -62,7 +63,9 @@ function createDist(minify, filename) {
     return gulp
         .src(paths.scripts)
         .pipe(minify ? nop() : sourcemaps.init())
-        .pipe(minify ? (uglify().on('error', handleError)) : nop())
+        .pipe(minify
+            ? (gulpif('!./src/js/templates.js', uglify().on('error', handleError)))
+            : nop())
         .pipe(concat(filename))
         .pipe(minify ? concatUtil.header('/*! ' + pkg.name + ' - v' + pkg.version + ' - <%=new Date().toISOString()%> */ \n\n') : nop())
         .pipe(minify ? nop() : sourcemaps.write())

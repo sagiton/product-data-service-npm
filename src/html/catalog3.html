@@ -37,11 +37,11 @@
             <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
                 <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-md'}}" alt="{{tile.title}}" title="{{tile.title}}">
                 <div class="card-block" ng-if="tile.title" equalize-teaser-height>
-                    <div class="card-title hl-4">{{tile.title}}</div>
+                    <div class="card-title hl-5">{{tile.title}}</div>
                     <p class="card-text">{{tile.subtitle}}</p>
-                </div>
-                <div class="card-block-link">
-                    <span class="link-more" translate="MORE.DETAILS"></span>
+                    <div class="card-block-link">
+                        <span class="link-more" translate="MORE.DETAILS"></span>
+                    </div>
                 </div>
             </a>
         </div>
