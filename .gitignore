@@ -3,8 +3,8 @@
 node_modules
 _res/assets
 bower_components
-src/js/env.js
-src/js/config.js
+#src/js/env.js
+#src/js/config.js
 src/js/templates.js
-dist
+#dist
 src/js-tests/coverage
