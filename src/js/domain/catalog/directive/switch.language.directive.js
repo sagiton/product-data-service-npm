@@ -1,34 +1,43 @@
 (function (angular) {
     angular
         .module('pds.catalog.directive')
-        .directive('navLang', SwitchLanguage);
+        .directive('navLang', function() {
+            return {
+                restrict: 'EA',
+                controller: SwitchLanguageController
+            }
+        });
 
-    SwitchLanguage.$inject = ['urlParserService', 'CatalogService', 'locale', '$window'];
+    SwitchLanguageController.$inject = ['$element', 'urlParserService', 'CatalogService', 'locale', '$window', 'metaTag']
 
-    function SwitchLanguage(urlParserService, catalogService, locale, $window) {
-        return {
-            restrict: 'EAC',
-            controller: ['$scope', '$element', '$attrs', function (scope, element, attrs) {
-                if (urlParserService.isOCS()) {
-                    element
-                        .children('li')
-                        .each(function (index, el) {
-                            var link = angular.element(el).children('a');
-
-                            link.click(function (e) {
-                                e.preventDefault();
-                                var language = link.children('span').text().toLowerCase();
-                                var newLocale = locale.toString().replace(locale.language, language);
-                                catalogService
-                                    .resolveUriFromHierarchy(catalogService.getIdFromLocation(), newLocale)
-                                    .then(function (uri) {
-                                        $window.location.href = urlParserService.setLanguage(uri, language);
-                                    });
-                            });
-                        });
-                }
-            }]
+    function SwitchLanguageController(element, urlParserService, catalogService, locale, $window, metaTag) {
+        if (!urlParserService.isOCS()) {
+            return
         }
+
+        element
+            .children('li')
+            .each(function (index, el) {
+                var link = angular.element(el).children('a');
+                link.click(changeLanguage.bind(link));
+            });
+
+        function changeLanguage (event) {
+            event.preventDefault();
+
+            var $span = this.children('span')
+
+            var language = $span.text().toLowerCase();
+            var newLocale = locale.toString().replace(locale.language, language);
+            var ocsChannel = angular.element($span).attr('ocs-channel') || metaTag.getSiteChannel()
+
+            catalogService
+                .resolveUriFromHierarchy(catalogService.getIdFromLocation(), newLocale, ocsChannel)
+                .then(function (uri) {
+                    $window.location.href = urlParserService.setLanguage(uri, language);
+                });
+        }
+
     }
 
 })(angular);

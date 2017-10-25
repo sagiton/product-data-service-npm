@@ -16,9 +16,6 @@
         };
 
         this.build = function (catalogs) {
-            if (!_.size(catalogs)) {
-                return String();
-            }
             return getSchema(metaTag.getSiteChannel())(catalogs);
         };
 
