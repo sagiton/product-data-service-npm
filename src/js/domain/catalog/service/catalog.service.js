@@ -3,9 +3,9 @@
         .module("pds.catalog.service")
         .service("CatalogService", CatalogService);
 
-    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'catalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale'];
+    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'catalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale', 'metaTag'];
 
-    function CatalogService($window, Catalog, menuService, catalogUrlSchema, catalogSearchListener, _, $q, locale) {
+    function CatalogService($window, Catalog, menuService, catalogUrlSchema, catalogSearchListener, _, $q, locale, metaTag) {
         var catalogTemplate;
 
         catalogSearchListener
@@ -32,7 +32,7 @@
                 template: {name: 'NEW_PRODUCTS'},
                 model: {
                     locale: locale.toString(),
-                    channel: getOCSChannel()
+                    channel: metaTag.getSiteChannel()
                 }
             });
             return catalog.$template();
@@ -51,10 +51,10 @@
                     }
                     catalog.model = {
                         locale: locale.toString(),
-                        channel: getOCSChannel(),
+                        channel: metaTag.getSiteChannel(),
                         catalogRequest: {
                             id: catalogId,
-                            channel: getOCSChannel(),
+                            channel: metaTag.getSiteChannel(),
                             type: catalog.type
                         }
                     }
@@ -98,7 +98,7 @@
         function getById(categoryId) {
             return getCatalogFromHierarchy(categoryId)
                 .then(function (catalog) {
-                    catalog.channel = getOCSChannel()
+                    catalog.channel = metaTag.getSiteChannel()
                     return catalog.get().$promise;
                 });
         }
@@ -128,14 +128,10 @@
                     var params = !catalog ? null : {
                         id: catalog.id,
                         type: catalog.type,
-                        channel: getOCSChannel()
+                        channel: metaTag.getSiteChannel()
                     }
                     return new Catalog(params)
                 });
-        }
-
-        function getOCSChannel() {
-            return angular.element('meta[name="ocs-channel"]').attr('content')
         }
 
     }

@@ -14,7 +14,7 @@
             }],
             controller: 'CatalogController as vm',
             resolve: {
-                redirect: ['MetaService', function (metaService) {
+                redirect: ['metaService', function (metaService) {
                     return metaService.redirectOnInvalidUrl();
                 }]
             }

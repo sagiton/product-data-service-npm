@@ -4,16 +4,16 @@
         .module('pds.catalog.controller')
         .controller("CatalogController", CatalogController);
 
-    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_', 'MetaService', 'CatalogService'];
+    CatalogController.$inject = ['$scope', '$rootScope', 'urlParserService', '_', 'metaService', 'CatalogService'];
 
-    function CatalogController($scope, $rootScope, urlParserService, _, MetaService, CatalogService) {
+    function CatalogController($scope, $rootScope, urlParserService, _, metaService, CatalogService) {
         var vm = this;
 
         vm.catalogId = urlParserService.getCatalogId();
 
         vm.isArray = _.isArray;
 
-        MetaService.updateMetaByCategory(vm.catalogId);
+        metaService.updateMetaByCategory(vm.catalogId);
         $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});
 
         $scope.$on('pds.catalog.loaded', function (event, params) {

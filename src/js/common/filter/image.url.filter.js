@@ -3,7 +3,7 @@
         .module('pds.common.filter')
         .filter('imageUrl', ImageUrlFilter);
 
-    ImageUrlFilter.$inject = ['env', 'locale', 'ocsChannel'];
+    ImageUrlFilter.$inject = ['env', 'locale', 'metaTag'];
 
     var rootSrc = '/media/images/'
 
@@ -14,9 +14,10 @@
         'img-xlg': rootSrc + 'default-1600x560.jpg'
     };
 
-    function ImageUrlFilter(env, locale, ocsChannel) {
+    function ImageUrlFilter(env, locale, metaTag) {
         return function (mediaObject, size) {
-            return mediaObject ? env.endPoint.ocsMediaEndpoint + ocsChannel + "/" + locale.toString() + "/" + mediaObject : defaultImages[size || 'img-sm'];
+            return mediaObject ? env.endPoint.ocsMediaEndpoint + metaTag.getSiteChannel()
+                + "/" + locale.toString() + "/" + mediaObject : defaultImages[size || 'img-sm'];
         }
     }
 })(angular);

@@ -3,9 +3,9 @@
 		.module("pds.navigation.service")
 		.service("MenuService", MenuService);
 
-	MenuService.$inject = ['_', 'Navigation', 'locale', 'Catalog'];
+	MenuService.$inject = ['_', 'Navigation', 'locale', 'Catalog', 'metaTag'];
 
-	function MenuService(_, Navigation, locale, Catalog) {
+	function MenuService(_, Navigation, locale, Catalog, metaTag) {
         var NAVIGATION_TEMPLATE_NAME = 'CATALOG_HIERARCHY';
         var self = this;
         self.currentLocale = locale.toString();
@@ -19,11 +19,11 @@
             var nav = new Navigation({
                 template: {
                     name: NAVIGATION_TEMPLATE_NAME,
-                    channel: getOCSChannel()
+                    channel: metaTag.getSiteChannel()
                 },
                 model: {
                     locale: properLocale,
-                    channel: getOCSChannel()
+                    channel: metaTag.getSiteChannel()
                 }
             });
 			return Navigation
@@ -37,11 +37,6 @@
                     return res.root.children[0];
 				})
 		}
-
-
-        function getOCSChannel() {
-            return angular.element('meta[name="ocs-channel"]').attr('content')
-        }
 
 		function getFlatMenu(locale) {
             return getMenu(locale)

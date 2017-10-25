@@ -3,9 +3,9 @@
         .module('pds.catalog.service')
         .service('catalogUrlSchema', CatalogUrlSchema);
 
-    CatalogUrlSchema.$inject = ['SeoFriendlyUrlBuilder', '_'];
+    CatalogUrlSchema.$inject = ['SeoFriendlyUrlBuilder', 'metaTag', '_'];
 
-    function CatalogUrlSchema(SeoFriendlyUrlBuilder, _) {
+    function CatalogUrlSchema(SeoFriendlyUrlBuilder, metaTag, _) {
         var productPrefix = 'p';
         var categoryPrefix = 'c';
 
@@ -15,15 +15,11 @@
             'commercial-industrial': industrialSchema
         };
 
-        function getSiteChannel() {
-            return angular.element('meta[name="channel"]').attr('content') || '';
-        }
-
         this.build = function (catalogs) {
             if (!_.size(catalogs)) {
                 return String();
             }
-            return getSchema(getSiteChannel())(catalogs);
+            return getSchema(metaTag.getSiteChannel())(catalogs);
         };
 
         function getSchema(name) {
@@ -31,7 +27,7 @@
         }
 
         function industrialSchema(catalogs) {
-            var builder = new SeoFriendlyUrlBuilder({ocsBasePath: getSiteChannel() + '/ocs'});
+            var builder = new SeoFriendlyUrlBuilder({ocsBasePath: metaTag.getSiteChannel() + '/ocs'});
             _.forEachRight(catalogs, function (catalog, index) {
                 var fragments = [catalog.name];
                 if (index === 0) {
@@ -54,7 +50,7 @@
                     fragments.push(catalog.id, categoryPrefix);
                 }
                 if (index === catalogs.length - 1) {
-                    fragments.unshift(getSiteChannel());
+                    fragments.unshift(metaTag.getSiteChannel());
                 }
                 builder.addPath(fragments);
 

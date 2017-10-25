@@ -1,7 +1,7 @@
 (function (angular) {
     angular
         .module('pds.catalog.service')
-        .service('MetaService', MetaService);
+        .service('metaService', MetaService);
 
     MetaService.$inject = ['$rootScope', '$q', '$location', '$window', 'CatalogService', 'imageUrlFilter', 'config', 'urlParserService'];
 
