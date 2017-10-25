@@ -19,11 +19,11 @@
             var nav = new Navigation({
                 template: {
                     name: NAVIGATION_TEMPLATE_NAME,
-                    channel: metaTag.getSiteChannel()
+                    channel: metaTag.getOcsChannel()
                 },
                 model: {
                     locale: properLocale,
-                    channel: metaTag.getSiteChannel()
+                    channel: metaTag.getOcsChannel()
                 }
             });
 			return Navigation

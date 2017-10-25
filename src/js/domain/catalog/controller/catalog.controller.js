@@ -12,6 +12,7 @@
         vm.catalogId = urlParserService.getCatalogId();
 
         vm.isArray = _.isArray;
+        vm.hasAnyOfValues = hasAnyOfValues
 
         metaService.updateMetaByCategory(vm.catalogId);
         $rootScope.$broadcast('pds.breadcrumb.update', {catalogId: vm.catalogId});
@@ -39,6 +40,14 @@
 
             vm.catalog.energyEfficiency = vm.catalog.energyEfficiency || {};
             return catalog
+        }
+
+        function hasAnyOfValues(data, properties) {
+            return !!_(properties)
+                .filter(function(property) {
+                    return !_.isEmpty(_.get(data, property))
+                })
+                .value().length
         }
     }
 

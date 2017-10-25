@@ -16,7 +16,7 @@
 
     function ImageUrlFilter(env, locale, metaTag) {
         return function (mediaObject, size) {
-            return mediaObject ? env.endPoint.ocsMediaEndpoint + metaTag.getSiteChannel()
+            return mediaObject ? env.endPoint.ocsMediaEndpoint + metaTag.getOcsChannel()
                 + "/" + locale.toString() + "/" + mediaObject : defaultImages[size || 'img-sm'];
         }
     }

@@ -29,7 +29,7 @@
 
             var language = $span.text().toLowerCase();
             var newLocale = locale.toString().replace(locale.language, language);
-            var ocsChannel = angular.element($span).attr('ocs-channel') || metaTag.getSiteChannel()
+            var ocsChannel = angular.element($span).attr('ocs-channel') || metaTag.getOcsChannel()
 
             catalogService
                 .resolveUriFromHierarchy(catalogService.getIdFromLocation(), newLocale, ocsChannel)

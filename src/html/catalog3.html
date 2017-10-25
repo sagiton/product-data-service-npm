@@ -329,7 +329,7 @@
 </script>
 
 <script type="text/ng-template" id="section-FOOTNOTES">
-<section class="section">
+<section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">

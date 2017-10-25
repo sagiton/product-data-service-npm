@@ -8,15 +8,21 @@
     function MetaTag() {
 
         return {
-            getSiteChannel: getSiteChannel
+            getSiteChannel: getSiteChannel,
+            getOcsChannel: getOcsChannel
         };
 
         function getSiteChannel() {
-            return getMetaTagContentByName('meta[name="ocs-channel"]')
+            return getMetaTagContentByName('channel')
+        }
+
+        function getOcsChannel() {
+            return getMetaTagContentByName('ocs-channel')
         }
 
         function getMetaTagContentByName(name) {
-            return angular.element(name).attr('content') || ''
+            var metaName = 'meta[name="' + name + '"]'
+            return angular.element(metaName).attr('content') || ''
         }
 
     }
