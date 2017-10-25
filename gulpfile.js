@@ -55,7 +55,7 @@ gulp.task('scripts-concat-only', function () {
     return createDist(false, 'pds.js');
 });
 
-gulp.task('scripts', ['ng-config'], function() {
+gulp.task('scripts', ['ng-config', 'templates'], function() {
     return createDist(!argv.env || (argv.env == 'prd'), 'pds.min.js');
 });
 
@@ -159,11 +159,11 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('build', function (callback) {
-    runSequence('clean', ['vendor', 'templates', 'scripts-concat-only', 'scripts', 'css'])
+    runSequence('clean', ['vendor', 'scripts-concat-only', 'scripts', 'css'])
 });
 
 gulp.task('build-without-vendor', function (callback) {
-    runSequence('clean', ['templates', 'scripts-concat-only', 'scripts', 'css'])
+    runSequence('clean', ['scripts-concat-only', 'scripts', 'css'])
 })
 
 gulp.task('bump', function () {
