@@ -2,28 +2,22 @@
     angular
         .module('pds.catalog.model')
         .provider('Catalog', function CatalogProvider() {
-            var pdsUrl = null;
             var csUrl = null;
-
-            this.productDataServiceEndPoint = function (value) {
-                pdsUrl = value;
-                return this;
-            };
 
             this.contentServiceEndPoint = function (value) {
                 csUrl = value;
                 return this;
             };
 
-            this.$get = ['$resource', '$cacheFactory', 'locale', '$http', '_', function ($resource, $cacheFactory, locale, $http, _) {
-                return new Catalog($resource, $cacheFactory, locale, pdsUrl, csUrl, $http, _);
+            this.$get = ['$resource', '$http', '_', function ($resource, $http, _) {
+                return new Catalog($resource, $http, _, csUrl);
             }];
         });
 
-    function Catalog($resource, $cacheFactory, locale, pdsUrl, csUrl, $http, _) {
-        var catalogCache = $cacheFactory("catalog");
-        var customTransformations = [redirectChildren];
+    function Catalog($resource, $http, _, csUrl) {
+        var customTransformations = [redirectChildren]
         var transformations = $http.defaults.transformResponse.concat(customTransformations);
+
         var transformResponse = function (data, headers, status) {
             var result = data;
             _.each(transformations, function (t) {
@@ -31,22 +25,10 @@
             });
             return result;
         };
-        var CatalogResource = $resource(pdsUrl + 'hierarchy/:channel/:locale/:type/:id', null, {
-                get: {
-                    method: 'GET',
-                    params: {locale: locale},
-                    cache: catalogCache,
-                    transformResponse: transformResponse
-                },
-                query: {
-                    method: 'GET',
-                    isArray: true,
-                    params: {locale: locale},
-                    cache: catalogCache
-                },
+
+        var CatalogResource = $resource(csUrl + 'rest/document/display', null, {
                 template: {
                     method: 'POST',
-                    url: csUrl + 'rest/document/display',
                     transformResponse: transformResponse
                 }
             }

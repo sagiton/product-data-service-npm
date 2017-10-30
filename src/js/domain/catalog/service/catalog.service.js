@@ -39,31 +39,29 @@
         }
 
         function getCatalogTemplate(catalogId) {
-            catalogTemplate = catalogTemplate || getTemplate(catalogId)
-            return catalogTemplate
+            return catalogTemplate = catalogTemplate || getTemplate(catalogId)
         }
 
         function getTemplate(catalogId, type) {
             return menuService.findInNavigation(catalogId)
-                .then(function (catalog) {
-                    catalog.template = {
-                        name: type || catalog.type
-                    }
-                    catalog.model = {
-                        locale: locale.toString(),
-                        channel: metaTag.getOcsChannel(),
-                        catalogRequest: {
-                            id: catalogId,
+                .then(function (data) {
+                    return new Catalog({
+                        template: {name: type || data.type},
+                        model: {
+                            locale: locale.toString(),
                             channel: metaTag.getOcsChannel(),
-                            type: catalog.type
+                            catalogRequest: {
+                                id: catalogId,
+                                channel: metaTag.getOcsChannel(),
+                                type: data.type
+                            }
                         }
-                    }
-                    return catalog.$template();
+                    }).$template()
                 });
         }
 
         function redirectTo(id) {
-            return resolveUri(id)
+            return resolveUriFromHierarchy(id)
                 .then(function (uri) {
                     $window.location.href = uri;
                 });
@@ -93,31 +91,6 @@
                 .then(function (catalogs) {
                     return catalogUrlSchema.build(catalogs, channel)
                 });
-        }
-
-        function getById(categoryId) {
-            return menuService.findInNavigation(categoryId)
-                .then(function (catalog) {
-                    catalog.channel = metaTag.getOcsChannel()
-                    return catalog.$get().$promise;
-                });
-        }
-
-        function travelUpHierarchy(categoryId) {
-            return getById(categoryId)
-                .then(function (catalog) {
-                    var catalogs = [];
-                    while (catalog != null) {
-                        catalogs.push(catalog);
-                        catalog = getById(catalog.parentId, locale);
-                    }
-                    return $q.all(catalogs);
-                });
-        }
-
-        function resolveUri(categoryId) {
-            return travelUpHierarchy(categoryId)
-                .then(catalogUrlSchema.build);
         }
 
     }

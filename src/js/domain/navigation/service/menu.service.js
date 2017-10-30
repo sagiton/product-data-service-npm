@@ -6,16 +6,18 @@
 	MenuService.$inject = ['_', 'Navigation', 'locale', 'Catalog', 'metaTag'];
 
 	function MenuService(_, Navigation, locale, Catalog, metaTag) {
-        var NAVIGATION_TEMPLATE_NAME = 'CATALOG_HIERARCHY';
         var self = this;
-        self.currentLocale = locale.toString();
+        var NAVIGATION_TEMPLATE_NAME = 'CATALOG_HIERARCHY';
+
+        self.locale = locale.toString();
         self.flatNavigation = {};
+
         self.getMenu = getMenu;
         self.findInNavigation = findInNavigation;
         self.findParentInNavigation = findParentInNavigation;
 
 		function getMenu(locale) {
-            var properLocale = locale || self.currentLocale;
+            var properLocale = locale || self.locale;
             var nav = new Navigation({
                 template: {
                     name: NAVIGATION_TEMPLATE_NAME,
@@ -41,19 +43,22 @@
 		function getFlatMenu(locale) {
             return getMenu(locale)
                 .then(function (menu) {
-                    locale = locale || self.currentLocale;
+                    locale = locale || self.locale;
                     self.flatNavigation[locale] = self.flatNavigation[locale] || flatMenu(menu);
                     return self.flatNavigation[locale];
                 })
         }
 
-        function flatMenu(menu, flat) {
-            flat = flat || [];
-            flat.push(menu);
-            _.each(menu.children, function (item) {
-                flatMenu(item, flat);
-            });
-            return flat;
+        function flatMenu(menu) {
+		    var children = _.get(menu, 'children')
+            return children && children.reduce(function(acc, elem) {
+                acc.concat(elem)
+                if (!_.isEmpty(elem.children)) {
+                    acc = acc.concat(flatMenu(elem));
+                    elem.children= []
+                }
+                return acc
+            }, [menu])
         }
 
         function findInNavigation(id, locale) {
@@ -65,7 +70,7 @@
         }
 
         function findParentInNavigation(childId, locale) {
-            var params = _.find(self.flatNavigation[locale || self.currentLocale], function (val) {
+            var params = _.find(self.flatNavigation[locale || self.locale], function (val) {
                 return !!_.find(val.children, {id: childId});
             });
             return params ? new Catalog(params) : null

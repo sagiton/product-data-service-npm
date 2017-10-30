@@ -7,7 +7,6 @@
 
     function CatalogConfig(env, catalogModelProvider) {
         catalogModelProvider
-            .productDataServiceEndPoint(env.endPoint.productDataService)
             .contentServiceEndPoint(env.endPoint.contentService);
     }
 
