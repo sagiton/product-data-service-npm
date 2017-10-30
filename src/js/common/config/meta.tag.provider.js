@@ -9,7 +9,8 @@
 
         return {
             getSiteChannel: getSiteChannel,
-            getOcsChannel: getOcsChannel
+            getOcsChannel: getOcsChannel,
+            getOcsLocale: getOcsLocale
         };
 
         function getSiteChannel() {
@@ -18,6 +19,10 @@
 
         function getOcsChannel() {
             return getMetaTagContentByName('ocs-channel')
+        }
+
+        function getOcsLocale() {
+            return getMetaTagContentByName('ocs-locale')
         }
 
         function getMetaTagContentByName(name) {
