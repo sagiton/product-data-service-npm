@@ -3,9 +3,9 @@
 		.module("pds.navigation.service")
 		.service("MenuService", MenuService);
 
-	MenuService.$inject = ['_', 'Navigation', 'locale', 'Catalog', 'metaTag'];
+	MenuService.$inject = ['_', 'Navigation', 'locale', 'metaTag'];
 
-	function MenuService(_, Navigation, locale, Catalog, metaTag) {
+	function MenuService(_, Navigation, locale, metaTag) {
         var self = this;
         var NAVIGATION_TEMPLATE_NAME = 'CATALOG_HIERARCHY';
 
@@ -64,16 +64,14 @@
         function findInNavigation(id, locale) {
             return getFlatMenu(locale)
                 .then(function(flat) {
-                    var params = _.find(flat, {id: String(id)});
-                    return params ? new Catalog(params) : null
+                    return _.find(flat, {id: String(id)})
                 });
         }
 
         function findParentInNavigation(childId, locale) {
-            var params = _.find(self.flatNavigation[locale || self.locale], function (val) {
+            return _.find(self.flatNavigation[locale || self.locale], function (val) {
                 return !!_.find(val.children, {id: childId});
             });
-            return params ? new Catalog(params) : null
         }
 	}
 

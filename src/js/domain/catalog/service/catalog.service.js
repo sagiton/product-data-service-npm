@@ -70,11 +70,11 @@
         function travelUpNavigationHierarchy(categoryId, locale) {
             return menuService
                 .findInNavigation(categoryId, locale)
-                .then(function (catalog) {
+                .then(function (data) {
                     var catalogs = [];
-                    while (catalog != null) {
-                        catalogs.push(catalog);
-                        catalog = menuService.findParentInNavigation(catalog.id, locale);
+                    while (data != null) {
+                        catalogs.push(new Catalog(data));
+                        data = menuService.findParentInNavigation(data.id, locale);
                     }
                     return $q.all(catalogs);
                 });
