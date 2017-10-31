@@ -1,5 +1,5 @@
 <span class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
-<a ocs-navigate="$ctrl.menu.id" ng-bind="$ctrl.menu.name">Produkte</a>
+<a ocs-navigate="$ctrl.menu.id" ng-bind="$ctrl.menu.name"></a>
 <ul simple-submenu
     class="nav submenu"
     ng-if="$ctrl.menu.children.length"
@@ -15,5 +15,7 @@
             ng-init="subLevel = lvl.children"
             ng-include="'nav-level'"></ul>
     </li>
-    <li><a ng-if="limitedLevel.length < subLevel.length" ocs-navigate="$parent.lvl.id" class="btn btn-show hidden-xs hidden-sm no-animate">Alles anzeigen</a></li>
+    <li><a ng-if="limitedLevel.length < subLevel.length" ocs-navigate="$ctrl.menu.id" class="btn btn-show hidden-xs hidden-sm no-animate">
+        <span translate="NAVIGATION_MENU.SHOW_ALL"></span>
+    </a></li>
 </script>
