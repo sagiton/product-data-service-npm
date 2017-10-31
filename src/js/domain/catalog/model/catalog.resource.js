@@ -67,6 +67,11 @@
             return 'PRODUCT_FAMILY';
         };
 
+        CatalogResource.prototype.getParameter = function (section, parameter) {
+            var params = (_.find(this.sections, {name: section}) || {}).params
+            return _.get(params, parameter)
+        }
+
         return CatalogResource;
     }
 

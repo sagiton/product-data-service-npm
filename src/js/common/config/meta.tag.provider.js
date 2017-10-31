@@ -10,7 +10,8 @@
         return {
             getSiteChannel: getSiteChannel,
             getOcsChannel: getOcsChannel,
-            getOcsLocale: getOcsLocale
+            getOcsLocale: getOcsLocale,
+            addMeta: addMeta
         };
 
         function getSiteChannel() {
@@ -27,7 +28,21 @@
 
         function getMetaTagContentByName(name) {
             var metaName = 'meta[name="' + name + '"]'
-            return angular.element(metaName).attr('content') || ''
+            return angular
+                .element(metaName)
+                .attr('content') || ''
+        }
+
+        function addMeta(name, content) {
+            angular
+                .element('meta[name="' + name + '"')
+                .remove();
+
+            angular
+                .element('<meta>')
+                .attr('name', name)
+                .attr('content', content)
+                .appendTo('head');
         }
 
     }

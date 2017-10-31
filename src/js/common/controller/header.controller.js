@@ -3,12 +3,14 @@
         .module('pds.common.controller')
         .controller('headerController', HeaderController);
 
-    HeaderController.$inject = ['$scope', '$location', 'locale', 'config', 'jsonFilter', '_', 'BreadcrumbService'];
+    HeaderController.$inject = ['$scope', '$location', 'locale', 'config', 'jsonFilter', '_', 'breadcrumbService', 'metaTag'];
+
     var contentGroups = ['WT.cg_n', 'WT.cg_s', 'WT.z_cg3', 'WT.z_cg4', 'WT.z_cg5', 'WT.z_cg6', 'WT.z_cg7', 'WT.z_cg8', 'WT.z_cg9', 'WT.z_cg10'];
 
-    function HeaderController($scope, $location, locale, config, jsonFilter, _, BreadcrumbService) {
-        var rootContentGroup = {name: config.metaTags.siteName};
+    function HeaderController($scope, $location, locale, config, jsonFilter, _, breadcrumbService, metaTag) {
         var vm = this;
+        var rootContentGroup = {name: config.metaTags.siteName};
+
         vm.url = $location.absUrl();
         vm.locale = locale.toString();
         vm.brand = config.metaTags.brand;
@@ -37,7 +39,7 @@
 
         //FIXME
         $scope.$on('pds.breadcrumb.update', function (event, params) {
-            BreadcrumbService
+            breadcrumbService
                 .build(params.catalogId)
                 .then(function (breadcrumbs) {
                     buildJsonLD({
@@ -70,21 +72,10 @@
         function buildContentGroups(tree) {
             tree.unshift(rootContentGroup);
             _.forEach(tree, function (element, idx) {
-                addMeta(contentGroups[idx], element.name);
+                metaTag.addMeta(contentGroups[idx], element.name);
             });
         }
 
-
-        function addMeta(name, content) {
-            angular
-                .element('meta[name="' + name + '"')
-                .remove();
-            angular
-                .element('<meta>')
-                .attr('name', name)
-                .attr('content', content)
-                .appendTo('head');
-        }
     }
 
 })(angular);

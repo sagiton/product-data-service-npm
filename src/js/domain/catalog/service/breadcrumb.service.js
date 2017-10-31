@@ -1,7 +1,7 @@
 (function(angular) {
     angular
         .module("pds.catalog.service")
-        .service("BreadcrumbService", BreadcrumbService);
+        .service("breadcrumbService", BreadcrumbService);
 
     BreadcrumbService.$inject = ['CatalogService', '_', '$q'];
 
@@ -9,19 +9,18 @@
         var templatePromise
 
         return {
+            getData: getData,
             build: build
         };
 
-        function build(categoryId) {
-            templatePromise = templatePromise || CatalogService.getTemplate(categoryId, 'BREADCRUMBS')
+        function getData(categoryId) {
+            return templatePromise = templatePromise || CatalogService.getTemplate(categoryId, 'BREADCRUMBS')
+        }
 
-            return templatePromise
+        function build(categoryId) {
+            return getData(categoryId)
                 .then(decorateWithUrls)
-                .then(function (tree) {
-                    return _.map(tree, function (node) {
-                        return _.pick(node, 'id', 'name', 'url', 'type')
-                    })
-                });
+                .then(mapData);
         }
 
         function decorateWithUrls(response) {
@@ -35,6 +34,12 @@
                     });
             })
             return $q.all(promises)
+        }
+
+        function mapData(tree) {
+            return _.map(tree, function (node) {
+                return _.pick(node, 'id', 'name', 'url', 'type')
+            })
         }
     }
 

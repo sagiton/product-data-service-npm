@@ -7,6 +7,7 @@
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
             'https://services.kittelberger.net/**',
+            'https://services-rvw.kittelberger.net/**',
             'https://dev02.sagiton.pl/**',
             'http://localhost:8080/**',
             'https://mycliplister.com/**'
