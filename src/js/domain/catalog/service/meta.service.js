@@ -38,14 +38,16 @@
             var headerTitle = _.map(tree, 'name')
             headerTitle.push(config.metaTags.siteName)
 
-            var image = currentNode.getParameter('PRODUCT_HEADER', 'productImgUrl') || currentNode.getParameter('KEYVISUAL', 'backgroundImgUrl')
-            var seoMetaText = currentNode.getParameter('SEO_TEXT', 'seoText')
-            var description = currentNode.getParameter('CATEGORY_DESCRIPTION', 'text')
-            var descriptionShort = currentNode.getParameter('PRODUCT_HEADER', 'subtitle')
+            var image = currentNode.getParameter('PRODUCT_HEADER', 'productImgUrl')
+                    || currentNode.getParameter('KEYVISUAL', 'backgroundImgUrl')
+
+            var description = currentNode.getParameter('SEO_TEXT', 'seoText')
+                    || currentNode.getParameter('CATEGORY_DESCRIPTION', 'text')
+                    || currentNode.getParameter('PRODUCT_HEADER', 'subtitle')
 
             var params = {
                 title: headerTitle.join(TITLE_DELIMITER),
-                description: seoMetaText || description || descriptionShort,
+                description: description,
                 image: image ? imageUrlFilter(image) : undefined,
                 siteName: config.metaTags.siteName,
                 webTrends: {
