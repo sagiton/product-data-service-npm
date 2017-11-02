@@ -18,12 +18,7 @@
         vm.language = locale.language;
 
         $scope.$on('pds.header.update', function (event, params) {
-            vm.title = params.title;
-            vm.description = params.description;
-            vm.image = params.image;
-            vm.webTrends = params.webTrends;
-            vm.siteName = params.siteName;
-            vm.canonicalUrl = params.canonicalUrl;
+            _.assign(vm, params)
         });
 
         $scope.$on('pds.header.update', function (event, params) {

@@ -38,7 +38,7 @@
             var headerTitle = _.map(tree, 'name')
             headerTitle.push(config.metaTags.siteName)
 
-            var image = currentNode.getParameter('KEYVISUAL', 'backgroundImgUrl')
+            var image = currentNode.getParameter('PRODUCT_HEADER', 'productImgUrl') || currentNode.getParameter('KEYVISUAL', 'backgroundImgUrl')
             var seoMetaText = currentNode.getParameter('SEO_TEXT', 'seoText')
             var description = currentNode.getParameter('CATEGORY_DESCRIPTION', 'text')
             var descriptionShort = currentNode.getParameter('PRODUCT_HEADER', 'subtitle')
