@@ -5,8 +5,11 @@
             template:  ['$templateCache', function($templateCache) {
                 return $templateCache.get('component/quick_search.html')
             }],
-            transclude: true,
-            controller: ocsQuickSearchController
+            controller: ocsQuickSearchController,
+            bindings: {
+                searchPageUrl: '<'
+            },
+            transclude: true
         });
 
     ocsQuickSearchController.$inject = ['_', '$location', '$state', '$rootScope', 'SearchService', '$window'];
@@ -17,7 +20,10 @@
         self.suggest = _.throttle(suggest, 200);
         self.goTo = goTo;
         self.doSearch = doSearch;
-        self.searchPageUrl = angular.element('#header-search').attr('search-page-url') || 'search.html';
+
+        self.$onInit = function() {
+            self.searchPageUrl = self.searchPageUrl || angular.element('#header-search').attr('search-page-url') || 'search.html';
+        };
 
         //FIXME a hack to proceed to state `search` after entering search.html
         var path = $location.path();
