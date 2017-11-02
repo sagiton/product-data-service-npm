@@ -3,15 +3,16 @@
         .module('pds.common.config')
         .factory('metaTag', MetaTag);
 
-    MetaTag.$inject = [];
+    MetaTag.$inject = ['jsonFilter'];
 
-    function MetaTag() {
+    function MetaTag(jsonFilter) {
 
         return {
             getSiteChannel: getSiteChannel,
             getOcsChannel: getOcsChannel,
             getOcsLocale: getOcsLocale,
-            addMeta: addMeta
+            addMeta: addMeta,
+            addJsonLD: addJsonLD
         };
 
         function getSiteChannel() {
@@ -42,6 +43,14 @@
                 .element('<meta>')
                 .attr('name', name)
                 .attr('content', content)
+                .appendTo('head');
+        }
+
+        function addJsonLD(model) {
+            angular
+                .element('<script>')
+                .attr('type', 'application/ld+json')
+                .text(jsonFilter(model))
                 .appendTo('head');
         }
 

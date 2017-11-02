@@ -34,8 +34,9 @@
         function initCatalog(catalog) {
             vm.catalog = catalog;
 
-            if (_.get(vm.catalog, 'redirectCategory.id')) {
-                return CatalogService.redirectTo(vm.catalog.redirectCategory.id);
+            var redirectDestination = _.get(vm.catalog, 'redirectCategory.id')
+            if (redirectDestination) {
+                return CatalogService.redirectTo(redirectDestination);
             }
 
             vm.catalog.energyEfficiency = vm.catalog.energyEfficiency || {};
