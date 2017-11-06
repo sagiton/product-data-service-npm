@@ -48,21 +48,8 @@
     <link rel="stylesheet" href="/src/test/project/boschtt/css/fonts.min.css">
     <link rel="stylesheet" href="/src/test/project/boschtt/css/brand/bosch-tt.css">
 </head>
-
 <body class="ocs">
 <div id="page" class="clearfix">
-    <section id="cookielaw">
-        <div class="container">
-            <div class="row">
-                <button type="button" id="cookie-close" class="btn icon-close"></button>
-                <div class="col-md-8">
-                    <h5 class="hl-5">Wichtige Cookie Informationen</h5>
-                    <p>Wir benutzen auf unserer Webseite Cookies, um ihnen eine komfortable Benutzung zu gewährleisten. Mit der Nutzung unserer Dienste erklären Sie sich damit einverstanden, dass wir Cookies verwenden. Erfahren Sie mehr über Cookies in unseren <a href="http://www.bosch.com/imprint/en/imprints.php" class="link-inline">Datenschutzbestimmungen</a>.</p>
-                </div>
-                <span id="cookie-accept" class="btn btn-white">Akzeptieren</span>
-            </div>
-        </div>
-    </section>
 
     <header id="header">
         <div id="header-top" class="container-fluid">
@@ -161,12 +148,7 @@
         </nav>
     </header>
 
-    <div id="content" ng-controller="ContentController as vm">
-        <ui-view ng-hide="vm.isSpinning()" class="fade-in"></ui-view>
-        <div class="loading-spinner" ng-show="vm.isSpinning()">
-            <img src="/media/images/ajax-loader.gif" class="spinner">
-        </div>
-    </div>
+    <ocs-search></ocs-search>
 
     <footer id="footer">
         <div id="social-media-footer">
@@ -288,11 +270,8 @@
         </nav>
         <!-- END #nav-footer -->
     </footer>
+</div>
 
-</div><!-- END #page -->
-
-<span id="js-detect-xs" class="hidden-xs sr-only"></span>
-<span id="js-detect-sm" class="hidden-sm sr-only"></span>
 <script type="text/javascript">
     window.cmsTranslations = {
         "MOBILE_NAVIGATION_BACK": "Zurück",
@@ -327,4 +306,3 @@
 <script type="text/javascript" src="/dist/js/pds.min.js"></script>
 
 </body>
-</html>

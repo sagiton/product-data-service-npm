@@ -7,14 +7,14 @@
             }],
             controller: ocsQuickSearchController,
             bindings: {
-                searchPageUrl: '<'
+                searchPageUrl: '@'
             },
             transclude: true
         });
 
-    ocsQuickSearchController.$inject = ['_', '$location', '$state', '$rootScope', 'SearchService', '$window'];
+    ocsQuickSearchController.$inject = ['_', '$rootScope', 'SearchService', '$window'];
 
-    function ocsQuickSearchController(_, $location, $state, $rootScope, SearchService, $window) {
+    function ocsQuickSearchController(_, $rootScope, SearchService, $window) {
         var self = this;
 
         self.suggest = _.throttle(suggest, 200);
@@ -24,12 +24,6 @@
         self.$onInit = function() {
             self.searchPageUrl = self.searchPageUrl || angular.element('#header-search').attr('search-page-url') || 'search.html';
         };
-
-        //FIXME a hack to proceed to state `search` after entering search.html
-        var path = $location.path();
-        if (path && path.indexOf('search.html') > -1 && !$state.is('search')) {
-            $state.go('search');
-        }
 
         function suggest() {
             return SearchService
