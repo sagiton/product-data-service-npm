@@ -36,7 +36,7 @@
             var tree = (_.get(data, '[0].nodes') || []).reverse()
             var currentNode = _.get(data, '[1]')
             var headerTitle = _.map(tree, 'name')
-            headerTitle.push(config.metaTags.siteName)
+            headerTitle.push($window.cmsTranslations.PAGE_TITLE)
 
             var image = currentNode.getParameter('PRODUCT_HEADER', 'productImgUrl')
                     || currentNode.getParameter('KEYVISUAL', 'backgroundImgUrl')
