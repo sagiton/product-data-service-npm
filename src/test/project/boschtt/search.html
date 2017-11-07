@@ -148,7 +148,12 @@
         </nav>
     </header>
 
-    <ocs-search></ocs-search>
+    <div id="content" ng-controller="ContentController as vm">
+        <ocs-search ng-hide="vm.isSpinning()" class="fade-in"></ocs-search>
+        <div class="loading-spinner" ng-show="vm.isSpinning()">
+            <img src="/media/images/ajax-loader.gif" class="spinner">
+        </div>
+    </div>
 
     <footer id="footer">
         <div id="social-media-footer">

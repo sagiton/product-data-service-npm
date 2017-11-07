@@ -4,7 +4,8 @@
 
         <form method="post" role="form">
             <div class="form-group has-feedback">
-                <input ng-keypress="$ctrl.onSearchInput($event)" ng-model="$ctrl.searchTerm" type="search" class="form-control" placeholder="{{'SEARCH.PLACEHOLDER' | translate}}">
+                <input ng-keypress="$ctrl.onSearchInput($event)" ng-model="$ctrl.searchTerm" type="search" class="form-control"
+                       ng-attr-placeholder="{{'SEARCH.PLACEHOLDER' | translate}}">
                 <span class="form-control-feedback icon-search" aria-hidden="true"></span>
             </div>
         </form>
@@ -15,18 +16,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">
-                <h4 class="hl-4 section-title" translate="SEARCH.NO.RESULT.HEADLINE" translate-values="{searchTerm: $ctrl.searchTerm}"></h4>
+                <h4 class="hl-4 section-title" translate="SEARCH.NO.RESULT.HEADLINE"
+                    ng-init="$ctrl.copySearchTerm = $ctrl.searchTerm"
+                    translate-values="{searchTerm: $ctrl.copySearchTerm}"></h4>
                 <ul class="checklist margin-top">
                     <li ng-bind-html="$ctrl.contactText"></li>
                 </ul>
             </div>
         </div>
-    </div>
-</section>
-
-<section ng-controller="ContentController as vm" ng-if="$ctrl.totalLength === false">
-    <div class="loading-spinner loading-white">
-        <img src="/media/images/ajax-loader.gif" class="spinner">
     </div>
 </section>
 
