@@ -6,7 +6,7 @@
     RouteConfig.$inject = ['$stateProvider'];
 
     function RouteConfig($stateProvider) {
-        $stateProvider.pdsRoute({
+        $stateProvider.state({
             name: 'catalog',
             url: '{catUrl:.*-[cp][/]?}',
             templateProvider: ['$templateCache', function($templateCache){

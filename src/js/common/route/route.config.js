@@ -3,18 +3,10 @@
         .module('pds.common.route')
         .config(RouteConfig);
 
-    RouteConfig.$inject = ['$stateProvider', '$locationProvider', 'config'];
+    RouteConfig.$inject = ['$locationProvider'];
 
-    function RouteConfig($stateProvider, $locationProvider, config) {
+    function RouteConfig($locationProvider) {
         $locationProvider.html5Mode(true);
-        $stateProvider.pdsRoute = function (route) {
-            route.url = urlPath(route.url);
-            $stateProvider.state(route);
-        };
-
-        function urlPath(path) {
-            return config.pdsPathPrefix + '/' + path;
-        }
-
     }
+
 })(angular);

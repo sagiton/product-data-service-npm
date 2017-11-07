@@ -1,6 +1,6 @@
 <catalog-template catalog-id="vm.catalogId">
     <div ng-repeat="section in vm.catalog.sections">
-        <div ng-init="$section = section.params" ng-include="'section-' + section.name"></div>
+        <div ng-init="$section = section.params" ng-include="'section-' + section.name" data-section="{{section.name}}"></div>
     </div>
 </catalog-template>
 
