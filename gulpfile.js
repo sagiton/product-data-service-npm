@@ -20,6 +20,7 @@ var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ngTemplates = require('gulp-ng-templates');
 var gulpif = require('gulp-if');
+var bsConfig = require('./bs-config')
 
 var paths = {
     build: './',
@@ -140,18 +141,7 @@ gulp.task('observe', function() {
 });
 
 gulp.task('browser-sync', function() {
-    return browserSync({
-        server: {
-            baseDir: paths.build,
-            directory: true
-        },
-        port: 4000,
-        notify: false,
-        open: false,
-        files: [
-            paths.build + '**/*'
-        ]
-    });
+    return browserSync(bsConfig);
 });
 
 gulp.task('build', function (callback) {
