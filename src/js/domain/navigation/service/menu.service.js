@@ -51,11 +51,11 @@
 
         function flatMenu(menu) {
 		    var children = _.get(menu, 'children')
-            return children && children.reduce(function(acc, elem) {
-                acc.concat(elem)
+            return children.reduce(function(acc, elem) {
+                acc = acc.concat(elem)
                 if (!_.isEmpty(elem.children)) {
                     acc = acc.concat(flatMenu(elem));
-                    elem.children= []
+                    elem.children = []
                 }
                 return acc
             }, [menu])

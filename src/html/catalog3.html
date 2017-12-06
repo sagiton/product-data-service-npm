@@ -167,7 +167,7 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_INFORMATION">
-<section class="section fs-two-column-headline-text bg-grey-dark bg-blue">
+<section class="section fs-two-column-headline-text bg-grey-dark bg-blue" ng-if="vm.hasAnyOfValues($section, ['list'])">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3">
@@ -190,7 +190,7 @@
 </script>
 
 <script type="text/ng-template" id="section-MORE_INFORMATION">
-<section class="section fs-two-column-icon-accordion">
+<section class="section fs-two-column-icon-accordion" ng-if="vm.hasAnyOfValues($section, ['headlineDetails', 'items'])">
     <div class="container-fluid">
         <h2 class="section-title text-primary text-center">{{$section.headlineDetails}}</h2>
         <div id="acrd-872921587" class="accordion panel-group m-b-0" role="tablist" aria-multiselectable="true">
