@@ -330,14 +330,12 @@
 </script>
 
 <script type="text/ng-template" id="section-FOOTNOTES">
-<section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])">
+<section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])" style="padding: 0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">
                 <div class="footnotes">
-                    <ol class="footnote-ordered-list" ng-if="!vm.isArray($section.list) && $section.list">
-                        <li>{{$section.list}}</li>
-                    </ol>
+                    <div ng-if="$section.list && !vm.isArray($section.list)" ng-bind-html="$section.list"></div>
                     <ol class="footnote-ordered-list" ng-if="vm.isArray($section.list)">
                         <li ng-repeat="item in $section.list track by $index" ng-if="item">{{item}}</li>
                     </ol>
