@@ -22,7 +22,7 @@
     <meta name="DCSext.wtg_bth1" content="122" />
     <meta name="DCSext.wtg_bth2" content="577" />
     <meta name="DCSext.wtg_bth3" content="577" />
-    <meta name="ocs-channel" content="MPE OCS LSS Master" />
+    <meta name="ocs-channel" content="MPE OCS LSS DE" />
 
     <link rel="alternate" hreflang="es-ES" href="">
 
@@ -194,7 +194,25 @@
         <div id="link-footer">
             <div class="container-fluid">
                 <div id="acrd-footer" class="accordion panel-group flex-row m-b-0" role="tablist" aria-multiselectable="true">
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-12 col-sm-2 col-md-2">
+                        <div class="panel">
+                            <div id="acrd-footer-heading-0" class="panel-heading" role="tab">
+                                <div class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#acrd-footer" data-target="#acrd-footer-panel-0" aria-controls="acrd-footer-panel-0" aria-expanded="false" target="_self">Produkte</a>
+                                </div>
+                            </div>
+                            <div id="acrd-footer-panel-0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acrd-footer-heading-0">
+                                <div class="panel-body" ocs-navigation-menu>
+                                    <ul class="list-unstyled">
+                                        <li ng-repeat="item in $ctrl.menu.children">
+                                            <a ocs-navigate="item.id" target="_self">{{item.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
                         <div class="panel">
                             <div id="acrd-footer-heading-1" class="panel-heading" role="tab">
                                 <h3 class="panel-title">
