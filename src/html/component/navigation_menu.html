@@ -10,7 +10,7 @@
 <script type="text/ng-template" id="nav-level">
     <li ng-repeat="lvl in subLevel | limitTo: $ctrl.menu.maxNavigationItems as limitedLevel">
         <span ng-if="lvl.children.length" class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
-        <a target="_self" ocs-navigate="lvl.id">{{lvl.name}}</a>
+        <a target="_self" ocs-navigate="lvl.redirectId || lvl.id">{{lvl.name}}</a>
         <ul simple-submenu
             class="nav submenu"
             ng-if="lvl.children.length"
