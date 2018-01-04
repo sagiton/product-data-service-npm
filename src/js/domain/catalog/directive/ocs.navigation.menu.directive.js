@@ -20,7 +20,11 @@
     function NavigationMenuController($scope, MenuService, $element, $transclude, $templateCache, $compile) {
         var self = this;
         $transclude($scope, function (clone) {
-            self.transcluded = !!clone.length;
+            self.transcluded = !!clone
+                .filter(function () {
+                    return this.nodeType !== 3;
+                })
+                .length;
             $element.empty();
             $element.append(self.transcluded ? clone : $compile($templateCache.get('component/navigation_menu.html'))($scope));
         });
