@@ -272,7 +272,7 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE">
-    <section section-technical-data-table="$section" class="section fs-table">
+    <section section-technical-data-table="$section" class="section fs-table" style="padding-bottom: 0;">
         <div class="container-fluid">
             <h2 class="hl-2 section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
 
@@ -330,7 +330,7 @@
 </script>
 
 <script type="text/ng-template" id="section-FOOTNOTES">
-<section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])" style="padding: 0">
+<section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])" style="padding-top: 0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">
