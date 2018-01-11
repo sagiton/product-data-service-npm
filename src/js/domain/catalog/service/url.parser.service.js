@@ -14,7 +14,7 @@
                       /**  {1}{2}   {3}                                    {4}    **/
                       /** /ch/de/residential.html/qwe/asd/qwe/asd/poiuuy-134233-c **/
     var pathPattern = /^\/([a-z]{2})\/([a-z]{2})\/(?:ocs\/)?([^\/]*)(?:\.html)?\/(?:.*-([0-9]*)-[pc]\/?$)?/i;
-    var languagePattern = /(\/[a-z]{2}\/)([a-z]{2})(.*)/i;
+    var catalogPattern = /\/ocs\/(.*)/;
 
     function UrlParser(config) {
         this.config = config;
@@ -36,10 +36,9 @@
         return matchForIndex(languageMatchIndex);
     };
 
-    UrlParser.prototype.setLanguage = function (url, language) {
-        var uri = new URI(url);
-        uri.path(uri.path().replace(languagePattern, '$1' + language + '$3'));
-        return uri.toString();
+    UrlParser.prototype.getCatalogPath = function (url) {
+        var match = new URI(url).path().match(catalogPattern);
+        return match && match[1];
     };
 
     function matchForIndex(index) {

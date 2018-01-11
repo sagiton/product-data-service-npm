@@ -25,6 +25,7 @@
         function changeLanguage (event) {
             event.preventDefault();
 
+            var link = this;
             var $span = this.children('span');
             var newLocale = new Locale($span.attr('ocs-locale'));
             var ocsChannel = $span.attr('ocs-channel') || metaTag.getOcsChannel();
@@ -32,7 +33,7 @@
             catalogService
                 .resolveUriFromHierarchy(catalogService.getIdFromLocation(), newLocale.toString(), ocsChannel)
                 .then(function (uri) {
-                    $window.location.href = urlParserService.setLanguage(uri, newLocale.getLanguage());
+                    $window.location.href = link.attr('href') + urlParserService.getCatalogPath(uri);
                 });
         }
 
