@@ -8,9 +8,9 @@
             }
         });
 
-    SwitchLanguageController.$inject = ['$element', 'urlParserService', 'CatalogService', 'locale', '$window', 'metaTag']
+    SwitchLanguageController.$inject = ['$element', 'urlParserService', 'CatalogService', 'locale', '$window', 'metaTag', 'Locale']
 
-    function SwitchLanguageController(element, urlParserService, catalogService, locale, $window, metaTag) {
+    function SwitchLanguageController(element, urlParserService, catalogService, locale, $window, metaTag, Locale) {
         if (!urlParserService.isOCS()) {
             return
         }
@@ -25,16 +25,14 @@
         function changeLanguage (event) {
             event.preventDefault();
 
-            var $span = this.children('span')
-
-            var language = $span.text().toLowerCase();
-            var newLocale = $span.attr('ocs-locale');
+            var $span = this.children('span');
+            var newLocale = new Locale($span.attr('ocs-locale'));
             var ocsChannel = $span.attr('ocs-channel') || metaTag.getOcsChannel();
 
             catalogService
-                .resolveUriFromHierarchy(catalogService.getIdFromLocation(), newLocale, ocsChannel)
+                .resolveUriFromHierarchy(catalogService.getIdFromLocation(), newLocale.toString(), ocsChannel)
                 .then(function (uri) {
-                    $window.location.href = urlParserService.setLanguage(uri, language);
+                    $window.location.href = urlParserService.setLanguage(uri, newLocale.getLanguage());
                 });
         }
 

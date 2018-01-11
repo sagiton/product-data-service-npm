@@ -13,13 +13,11 @@
         }
     }
 
-    CatalogMetadataController.$inject = ['_', '$scope', 'CatalogService'];
+    CatalogMetadataController.$inject = ['_', '$scope', 'CatalogService', 'Locale'];
 
-    var LOCALE_DELIMITER = '-';
-    var LOCALE_PROPER_DELIMITER = '_';
     var PATH_SEPARATOR = '/';
 
-    function CatalogMetadataController(_, $scope, CatalogService) {
+    function CatalogMetadataController(_, $scope, CatalogService, Locale) {
 
         var redirectCategoryId = _.get($scope.data, 'redirect.id')
         if (redirectCategoryId) {
@@ -43,12 +41,11 @@
                 .element('link[hreflang]')
                 .each(function (index, link) {
                     var linkObject = angular.element(link);
-                    var locale = linkObject.attr('hreflang');
-                    locale = locale.split(LOCALE_DELIMITER);
+                    var locale = new Locale(linkObject.attr('hreflang'));
                     CatalogService
-                        .resolveUriFromHierarchy(catalogId, locale[0] + LOCALE_PROPER_DELIMITER + locale[1])
+                        .resolveUriFromHierarchy(catalogId, locale.toString())
                         .then(function (url) {
-                            linkObject.attr('href', url.replace(/\/[a-z]{2}\/[a-z]{2}\//, PATH_SEPARATOR + locale[1].toLowerCase() + PATH_SEPARATOR + locale[0].toLowerCase()  + PATH_SEPARATOR));
+                            linkObject.attr('href', url.replace(/\/[a-z]{2}\/[a-z]{2}\//, PATH_SEPARATOR + locale.toString(PATH_SEPARATOR)  + PATH_SEPARATOR));
                             return !!url;
                         })
                         .then(function (result) {
