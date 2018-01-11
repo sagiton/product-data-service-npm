@@ -43,7 +43,7 @@
         }
 
         function getTemplate(catalogId, type) {
-            return menuService.findInNavigation(catalogId)
+            return menuService.findInNavigation({id: catalogId})
                 .then(function (data) {
                     return new Catalog({
                         template: {name: type || data.type},
@@ -67,14 +67,14 @@
                 });
         }
 
-        function travelUpNavigationHierarchy(categoryId, locale) {
+        function travelUpNavigationHierarchy(metadata) {
             return menuService
-                .findInNavigation(categoryId, locale)
+                .findInNavigation(metadata)
                 .then(function (data) {
                     var catalogs = [];
                     while (data != null) {
                         catalogs.push(new Catalog(data));
-                        data = menuService.findParentInNavigation(data.id, locale);
+                        data = menuService.findParentInNavigation(data.id, metadata.locale);
                     }
                     return $q.all(catalogs);
                 });
@@ -86,10 +86,10 @@
             return parts[parts.length - 2];
         }
 
-        function resolveUriFromHierarchy(categoryId, locale, channel) {
-            return travelUpNavigationHierarchy(categoryId, locale)
+        function resolveUriFromHierarchy(catalogId, locale, channel) {
+            return travelUpNavigationHierarchy({id: catalogId, locale: locale, channel: channel})
                 .then(function (catalogs) {
-                    return catalogUrlSchema.build(catalogs, channel)
+                    return catalogUrlSchema.build(catalogs)
                 });
         }
 

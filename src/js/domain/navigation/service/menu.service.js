@@ -16,16 +16,18 @@
         self.findInNavigation = findInNavigation;
         self.findParentInNavigation = findParentInNavigation;
 
-		function getMenu(locale) {
-            var properLocale = locale || self.locale;
+		function getMenu(metadata) {
+            metadata = metadata || {};
+            var properLocale = metadata.locale || self.locale;
+            var properChannel = metadata.channel || metaTag.getOcsChannel();
             var nav = new Navigation({
                 template: {
                     name: NAVIGATION_TEMPLATE_NAME,
-                    channel: metaTag.getOcsChannel()
+                    channel: properChannel
                 },
                 model: {
                     locale: properLocale,
-                    channel: metaTag.getOcsChannel()
+                    channel: properChannel
                 }
             });
 			return Navigation
@@ -40,10 +42,13 @@
 				})
 		}
 
-		function getFlatMenu(locale) {
-            return getMenu(locale)
+		function getFlatMenu(metadata) {
+            return getMenu(metadata)
                 .then(function (menu) {
-                    locale = locale || self.locale;
+                    if (!menu) {
+                        console.warn('Hierarchy not found', metadata);
+                    }
+                    locale = metadata.locale || self.locale;
                     self.flatNavigation[locale] = self.flatNavigation[locale] || flatMenu(menu);
                     return self.flatNavigation[locale];
                 })
@@ -61,10 +66,10 @@
             }, [menu])
         }
 
-        function findInNavigation(id, locale) {
-            return getFlatMenu(locale)
+        function findInNavigation(metadata) {
+            return getFlatMenu(metadata)
                 .then(function(flat) {
-                    return _.find(flat, {id: String(id)})
+                    return _.find(flat, {id: String(metadata.id)})
                 });
         }
 
