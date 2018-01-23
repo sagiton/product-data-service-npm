@@ -182,6 +182,7 @@
                 <ul class="technical-information-list" ng-if="vm.isArray($section.list)">
                     <li ng-repeat="info in $section.list track by $index" ng-if="info">{{info}}</li>
                 </ul>
+                <span ng-if="!vm.isArray($section.list) && !$section.description" ng-bind-html="$section.list"></span>
                 <span ng-if="$section.description" ng-bind-html="$section.description"></span>
             </div>
         </div>
