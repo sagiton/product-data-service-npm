@@ -27,3 +27,12 @@ After installation rebuild the app with `gulp build` task, it will concatenate y
 - Use _\<catalog-template catalog-id="id"\>_ directive to fetch the catalog and attach it to the template scope.
 - Listen on `pds.catalog.loaded` scope event to handle additional catalog logic after fetch
 - Example integration can be found in `./src/test/project/buderus`
+
+#### New version release
+- Bump a new version \
+  `gulp bump`
+- Push most recent changes
+- Tag and push commit: \
+  `git tag -a v1.2.3 -m "v1.2.3"` \
+  `git push --tags`
+- Update dependent project with new PDS version

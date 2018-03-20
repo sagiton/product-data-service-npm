@@ -15,7 +15,7 @@
 
         self.finalSearchResults = [];
         self.searchTerm = $location.search().terms;
-        self.contactText = translateFilter('SEARCH.NO.RESULT.CHECKLIST.3', {contactLink: "<a href='" + translateFilter('SEARCH.CONTACT.URL') + "' class='link-inline' target='_self'>" + translateFilter('SEARCH.CONTACT') + "</a>"});
+        self.contactText = translateFilter('SEARCH.NO.RESULT.CHECKLIST.3', {contactLink: "<a href='" + translateFilter('SEARCH.CONTACT.URL') + "' class='link-more' target='_self'>" + translateFilter('SEARCH.CONTACT') + "</a>"});
         self.onSearchInput = onSearchInput;
         self.goToAnchor = goToAnchor;
         self.goMore = goMore;
