@@ -6,9 +6,6 @@
         "urlSchema": {
             "trailingSlash": false
         },
-        "forceLanguage": null,
-        "search": {
-            "defaultImage": "default-search"
-        }
+        "forceLanguage": null
     }
 }
