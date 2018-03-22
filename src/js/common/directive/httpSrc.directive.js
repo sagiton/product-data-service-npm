@@ -31,7 +31,7 @@
             element.bind('error', defaultImage);
 
             function defaultImage() {
-                attrs.$set('src', translateFilter('search.default.image.path'));
+                attrs.$set('src', translateFilter('SEARCH.DEFAULT.IMAGE.PATH'));
             }
 
         }
