@@ -5,8 +5,13 @@
     <title ng-bind="vm.title"></title>
     <script type="text/javascript">
         (function () {
+            var localeChannelMap = {
+                en_DE: "MPE OCS LSS Master",
+                de_DE: "MPE OCS LSS DE"
+            };
             var path = window.location.pathname.split('/');
             document.write('<base href="/' + path[1] + '/' + path[2] + '/"/>');
+            document.write('<meta name="ocs-channel" content="' + localeChannelMap[path[2] + '_' + path[1].toUpperCase()] + '" />');
         }());
     </script>
 
@@ -22,8 +27,6 @@
     <meta name="DCSext.wtg_bth1" content="122" />
     <meta name="DCSext.wtg_bth2" content="577" />
     <meta name="DCSext.wtg_bth3" content="577" />
-    <meta name="ocs-channel" content="MPE OCS LSS Master" />
-    <meta name="ocs-locale" content="en_GB" />
 
     <link rel="alternate" hreflang="es-ES" href="">
 

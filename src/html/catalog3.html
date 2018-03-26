@@ -149,9 +149,10 @@
         <div class="row">
             <div class="col-sm-6 col-media">
                 <div class="js-slick-slider slick-image-slider"
-                     data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'>
-                    <div class="slide">
-                        <img class="img-responsive img-widen" ng-src="{{$section.productImgUrl | imageUrl: 'img-lg'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
+                     data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'
+                     ng-init="productImages = [].concat($section.productImgUrl)">
+                    <div class="slide" ng-repeat="image in productImages">
+                        <img class="img-responsive img-widen" ng-src="{{image | imageUrl: 'img-lg'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
                         <img class="img-overlay" ng-if="$section.energyEfficiency.image" ng-src="{{$section.energyEfficiency.image}}" />
                     </div>
                 </div>
