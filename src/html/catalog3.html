@@ -301,6 +301,27 @@
     </section>
 </script>
 
+<script type="text/ng-template" id="section-FOOTNOTES">
+    <section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])" style="padding-top: 0">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="footnotes">
+                        <div ng-if="$section.list && !vm.isArray($section.list)" ng-bind-html="$section.list"></div>
+                        <ol class="footnote-ordered-list" ng-if="vm.isArray($section.list)">
+                            <li ng-repeat="item in $section.list track by $index" ng-if="item">{{item}}</li>
+                        </ol>
+                        <p class="footnote-paragraph" ng-if="$section.value">{{$section.value}}</p>
+                        <p ng-if="$section.labels.system" class="footnote-paragraph" translate="ERP_SYSTEM_LABEL"></p>
+                        <p ng-if="$section.labels.product" class="footnote-paragraph" translate="ERP_PRODUCT_LABEL"></p>
+                        <p ng-if="$section.labels.boiler" class="footnote-paragraph" translate="B1_BOILER_LABEL"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</script>
+
 <script type="text/ng-template" id="section-RELATED_PRODUCTS">
 <section class="section fs-three-column-media-teaser bg-pattern" ng-if="vm.isArray($section.products)">
     <div class="container-fluid">
@@ -331,26 +352,6 @@
 </section>
 </script>
 
-<script type="text/ng-template" id="section-FOOTNOTES">
-<section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])" style="padding-top: 0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-10">
-                <div class="footnotes">
-                    <div ng-if="$section.list && !vm.isArray($section.list)" ng-bind-html="$section.list"></div>
-                    <ol class="footnote-ordered-list" ng-if="vm.isArray($section.list)">
-                        <li ng-repeat="item in $section.list track by $index" ng-if="item">{{item}}</li>
-                    </ol>
-                    <p class="footnote-paragraph" ng-if="$section.value">{{$section.value}}</p>
-                    <p ng-if="$section.labels.system" class="footnote-paragraph" translate="ERP_SYSTEM_LABEL"></p>
-                    <p ng-if="$section.labels.product" class="footnote-paragraph" translate="ERP_PRODUCT_LABEL"></p>
-                    <p ng-if="$section.labels.boiler" class="footnote-paragraph" translate="B1_BOILER_LABEL"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-</script>
 
 <script type="text/ng-template" id="section-CATALOG_METADATA">
     <catalog-metadata data="$section"></catalog-metadata>
