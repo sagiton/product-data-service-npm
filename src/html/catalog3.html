@@ -174,7 +174,7 @@
             <div class="col-sm-3">
                 <div class="hl-3 section-title">
                     <span ng-if="$section.title">{{$section.title}}</span>
-                    <span ng-if="!$section.title" translate="TECHNICAL.INFORMATION"></span>
+                    <span ng-if="!$section.title" translate="TECHNICAL.INFORMATION" translate-default="''"></span>
                 </div>
                 <a ng-if="$section.link" class="link-more" ng-href="{{$section.link | imageUrl}}" target="_blank">{{'PRODUCT.LEAFLET' | translate}}</a>
             </div>
