@@ -155,6 +155,11 @@
                         <img class="img-responsive img-widen" ng-src="{{image | imageUrl: 'img-lg'}}" alt="{{$section.productName}}" title="{{$section.productName}}">
                         <img class="img-overlay" ng-if="$section.energyEfficiency.image" ng-src="{{$section.energyEfficiency.image}}" />
                     </div>
+                    <div class="slide" ng-if="$section.videoIds.length" ng-repeat="vid in $section.videoIds">
+                        <div class="slide-image">
+                            <cliplister video-id="vid"></cliplister>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-text">
