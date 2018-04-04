@@ -337,7 +337,7 @@
 
             <a ng-repeat="related in $section.products" class="card col-xs-12 col-sm-6 col-md-4" ocs-navigate="related.categoryId">
                 <img class="card-img-top img-responsive img-widen" ng-src="{{::related.componentImageUrl | imageUrl}}" alt="{{related.productName}}" title="{{related.productName}}">
-                <div class="card-block">
+                <div class="card-block text-wrap">
                     <h3 class="hl-4 card-title">{{::related.productName}}</h3>
                     <span class="link-more" translate="MORE.DETAILS"></span>
                 </div>
