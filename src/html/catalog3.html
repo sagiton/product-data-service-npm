@@ -279,7 +279,7 @@
 </script>
 
 <script type="text/ng-template" id="section-TECHNICAL_DATA_TABLE">
-    <section section-technical-data-table="$section" class="section fs-table" style="padding-bottom: 0;">
+    <section section-technical-data-table="$section" class="section section-technical-table fs-table">
         <div class="container-fluid">
             <h2 class="hl-2 section-title text-primary text-center" translate="TECHNICAL.DATA"></h2>
 
@@ -307,7 +307,7 @@
 </script>
 
 <script type="text/ng-template" id="section-FOOTNOTES">
-    <section class="section" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])" style="padding-top: 0">
+    <section class="section section-footnotes" ng-if="vm.hasAnyOfValues($section, ['list', 'value', 'labels.system', 'labels.product', 'labels.boiler'])">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10">
@@ -328,7 +328,7 @@
 </script>
 
 <script type="text/ng-template" id="section-RELATED_PRODUCTS">
-<section class="section fs-three-column-media-teaser bg-pattern" ng-if="vm.isArray($section.products)">
+<section class="section section-related fs-three-column-media-teaser bg-pattern" ng-if="vm.isArray($section.products)">
     <div class="container-fluid">
         <h2 class="hl-2 section-title text-primary text-center">{{::$section.title}}</h2>
 
