@@ -165,7 +165,7 @@
             <div class="col-sm-6 col-text">
                 <div class="product-type">{{$section.productType}}</div>
                 <h1 class="hl-2 product-name">{{$section.productName}}</h1>
-                <p>{{$section.subtitle}}</p>
+                <p ng-bind-html="$section.subtitle"></p>
             </div>
         </div>
     </div>
