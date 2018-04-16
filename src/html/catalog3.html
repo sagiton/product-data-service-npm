@@ -216,8 +216,13 @@
                         <ul ng-if="vm.isArray(item.description)">
                             <li ng-repeat="el in item.description track by $index" ng-if="el">{{el}}</li>
                         </ul>
-                        <img ng-if="item.imageUrl" class="img-responsive img-widen m-b-1" ng-src="{{item.imageUrl | imageUrl}}"
-                             alt="{{item.title}}" title="{{item.title}}" />
+                        <div class="js-slick-slider slick-image-slider"
+                             data-slick='{"arrows": false, "dots": true, "autoplay": true, "autoplaySpeed": 4000, "speed": 1000, "cssEase": "ease-in-out"}'
+                             ng-init="images = [].concat(item.imageUrl)">
+                            <div class="slide" ng-repeat="image in images" ng-if="image">
+                                <img class="img-responsive img-widen m-b-1" ng-src="{{image | imageUrl}}" alt="{{item.title}}" title="{{item.title}}"/>
+                            </div>
+                        </div>
                     </article>
                 </div>
             </div>
