@@ -9,15 +9,15 @@
                 return this;
             };
 
-            this.$get = ['$resource', 'locale', function ($resource, locale) {
-                return new Search($resource, locale, url);
+            this.$get = ['$resource', 'locale', 'metaTag', function ($resource, locale, metaTag) {
+                return new Search($resource, locale, url, metaTag);
             }];
         });
 
-    function Search($resource, locale, url) {
+    function Search($resource, locale, url, metaTag) {
         var methods = {
             localize: {method: 'GET', isArray: true, params: {type: 'localize'}}
         };
-        return $resource(url + 'resource/:type/:locale', {locale: locale}, methods);
+        return $resource(url + 'resource/:type/:locale', {locale: locale, consumer: metaTag.getOcsChannel()}, methods);
     }
 })(angular);
