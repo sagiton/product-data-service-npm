@@ -53,7 +53,8 @@
                             catalogRequest: {
                                 id: catalogId,
                                 channel: metaTag.getOcsChannel(),
-                                type: data.type
+                                type: data.type,
+                                cmsDefinitionUrl: metaTag.getOcsSnippetDefinition()
                             }
                         }
                     }).$template()

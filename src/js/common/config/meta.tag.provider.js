@@ -11,9 +11,14 @@
             getSiteChannel: getSiteChannel,
             getOcsChannel: getOcsChannel,
             getOcsLocale: getOcsLocale,
+            getOcsSnippetDefinition: getOcsSnippetDefinition,
             addMeta: addMeta,
             addJsonLD: addJsonLD
         };
+
+        function getOcsSnippetDefinition() {
+            return getMetaTagContentByName('ocs-snippets');
+        }
 
         function getSiteChannel() {
             return getMetaTagContentByName('channel')
@@ -36,7 +41,7 @@
 
         function addMeta(name, content) {
             angular
-                .element('meta[name="' + name + '"')
+                .element('meta[name="' + name + '"]')
                 .remove();
 
             angular
