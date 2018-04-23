@@ -9,7 +9,7 @@
         this.listen = function () {
             var def = $q.defer();
             $root.$on('pds.search.navigate', function (event, params) {
-                if (params.target.channelDiscriminator == env.search.pdsChannelDiscriminator || params.target.resourceId) {
+                if (params.target.channelDiscriminator == env.search.pdsChannelDiscriminator) {
                     def.resolve(params);
                 }
             });
