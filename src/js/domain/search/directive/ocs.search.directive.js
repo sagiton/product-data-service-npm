@@ -8,11 +8,10 @@
             controller: ocsSearchController
         });
 
-    ocsSearchController.$inject = ['$anchorScroll', 'SearchService', 'cmsSearchListener', '$rootScope', '$location', '$window', '_', 'translateFilter'];
+    ocsSearchController.$inject = ['$anchorScroll', 'SearchService', '$rootScope', '$location', '_', 'translateFilter'];
 
-    function ocsSearchController($anchorScroll, SearchService, cmsSearchListener, $rootScope, $location, $window, _, translateFilter) {
+    function ocsSearchController($anchorScroll, SearchService, $rootScope, $location, _, translateFilter) {
         var self = this;
-
         self.finalSearchResults = [];
         self.searchTerm = $location.search().terms;
         self.contactText = translateFilter('SEARCH.NO.RESULT.CHECKLIST.3', {contactLink: "<a href='" + translateFilter('SEARCH.CONTACT.URL') + "' class='link-more' target='_self'>" + translateFilter('SEARCH.CONTACT') + "</a>"});
@@ -20,11 +19,6 @@
         self.goToAnchor = goToAnchor;
         self.goMore = goMore;
 
-        cmsSearchListener
-            .listen()
-            .then(function (param) {
-                $window.location.href = param.target.resourceLocation;
-            });
         search();
 
         function search() {
