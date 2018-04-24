@@ -26,7 +26,7 @@
             return CatalogService
                 .resolveUriFromHierarchy(urlParserService.getCatalogId())
                 .then(function (url) {
-                    if (encodeURI(url) != URI().toString()) {
+                    if (!_.endsWith(encodeURI(url), urlParserService.getCatalogPath())) {
                         $window.location.href = url;
                     }
                 })
