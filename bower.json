@@ -2,8 +2,8 @@
   "name": "product-data-service",
   "version": "2.1.1",
   "main": [
-      "dist/js/pds.min.js",
-      "dist/js/vendor.min.js"
+    "dist/js/pds.min.js",
+    "dist/js/vendor.min.js"
   ],
   "publishConfig": {
     "registry": "https://nexus.sagiton.pl/repository/bower-snapshot/"
@@ -30,11 +30,13 @@
     "cliplister": "https://mycliplister.com/merge?cliplister=2.0&clviewer=2.0&videostage=2.1&innercontrols=2.1&clickablevideo=2.0&playbutton=2.0&previewimage=2.0&bufferingspinner=2.0",
     "angular-resource": "^1.6.1",
     "angular-bootstrap": "^2.5.0",
-    "angular-translate": "^2.15.1"
+    "angular-translate": "^2.15.1",
+    "angular-bind-html-compile": "^1.4.1",
+    "lazysizes": "^4.0.2"
   },
   "resolutions": {
     "lodash": "^4.17.2",
-      "angular": "1.5.8",
-      "angular-resource": "1.5.11"
+    "angular": "1.5.8",
+    "angular-resource": "1.5.11"
   }
 }
