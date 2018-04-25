@@ -26,7 +26,7 @@ module.exports = {
             "/media/images": "src/media"
         },
         middleware: [
-            modRewrite(['^/[a-z]{0,2}/[a-z]{0,2}/(.*)$ http://localhost:3000/$1 [P]']),
+            modRewrite(['^/([a-z]{0,2}|global)/[a-z]{0,2}/(.*)$ http://localhost:3000/$2 [P]']),
             history({index: '/' + pdsHtml})
         ]
     }
