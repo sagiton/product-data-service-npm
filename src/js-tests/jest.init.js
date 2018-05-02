@@ -1,4 +1,5 @@
 import '../../bower_components/angular/angular'
+import '../../bower_components/angular-translate/angular-translate'
 import 'angular-mocks'
 
 import '../js/app'

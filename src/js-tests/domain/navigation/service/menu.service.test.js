@@ -16,6 +16,7 @@ describe('service: MenuService', () => {
             $provide.value('_', _)
             $provide.value('Navigation', new ResourceWrapper(getMenu()))
             $provide.value('locale', jest.fn())
+            $provide.value('metaTag', jest.fn())
         });
         angular.mock.inject($injector => MenuService = $injector.get('MenuService'))
     });

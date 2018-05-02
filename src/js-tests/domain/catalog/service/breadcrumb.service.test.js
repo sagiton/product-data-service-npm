@@ -13,14 +13,14 @@ describe('service: BreadcrumbService', () => {
         }
         $provide.value('CatalogService', catalogService)
         $provide.value('_', _)
-        $provide.value('$q', Promise)
+        // $provide.value('$q', Promise)
     }))
 
     beforeEach(angular.mock.inject(($injector) => {
-        BreadcrumbService = $injector.get('BreadcrumbService')
+        BreadcrumbService = $injector.get('breadcrumbService')
     }));
 
-    it('should return breadcrumbs', async () => {
+    it('should return breadcrumbs', async (done) => {
         spyOn(catalogService, 'getTemplate').and.returnValue(Promise.resolve({
             nodes: [
                 {
@@ -38,8 +38,11 @@ describe('service: BreadcrumbService', () => {
 
         spyOn(catalogService, 'resolveUriFromHierarchy').and.returnValue(Promise.resolve('url.url'))
 
-        let breadcrumbs = await BreadcrumbService.build()
-        expect(breadcrumbs).toMatchSnapshot()
+        BreadcrumbService
+            .build()
+            .then((breadcrumbs) => {
+                expect(breadcrumbs).toMatchSnapshot()
+            })
     })
 
 })
