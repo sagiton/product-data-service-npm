@@ -34,7 +34,7 @@
 <section class="section fs-four-column-media-teaser" ng-if="vm.isArray($section.items)">
     <div class="container-fluid">
         <div class="flex-row">
-            <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId">
+            <a class="card col-xs-6 col-sm-4 col-md-3" ng-repeat="tile in $section.items" ocs-navigate="tile.catalogId" ocs-tracking="'more.details'" ocs-tracking-data="{value: tile.title}">
                 <img class="card-img-top img-responsive img-widen" ng-src="{{tile.imageUrl | imageUrl: 'img-md'}}" alt="{{tile.title}}" title="{{tile.title}}">
                 <div class="card-block" ng-if="tile.title" equalize-teaser-height>
                     <div class="card-title hl-5">{{tile.title}}</div>
@@ -68,7 +68,7 @@
             <div class="col-sm-8 col-text">
                 <div class="product-type text-primary" ng-if="item.type">{{item.type}}</div>
                 <div class="hl-3 column-title text-primary">
-                    <a ng-if="!item.detailsHidden" ocs-navigate="item.catalogId">{{item.title}}</a>
+                    <a ng-if="!item.detailsHidden" ocs-navigate="item.catalogId" ocs-tracking="'more.details'" ocs-tracking-data="{value: item.title}">{{item.title}}</a>
                     <div ng-if="item.detailsHidden">{{item.title}}</div>
                 </div>
                 <p ng-if="!vm.isArray(item.subtitle)">{{item.subtitle}}</p>
@@ -77,7 +77,9 @@
                 </ul>
                 <ul class="list-inline button-list">
                     <li>
-                        <a ng-if="!item.detailsHidden" class="btn btn-primary" ocs-navigate="item.catalogId"><span translate="MORE.DETAILS"></span></a>
+                        <a ng-if="!item.detailsHidden" class="btn btn-primary" ocs-navigate="item.catalogId" ocs-tracking="'more.details'" ocs-tracking-data="{value: item.title}">
+                            <span translate="MORE.DETAILS"></span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -90,11 +92,11 @@
 <section class="section fs-two-column-media-text" ng-repeat="item in $section.items">
     <div class="container-fluid">
         <div class="row">
-            <a ng-if="!item.detailsHidden" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-image'"></a>
+            <a ng-if="!item.detailsHidden" class="card" ocs-navigate="item.catalogId" ocs-tracking="'more.details'" ocs-tracking-data="{value: item.title}" ng-include="'product-card-image'"></a>
             <div ng-if="item.detailsHidden" class="card" ng-include="'product-card-image'"></div>
 
             <div class="col-sm-6 col-text">
-                <a ng-if="!item.detailsHidden" class="card" ocs-navigate="item.catalogId" ng-include="'product-card-details'"></a>
+                <a ng-if="!item.detailsHidden" class="card" ocs-navigate="item.catalogId" ocs-tracking="'more.details'" ocs-tracking-data="{value: item.title}" ng-include="'product-card-details'"></a>
                 <div ng-if="item.detailsHidden" class="card" ng-include="'product-card-details'"></div>
             </div>
         </div>
@@ -126,7 +128,7 @@
     </ul>
     <div ng-if="!vm.isArray(item.subtitle)">{{item.subtitle}}</div>
 
-    <a class="link-more" ng-if="!item.detailsHidden" ocs-navigate="item.catalogId"><span translate="DETAILED_PRODUCT_DESCRIPTION"></span>&nbsp;{{item.title}}</a>
+    <a class="link-more" ng-if="!item.detailsHidden" ocs-navigate="item.catalogId" ocs-tracking="'more.details'" ocs-tracking-data="{value: item.title}"><span translate="DETAILED_PRODUCT_DESCRIPTION"></span>&nbsp;{{item.title}}</a>
 </script>
 
 <script type="text/ng-template" id="section-PRODUCT_HEADER">
@@ -340,7 +342,7 @@
         <div class="flex-row js-slick-slider slick-content-slider"
              data-slick='{"arrows": false, "dots": true, "infinite": false, "speed": 1000, "cssEase": "ease-in-out", "slidesToShow": 3, "slidesToScroll": 3, "responsive": [{ "breakpoint": 992, "settings": { "slidesToShow": 2, "slidesToScroll": 2}}, { "breakpoint": 768, "settings": { "slidesToShow": 1, "slidesToScroll": 1}}]}'>
 
-            <a ng-repeat="related in $section.products" class="card col-xs-12 col-sm-6 col-md-4" ocs-navigate="related.categoryId">
+            <a ng-repeat="related in $section.products" class="card col-xs-12 col-sm-6 col-md-4" ocs-navigate="related.categoryId" ocs-tracking="'more.details'" ocs-tracking-data="{value: related.productName}">
                 <img class="card-img-top img-responsive img-widen" ng-src="{{::related.componentImageUrl | imageUrl}}" alt="{{related.productName}}" title="{{related.productName}}">
                 <div class="card-block text-wrap">
                     <h3 class="hl-4 card-title">{{::related.productName}}</h3>

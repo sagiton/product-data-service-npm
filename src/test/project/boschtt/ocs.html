@@ -30,7 +30,7 @@
     <meta name="DCSext.wtg_bth1" content="122" />
     <meta name="DCSext.wtg_bth2" content="577" />
     <meta name="DCSext.wtg_bth3" content="577" />
-    <meta name="ocs-locale" content="en_ZZ" />
+    <!--<meta name="ocs-locale" content="en_ZZ" />-->
     <meta name="ocs-snippets" content="https://bosch-tt.kittelberger.net/de/de/gewerbe-industrie/technical_pages/snippets_ocs/index.json" />
 
     <link rel="alternate" hreflang="es-ES" href="">
@@ -56,6 +56,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/v/bs/dt-1.10.12/r-2.1.0/datatables.min.css">
     <link rel="stylesheet" href="/src/test/project/boschtt/css/fonts.min.css">
     <link rel="stylesheet" href="/src/test/project/boschtt/css/brand/bosch-tt.css">
+
+    <script type="text/javascript">
+        window.dcsMultiTrack = function (event, value) {
+            console.log('Mock webtrends track:', event, value);
+        }
+    </script>
 </head>
 
 <body class="ocs">

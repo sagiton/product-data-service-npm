@@ -26,7 +26,10 @@ module.exports = {
             "/media/images": "src/media"
         },
         middleware: [
-            modRewrite(['^/([a-z]{0,2}|global)/[a-z]{0,2}/(.*)$ http://localhost:3000/$2 [P]']),
+            modRewrite([
+                '^/([a-z]{0,2}|global)/[a-z]{0,2}/(.*)$ http://localhost:3000/$2 [P]',
+                '^/ocs-assets/(.*)$ https://services.kittelberger.net/asset/$1 [P]'
+            ]),
             history({index: '/' + pdsHtml})
         ]
     }
