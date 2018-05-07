@@ -3,19 +3,10 @@
         .module("pds.catalog.service")
         .service("CatalogService", CatalogService);
 
-    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'catalogUrlSchema', 'catalogSearchListener', '_', '$q', 'locale', 'metaTag'];
+    CatalogService.$inject = ['$window', 'Catalog', 'MenuService', 'catalogUrlSchema', '_', '$q', 'locale', 'metaTag'];
 
-    function CatalogService($window, Catalog, menuService, catalogUrlSchema, catalogSearchListener, _, $q, locale, metaTag) {
+    function CatalogService($window, Catalog, menuService, catalogUrlSchema, _, $q, locale, metaTag) {
         var catalogTemplate;
-
-        catalogSearchListener
-            .listen()
-            .then(function (params) {
-                return resolveUriFromHierarchy(params.target.resourceId, null, params.consumer);
-            })
-            .then(function (uri) {
-                $window.location.href = uri;
-            });
 
         return {
             getNewProducts: getNewProducts,

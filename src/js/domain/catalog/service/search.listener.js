@@ -3,17 +3,14 @@
         .module('pds.catalog.service')
         .service('catalogSearchListener', CatalogSearchListener);
 
-    CatalogSearchListener.$inject = ['$rootScope', '$q', 'env'];
+    CatalogSearchListener.$inject = ['CatalogService', '$q', 'env'];
 
-    function CatalogSearchListener($root, $q, env) {
-        this.listen = function () {
-            var def = $q.defer();
-            $root.$on('pds.search.navigate', function (event, params) {
-                if (params.target.channelDiscriminator == env.search.pdsChannelDiscriminator) {
-                    def.resolve(params);
-                }
-            });
-            return def.promise;
+    function CatalogSearchListener(catalogService, $q, env) {
+        this.handle = function (params) {
+            if (params.target.channelDiscriminator == env.search.pdsChannelDiscriminator) {
+                return catalogService.resolveUriFromHierarchy(params.target.resourceId, null, params.consumer);
+            }
+            return $q.reject();
         }
     }
 })(angular);

@@ -30,7 +30,8 @@ After installation rebuild the app with `gulp build` task, it will concatenate y
 
 #### New version release
 - Bump a new version \
-  `gulp bump`
+  `gulp bump --type={type}` \
+  _type_ parameter can be prerelease (default), patch, minor, major
 - Push most recent changes
 - Tag and push commit: \
   `git tag -a v1.2.3 -m "v1.2.3"` \

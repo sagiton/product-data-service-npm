@@ -12,9 +12,9 @@
             transclude: true
         });
 
-    ocsQuickSearchController.$inject = ['_', '$rootScope', 'SearchService', '$window'];
+    ocsQuickSearchController.$inject = ['_', 'SearchService', '$window'];
 
-    function ocsQuickSearchController(_, $rootScope, SearchService, $window) {
+    function ocsQuickSearchController(_, SearchService, $window) {
         var self = this;
 
         self.suggest = _.throttle(suggest, 200);
@@ -34,7 +34,11 @@
         }
 
         function goTo(target) {
-            $rootScope.$broadcast('pds.search.navigate', {target: target});
+            SearchService
+                .resolveTarget({target: target})
+                .then(function (target) {
+                    $window.location.href = target;
+                });
         }
 
         function doSearch($item) {

@@ -3,17 +3,18 @@
         .module('pds.search.service')
         .service('cmsSearchListener', CmsSearchListener);
 
-    CmsSearchListener.$inject = ['$rootScope', '$q', 'config'];
+    CmsSearchListener.$inject = ['$q'];
 
-    function CmsSearchListener($root, $q, config) {
-        this.listen = function () {
-            var def = $q.defer();
-            $root.$on('pds.search.navigate', function (event, params) {
-                if (!!params.target.resourceLocation) {
-                    def.resolve(params);
-                }
-            });
-            return def.promise;
+    var HIGHLIGHT_PARAM = "hl";
+
+    function CmsSearchListener($q) {
+        this.handle = function (params) {
+            if (!!params.target.resourceLocation) {
+                return $q.resolve(new URI(params.target.resourceLocation)
+                    .addQuery(HIGHLIGHT_PARAM, params.searchTerm)
+                    .toString());
+            }
+            return $q.reject();
         }
     }
 })(angular);

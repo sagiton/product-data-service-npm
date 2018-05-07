@@ -66,13 +66,13 @@
 
                         <div class="search-result media" ng-repeat="item in results track by $index">
                             <div class="media-left">
-                                <a><img src class="media-object" http-src="item.imageUrl"
+                                <a search-result-link="item" search-term="$ctrl.searchTerm" target="_self"><img src class="media-object" http-src="item.imageUrl"
                                         alt="{{item.name}}" title="{{item.name}}"></a>
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">{{item.name}}</h4>
                                 <p>{{item.text}}</p>
-                                <a ng-click="$ctrl.goMore(item, group)" class="link-more" translate="MORE.DETAILS"></a>
+                                <a search-result-link="item" search-term="$ctrl.searchTerm" target="_self" class="link-more"><translate>MORE.DETAILS</translate></a>
                             </div>
                         </div>
                     </div>
