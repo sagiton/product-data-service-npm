@@ -16,7 +16,7 @@
                 var id = 'video' + Math.floor(Math.random()*1000);
                 element.attr('id', id);
                 $timeout(function () {
-                    new CliplisterControl.Viewer({
+                    var viewer = new CliplisterControl.Viewer({
                         parentId: id,
                         customer: 157893,
                         assets: [scope.videoId],
@@ -45,6 +45,15 @@
                             },
                             PreviewImage: {layer: 6}
                         }
+                    });
+
+                    var slick = element.closest('.js-slick-slider');
+                    viewer.onPlay(function () {
+                        slick.slick('slickPause');
+                    });
+
+                    slick.on('beforeChange', function () {
+                        viewer.pause();
                     });
                 }, 500);
             },
