@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`service: BreadcrumbService should return menu 1`] = `
+exports[`service: BreadcrumbService should return breadcrumbs 1`] = `
 Array [
   Object {
     "id": 669445,

@@ -2,7 +2,9 @@ import * as _ from 'lodash'
 
 describe('service: BreadcrumbService', () => {
     let BreadcrumbService
-    let catalogService;
+    let catalogService
+    let $q
+    let $root
 
     beforeEach(angular.mock.module('pds.catalog.service'))
 
@@ -13,15 +15,16 @@ describe('service: BreadcrumbService', () => {
         }
         $provide.value('CatalogService', catalogService)
         $provide.value('_', _)
-        // $provide.value('$q', Promise)
     }))
 
     beforeEach(angular.mock.inject(($injector) => {
         BreadcrumbService = $injector.get('breadcrumbService')
+        $q = $injector.get('$q')
+        $root = $injector.get('$rootScope')
     }));
 
-    it('should return breadcrumbs', async (done) => {
-        spyOn(catalogService, 'getTemplate').and.returnValue(Promise.resolve({
+    it('should return breadcrumbs', (done) => {
+        spyOn(catalogService, 'getTemplate').and.returnValue($q.resolve({
             nodes: [
                 {
                     "id": 669445,
@@ -36,13 +39,17 @@ describe('service: BreadcrumbService', () => {
             ]
         }))
 
-        spyOn(catalogService, 'resolveUriFromHierarchy').and.returnValue(Promise.resolve('url.url'))
+        spyOn(catalogService, 'resolveUriFromHierarchy').and.returnValue($q.resolve('url.url'))
 
         BreadcrumbService
             .build()
             .then((breadcrumbs) => {
                 expect(breadcrumbs).toMatchSnapshot()
+                done()
             })
+            .catch(done)
+
+        $root.$apply()
     })
 
 })
