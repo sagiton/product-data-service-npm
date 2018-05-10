@@ -50,16 +50,17 @@
         '\u2019':   '-', //’
         '\u00e0':   'a'  //à
     };
-    var characterRegex = _
-        .map(CHARACTER_MAP, function (val, key) {
-            return '\\' + key;
-        })
-        .join('|');
-    var regExp = new RegExp(characterRegex, 'g');
 
     angular
         .module('pds.common.filter')
         .filter('simplifyCharacters', ['_', function (_) {
+            var characterRegex = _
+                .map(CHARACTER_MAP, function (val, key) {
+                    return '\\' + key;
+                })
+                .join('|');
+            var regExp = new RegExp(characterRegex, 'g');
+
             return function (val) {
                 return val && val
                         .toLowerCase()

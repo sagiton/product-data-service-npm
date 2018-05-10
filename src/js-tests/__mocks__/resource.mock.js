@@ -3,7 +3,10 @@ function ResourceMock(val) {
     this.val = val;
 
     class Resource {
-        constructor() {}
+
+        constructor(args) {
+            this.args = args
+        }
 
         static get(val) {
             return new Method()

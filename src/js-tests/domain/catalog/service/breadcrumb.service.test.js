@@ -1,4 +1,6 @@
 import * as _ from 'lodash'
+import '../../../../js/domain/catalog/catalog.module'
+import '../../../../js/domain/catalog/service/breadcrumb.service'
 
 describe('service: BreadcrumbService', () => {
     let BreadcrumbService

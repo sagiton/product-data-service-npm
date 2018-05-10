@@ -1,5 +1,7 @@
 import * as _ from 'lodash'
 import sinon from 'sinon'
+import '../../../../js/domain/catalog/catalog.module'
+import '../../../../js/domain/catalog/service/catalog.service'
 
 describe('service: CatalogService', () => {
     let CatalogService, MenuService, CatalogUrlSchema, catalogSearchListener, Catalog, locale, CatalogConstructorSpy, $window, metaTag, $root, $q
