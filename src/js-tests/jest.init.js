@@ -17,7 +17,6 @@ import '../js/domain/search/service/search.handlers'
 import '../js/domain/search/service/search.service'
 
 import '../js/domain/catalog/catalog.module'
-import '../js/domain/catalog/service/meta.service'
 import '../js/domain/catalog/service/search.listener'
 import '../js/domain/catalog/service/seo.friendly.url.builder'
 import '../js/domain/catalog/service/url.parser.service'
