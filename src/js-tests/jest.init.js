@@ -4,7 +4,6 @@ import 'angular-mocks'
 
 import '../js/app'
 import '../js/env'
-import '../js/config'
 
 import '../js/domain/search/search.module'
 import '../js/domain/search/directive/ocs.quicksearch.directive'
