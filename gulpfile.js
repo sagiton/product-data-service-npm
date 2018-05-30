@@ -92,6 +92,9 @@ gulp.task('vendor', function () {
                 },
                 "angular-jsonld": {
                     main: ['src/angular-jsonld.module.js', 'src/directives/angular-jsonld.directive.js']
+                },
+                "urijs": {
+                    main: ['src/URI.js', 'src/URITemplate.js']
                 }
             }
         }))

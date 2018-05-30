@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, URITemplate) {
     angular
         .module('pds.common.filter')
         .filter('imageUrl', ImageUrlFilter);
@@ -15,9 +15,20 @@
     };
 
     function ImageUrlFilter(env, locale, metaTag) {
-        return function (mediaObject, size) {
-            return mediaObject ? env.endPoint.ocsMediaEndpoint + metaTag.getOcsChannel()
-                + "/" + locale.toString() + "/" + mediaObject : defaultImages[size || 'img-sm'];
+        return function (url, variant, size) {
+            if (!url) {
+                return defaultImages[variant || 'img-sm'];
+            }
+            var file = url.split(".");
+            return new URITemplate(env.endPoint.ocsMediaEndpoint + "{channel}/{locale}/{filename}" + (size ? "_{size}" : "") + "{.extension}")
+                .expand({
+                    channel: metaTag.getOcsChannel(),
+                    locale: locale.toString(),
+                    filename: file[0],
+                    size: size,
+                    extension: file[1]
+                })
+                .toString();
         }
     }
-})(angular);
+})(angular, URITemplate);
