@@ -8,7 +8,14 @@
 <section class="section fs-keyvisual p-a-0">
     <div class="slide">
         <div class="slide-image slide-image-transparent-30">
-            <image-src-set aspect-ratio="21:9" append-class="img-responsive" image="$section.backgroundImgUrl" alt-text="$section.name" title-text="$section.name" image-type="'img-xlg'"></image-src-set>
+            <image-src-set
+                img-sizes="(max-width: 270px) 270px, (max-width: 680px) 680px, (max-width: 820px) 820px, (max-width: 1170px) 1170px, (max-width: 1470px) 1470px, 1600px"
+                aspect-ratio="21:9"
+                append-class="img-responsive"
+                image="$section.backgroundImgUrl"
+                alt-text="$section.name"
+                title-text="$section.name"
+                image-type="'img-xlg'"></image-src-set>
         </div>
         <div class="slide-caption text-center">
             <h1 class="hl-1 slide-title" ng-if="$section.title">{{$section.title}}</h1>
