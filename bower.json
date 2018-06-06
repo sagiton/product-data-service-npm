@@ -1,6 +1,6 @@
 {
   "name": "product-data-service",
-  "version": "2.1.8-1",
+  "version": "2.2.0",
   "main": [
     "dist/js/pds.min.js",
     "dist/js/vendor.min.js"

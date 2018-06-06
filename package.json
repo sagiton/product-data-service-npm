@@ -1,6 +1,6 @@
 {
     "name": "product-data-service-npm",
-    "version": "2.1.8-1",
+    "version": "2.2.0",
     "description": "Product data service",
     "main": "dist/js/pds.min.js",
     "scripts": {
