@@ -3,7 +3,7 @@
         .module('pds.common.filter')
         .filter('imageUrl', ImageUrlFilter);
 
-    ImageUrlFilter.$inject = ['env', 'locale', 'metaTag'];
+    ImageUrlFilter.$inject = ['env', 'locale', 'metaTag', '_'];
 
     var rootSrc = '/media/images/'
 
@@ -14,9 +14,9 @@
         'img-xlg': rootSrc + 'default-1600x560.jpg'
     };
 
-    function ImageUrlFilter(env, locale, metaTag) {
+    function ImageUrlFilter(env, locale, metaTag, _) {
         return function (url, variant, size) {
-            if (!url) {
+            if (!_.isString(url)) {
                 return defaultImages[variant || 'img-sm'];
             }
             var file = url.split(".");
