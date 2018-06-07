@@ -1,5 +1,495 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`flatMenu 1`] = `
+Object {
+  "pl_PL": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [],
+          "id": "669447",
+          "name": "Heizkessel",
+          "type": "LEAF_CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "669462",
+          "name": "Heißwasserkessel",
+          "type": "LEAF_CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "669471",
+          "name": "Dampfkessel",
+          "type": "LEAF_CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "669480",
+          "name": "Blockheizkraftwerke",
+          "type": "LEAF_CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "669484",
+          "name": "Kühlung & Lüftung",
+          "type": "CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "669519",
+          "name": "Abhitzesysteme",
+          "type": "LEAF_CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "732005",
+          "name": "Trinkwassererwärmung",
+          "type": "LEAF_CATEGORY",
+        },
+        Object {
+          "children": Array [],
+          "id": "669524",
+          "name": "Komponenten",
+          "type": "CATEGORY",
+        },
+      ],
+      "id": "669446",
+      "maxNavigationItems": 6,
+      "name": "Produkte",
+      "type": "CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669447",
+      "name": "Heizkessel",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669462",
+      "name": "Heißwasserkessel",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669462",
+      "name": "Heißwasserkessel",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669463",
+      "name": "UNIMAT Heizkessel UT-L",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669463",
+      "name": "UNIMAT Heizkessel UT-L",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106916",
+      "name": "UT-L",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669464",
+      "name": "UNIMAT Heißwasserkessel UT-M",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669464",
+      "name": "UNIMAT Heißwasserkessel UT-M",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106917",
+      "name": "UT-M",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669465",
+      "name": "UNIMAT Heißwasserkessel UT-H",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669465",
+      "name": "UNIMAT Heißwasserkessel UT-H",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106918",
+      "name": "UT-H",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669466",
+      "name": "UNIMAT Heißwasserkessel UT-HZ",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669466",
+      "name": "UNIMAT Heißwasserkessel UT-HZ",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106919",
+      "name": "UT-HZ",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669471",
+      "name": "Dampfkessel",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669471",
+      "name": "Dampfkessel",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669472",
+      "name": "UNIVERSAL Dampfkessel U-ND, U-HD",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669472",
+      "name": "UNIVERSAL Dampfkessel U-ND, U-HD",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106758",
+      "name": "U-ND",
+      "type": "PRODUCT",
+    },
+    Object {
+      "id": "1106759",
+      "name": "U-HD",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669473",
+      "name": "UNIVERSAL Dampfkessel U-MB",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669473",
+      "name": "UNIVERSAL Dampfkessel U-MB",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106911",
+      "name": "U-MB",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669474",
+      "name": "UNIVERSAL Dampfkessel UL-S, UL-SX",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669474",
+      "name": "UNIVERSAL Dampfkessel UL-S, UL-SX",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106913",
+      "name": "UL-SX",
+      "type": "PRODUCT",
+    },
+    Object {
+      "id": "1106912",
+      "name": "UL-S",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669475",
+      "name": "UNIVERSAL Dampfkessel ZFR, ZFR-X",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669475",
+      "name": "UNIVERSAL Dampfkessel ZFR, ZFR-X",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106914",
+      "name": "ZFR",
+      "type": "PRODUCT",
+    },
+    Object {
+      "id": "1106915",
+      "name": "ZFR-X",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669480",
+      "name": "Blockheizkraftwerke",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669480",
+      "name": "Blockheizkraftwerke",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669481",
+      "name": "BHKW-Module",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669481",
+      "name": "BHKW-Module",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "727826",
+      "name": "BHKW-Modul CHP CE 12 NA",
+      "type": "PRODUCT",
+    },
+    Object {
+      "id": "762957",
+      "name": "BHKW-Modul CHP CE 19-2 NA",
+      "type": "PRODUCT",
+    },
+    Object {
+      "id": "1106923",
+      "name": "CHP CE 50-400 NA",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669482",
+      "name": "BHKW-Systeme",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669482",
+      "name": "BHKW-Systeme",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107093",
+      "name": "BHKW-Systeme",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669483",
+      "name": "Druckluft-Wärme-Kraftwerk",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669483",
+      "name": "Druckluft-Wärme-Kraftwerk",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107094",
+      "name": "Druckluft-Wärme-Kraftwerk",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669484",
+      "name": "Kühlung & Lüftung",
+      "type": "CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669484",
+      "name": "Kühlung & Lüftung",
+      "type": "CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669517",
+      "name": "Großwärmepumpen",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669517",
+      "name": "Großwärmepumpen",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669518",
+      "name": "Hochtemperatur-Wärmepumpen und Kältemaschinen HHR",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669518",
+      "name": "Hochtemperatur-Wärmepumpen und Kältemaschinen HHR",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107117",
+      "name": "HHR // Hochtemperaturwärmepumpen und Kältemaschinen HHR",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669519",
+      "name": "Abhitzesysteme",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669519",
+      "name": "Abhitzesysteme",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669520",
+      "name": "4-Zug Abhitzekessel",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669520",
+      "name": "4-Zug Abhitzekessel",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107125",
+      "name": "Eigenbefeuerter Abhitzekessel",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669521",
+      "name": "UNIVERSAL Abhitzedampfkessel",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669521",
+      "name": "UNIVERSAL Abhitzedampfkessel",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1106924",
+      "name": "UNIVERSAL Abhitzedampfkessel HRSB",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669522",
+      "name": "Abhitzekessel",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669522",
+      "name": "Abhitzekessel",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107126",
+      "name": "Abhitzekessel",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669523",
+      "name": "ORC-Systeme",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669523",
+      "name": "ORC-Systeme",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107127",
+      "name": "ORC-Systeme",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "732005",
+      "name": "Trinkwassererwärmung",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "732005",
+      "name": "Trinkwassererwärmung",
+      "type": "LEAF_CATEGORY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669460",
+      "name": "Solarthermische Großanlagen",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "children": Array [],
+      "id": "669460",
+      "name": "Solarthermische Großanlagen",
+      "type": "PRODUCT_FAMILY",
+    },
+    Object {
+      "id": "1107087",
+      "name": "Solarthermische Großanlagen",
+      "type": "PRODUCT",
+    },
+    Object {
+      "children": Array [],
+      "id": "669524",
+      "name": "Komponenten",
+      "type": "CATEGORY",
+    },
+  ],
+}
+`;
+
+exports[`nodes 1`] = `
+Object {
+  "node": Object {
+    "children": Array [],
+    "id": "669462",
+    "name": "Heißwasserkessel",
+    "type": "LEAF_CATEGORY",
+  },
+  "node2": Object {
+    "children": Array [],
+    "id": "669464",
+    "name": "UNIMAT Heißwasserkessel UT-M",
+    "type": "PRODUCT_FAMILY",
+  },
+}
+`;
+
 exports[`service: MenuService should find parent in navigation 1`] = `
 Object {
   "node": undefined,
