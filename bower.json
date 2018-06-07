@@ -31,8 +31,7 @@
     "angular-resource": "^1.6.1",
     "angular-bootstrap": "^2.5.0",
     "angular-translate": "^2.15.1",
-    "angular-bind-html-compile": "^1.4.1",
-    "lazysizes": "^4.0.2"
+    "angular-bind-html-compile": "^1.4.1"
   },
   "resolutions": {
     "lodash": "^4.17.2",
