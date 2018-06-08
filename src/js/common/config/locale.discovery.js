@@ -22,6 +22,9 @@
         var result =  method ? method() : [];
         var country = result[1];
         var language = result[2];
+        if (!country || !language) {
+            throw new Error("OCS Locale cannot be discovered - country: " + country + ", language: " + language)
+        }
         return {
             country: country,
             language: language,

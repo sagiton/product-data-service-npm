@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, URI) {
     angular
         .module('pds.common.config')
         .config(['localeProvider', 'metaTagProvider', function (localeProvider, metaTagProvider) {
@@ -19,4 +19,4 @@
                 .addDiscoveryMethod(byUrlPath)
         }]);
 
-})(angular);
+})(angular, URI);
