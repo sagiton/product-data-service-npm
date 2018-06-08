@@ -4,7 +4,7 @@
         .directive('ocsBreadcrumb', OcsBreadcrumb);
 
     var crumbTemplate =
-        "<li ng-repeat=\"crumb in $breadcrumbs\" ng-class=\"{'active ocs-breadcrumb-last': $last}\">"
+        "<li ng-repeat=\"crumb in $breadcrumbs\" ng-class=\"{'active ocs-breadcrumb-last': $last}\" class='ocs-breadcrumb-{{crumb.type | lowercase}}'>"
             + "<a ocs-navigate=\"crumb.id\">{{crumb.name}}</a>"
         + "</li>";
 
@@ -29,12 +29,6 @@
                     var breadcrumbs = $compile(crumbTemplate)($scope);
                     var breadcrumbsContainer = angular.element('#nav-breadcrumbs');
                     breadcrumbsContainer.find('.dropdown-menu').append(breadcrumbs);
-
-                    //TODO Move this stuff, but where.......................................................................
-                    if (_.last($scope.$breadcrumbs).type == 'PRODUCT_FAMILY') {
-                        breadcrumbsContainer.addClass('dark-breadcrumb');
-                    }
-
                     breadcrumbsContainer
                         .find('.dropdown-toggle')
                         .text(_.last($scope.$breadcrumbs).name);
