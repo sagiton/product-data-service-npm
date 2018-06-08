@@ -9,7 +9,7 @@
         return {
             restrict: 'EA',
             link: function (scope, element, attrs) {
-                $timeout(function() {
+                $timeout(function() { //FIXME Remove timeout hack if possible
                     var firstColumnRow = angular
                         .element(document)
                         .find('.card.card-column table tr')

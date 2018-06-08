@@ -1,7 +1,6 @@
 <span class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
 <a ocs-navigate="$ctrl.menu.id" ng-bind="$ctrl.menu.name"></a>
-<ul simple-submenu
-    class="nav submenu"
+<ul class="nav submenu"
     ng-if="$ctrl.menu.children.length"
     ng-init="subLevel = $ctrl.menu.children"
     ng-include="'nav-level'">
@@ -11,8 +10,7 @@
     <li ng-repeat="lvl in subLevel | limitTo: $ctrl.menu.maxNavigationItems as limitedLevel">
         <span ng-if="lvl.children.length" class="js-open-submenu icon-link-arrow-right visible-xs-block"></span>
         <a target="_self" ocs-navigate="lvl.redirectId || lvl.id">{{lvl.name}}</a>
-        <ul simple-submenu
-            class="nav submenu"
+        <ul class="nav submenu"
             ng-if="lvl.children.length"
             ng-init="subLevel = lvl.children"
             ng-include="'nav-level'">
@@ -23,4 +21,5 @@
             <span translate="NAVIGATION_MENU.SHOW_ALL"></span>
         </a>
     </li>
+    <li class="dl-back"><a translate="MOBILE_NAVIGATION_BACK"></a></li>
 </script>
