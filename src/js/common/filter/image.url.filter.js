@@ -19,14 +19,16 @@
             if (!_.isString(url)) {
                 return defaultImages[variant || 'img-sm'];
             }
-            var file = url.split(".");
-            return new URITemplate(env.endPoint.ocsMediaEndpoint + "{channel}/{locale}/{filename}" + (size ? "_{size}" : "") + "{.extension}")
+            var idx = url.lastIndexOf(".");
+            var file = url.slice(0, idx);
+            var extension = url.slice(idx);
+            return new URITemplate(env.endPoint.ocsMediaEndpoint + "{channel}/{locale}/{filename}" + (size ? "_{size}" : "") + "{extension}")
                 .expand({
                     channel: metaTag.getOcsChannel(),
                     locale: locale.toString(),
-                    filename: file[0],
+                    filename: file,
                     size: size,
-                    extension: file[1]
+                    extension: extension
                 })
                 .toString();
         }

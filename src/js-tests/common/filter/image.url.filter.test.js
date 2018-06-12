@@ -38,9 +38,9 @@ describe("filter: ImageUrlFilter", () => {
         localeStub.returns("de_DE")
         channelStub.returns("ocs channel")
 
-        var url = filter('Asset_URL123 %#.jpg', 'img-sm', 'variantABC')
+        var url = filter('Asset_.URL123 %#.jpg', 'img-sm', 'variantABC')
 
-        expect(url).toEqual("http://asset-url.com/ocs%20channel/de_DE/Asset_URL123%20%25%23_variantABC.jpg")
+        expect(url).toEqual("http://asset-url.com/ocs%20channel/de_DE/Asset_.URL123%20%25%23_variantABC.jpg")
     })
 
     it('should get default asset url', () => {
