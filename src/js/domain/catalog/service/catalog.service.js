@@ -81,7 +81,7 @@
         function resolveUriFromHierarchy(catalogId, locale, channel) {
             return travelUpNavigationHierarchy({id: catalogId, locale: locale, channel: channel})
                 .then(function (catalogs) {
-                    return catalogUrlSchema.build(catalogs)
+                    return catalogUrlSchema.build(catalogs, menuService.getHierarchyType())
                 });
         }
 

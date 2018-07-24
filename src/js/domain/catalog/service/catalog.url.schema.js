@@ -10,13 +10,12 @@
         var categoryPrefix = 'c';
 
         var schemas = {
-            'comercial-e-industrial': industrialSchema, //TODO Make this locale independent
-            'gewerbe-industrie': industrialSchema,
-            'commercial-industrial': industrialSchema
+            'commercial-industrial': industrialSchema,
+            'residential': residentialSchema
         };
 
-        this.build = function (catalogs) {
-            return getSchema(metaTag.getSiteChannel())(catalogs);
+        this.build = function (catalogs, type) {
+            return getSchema(type)(catalogs);
         };
 
         function getSchema(name) {

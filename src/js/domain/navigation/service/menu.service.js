@@ -11,10 +11,12 @@
 
         self.locale = locale.toString();
         self.flatNavigation = {};
+        self.hierarchyType = null;
 
         self.getMenu = getMenu;
         self.findInNavigation = findInNavigation;
         self.findParentInNavigation = findParentInNavigation;
+        self.getHierarchyType = getHierarchyType;
 
 		function getMenu(metadata) {
             metadata = metadata || {};
@@ -38,6 +40,7 @@
                         return {};
                     }
                     res.root.children[0].maxNavigationItems = res.root.maxNavigationItems;
+                    self.hierarchyType = res.root.hierarchyType;
                     return res.root.children[0];
 				})
 		}
@@ -77,6 +80,10 @@
             return _.find(self.flatNavigation[locale || self.locale], function (val) {
                 return !!_.find(val.children, {id: childId});
             });
+        }
+
+        function getHierarchyType() {
+            return self.hierarchyType;
         }
 	}
 
