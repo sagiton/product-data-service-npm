@@ -20,9 +20,9 @@
                     ng-init="$ctrl.copySearchTerm = $ctrl.searchTerm"
                     translate-values="{searchTerm: $ctrl.copySearchTerm}"></h4>
                 <ul class="checklist margin-top">
-                    <li translate="SEARCH.NO.RESULT.CHECKLIST.1"></li>
-                    <li translate="SEARCH.NO.RESULT.CHECKLIST.2"></li>
-                    <li ng-bind-html="$ctrl.contactText"></li>
+                    <li translate-exists translate="SEARCH.NO.RESULT.CHECKLIST.1"></li>
+                    <li translate-exists translate="SEARCH.NO.RESULT.CHECKLIST.2"></li>
+                    <li translate-exists="SEARCH.NO.RESULT.CHECKLIST.3" ng-bind-html="$ctrl.contactText"></li>
                 </ul>
             </div>
         </div>
